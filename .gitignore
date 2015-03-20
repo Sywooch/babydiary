@@ -4,11 +4,7 @@ protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
-<<<<<<< HEAD
-
 access.log
 error_log
 
 .idea/
-=======
->>>>>>> 868ebcae5bcf3db5371eac2b3c295ca3c7c131fb
