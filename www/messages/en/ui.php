@@ -28,7 +28,7 @@ return [
     'Child Solid Foods' => '',
     'Child Teeth' => '',
     'Child Tooth ID' => '',
-    'Children' => '',
+    'Children' => 'Children',
     'Content' => '',
     'Create' => '',
     'Create Child' => '',

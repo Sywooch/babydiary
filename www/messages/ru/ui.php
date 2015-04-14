@@ -28,7 +28,7 @@ return [
     'Child Solid Foods' => '',
     'Child Teeth' => '',
     'Child Tooth ID' => '',
-    'Children' => '',
+    'Children' => 'Дети',
     'Content' => '',
     'Create' => '',
     'Create Child' => '',
@@ -145,4 +145,6 @@ return [
     'Update {modelClass}: ' => '',
     'User ID' => '',
     'Weight' => '',
+    //-------------------------------
+    'Babydiary title' => 'Babydiary - мы поможем Вам сохранить чудные момент',
 ];
