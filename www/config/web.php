@@ -44,6 +44,7 @@ $config = [
             'showScriptName' => false,
             'rules' => array(
                 'module/<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ),
         ),
         'i18n' => [

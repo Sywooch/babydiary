@@ -26,8 +26,28 @@ AppAsset::register($this);
             <header class="header">
                 <div class="container">
                     <div class="row">
-                        <div class="span12">
-                            
+                        <div class="col-md-12 col-sm-12">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="logo float-left">
+                                        <?=Html::a('BabyDiary',['/'],['title'=>'Babydiary', 'class' => 'logo-href']);?>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    тут будут кнопки соц. сетей
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <nav class="nav nav__primary">
+                                        <ul id="topnav" class="sf-menu sf-js-enabled">
+                                            <li class="first current-menu-item">
+                                                <?=Html::a(Yii::t('ui', 'Home'), ['/']);?>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
