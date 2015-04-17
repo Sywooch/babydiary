@@ -1,48 +1,9 @@
 @import url("../CherryFramework/style.css");
 @import url(//fonts.googleapis.com/css?family=Fredericka+the+Great|Gabriela|Henny+Penny);
 .main-holder { overflow:hidden; }
-@media (max-width: 767px) {
-    body { padding:0; }
-    body .header { padding:20px; }
-    body .footer {
-        padding:20px;
-        -webkit-box-sizing:border-box;
-        -moz-box-sizing:border-box;
-        box-sizing:border-box;
-    }
-    body .content-holder { padding:0 20px 30px 20px !important; }
-    body.home .content-holder { padding:20px 20px 30px 20px !important; }
-}
-a { transition:all 0.3s ease 0s; }
-.featured-thumbnail, .thumbnail, figure.frame {
-    background:none;
-    border-radius:0;
-    padding:0;
-    border:none;
-    box-shadow:none;
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    box-sizing:border-box;
-}
-.featured-thumbnail img, .thumbnail img, figure.frame img {
-    display:inline-block;
-    border:none;
-    background:none;
-    padding:0;
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    box-sizing:border-box;
-}
-figure.frame {
-    margin-bottom:10px;
-    margin-right:20px;
-    margin-left:0;
-    text-align:left;
-}
-figure.frame p { margin:0 !important; }
-@media (max-width: 767px) {
-    figure.frame { text-align:left; }
-}
+
+
+
 figure.frame.alignnone { margin:0 0 30px; }
 @media (min-width: 768px) and (max-width: 979px) {
     figure.frame.alignleft {
