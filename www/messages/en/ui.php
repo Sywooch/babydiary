@@ -145,4 +145,14 @@ return [
     'Update {modelClass}: ' => 'Update {modelClass}: ',
     'User ID' => 'User ID',
     'Weight' => 'Weight',
+    //-------------------------------
+    'Babydiary title' => 'Babydiary - мы поможем Вам сохранить чудные момент',
+    'Home' => 'Home',
+    'Diary' => 'Diary',
+    'Test page' => 'Test',
+
+
+
+    'Diaries' => 'Diaries',
+    'Dictionaries' => 'Dictionaries'
 ];

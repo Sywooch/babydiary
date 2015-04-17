@@ -2,29 +2,32 @@
   font-family: Gabriela;
   src: url('../fonts/Gabriela-Regular.ttf');
 }
-.float-left {
-  float: left;
-}
-[class*="span"] {
-  float: left;
-  min-height: 1px;
-  margin-left: 30px;
-  position: relative;
-}
-.logo-href {
-  font: 28px 'Gabriela', serif;
-}
-.logo-href:hover {
-  text-decoration: none;
-  color: #337ab7;
+.main-holder {
+  overflow: hidden;
 }
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 20px;
   color: #989898;
-  background-color: #ffffff;
+  line-height: 20px;
+}
+@media (max-width: 767px) {
+  body {
+    padding: 0;
+  }
+  body .header {
+    padding: 20px;
+  }
+  body .footer {
+    padding: 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  body .content-holder {
+    padding: 0 20px 30px 20px !important;
+  }
+  body.home .content-holder {
+    padding: 20px 20px 30px 20px !important;
+  }
 }
 .main-holder {
   position: relative;
@@ -203,6 +206,8 @@ body {
   top: 4px;
 }
 .nav__primary .sf-menu > li > a {
+  font: normal 19px/23px Gabriela;
+  color: #161616;
   border: none;
   padding: 0;
   display: inline-block;
@@ -388,4 +393,30 @@ body {
   .nav__primary .sf-menu {
     display: none !important;
   }
+}
+/*******/
+.float-left {
+  float: left;
+}
+[class*="span"] {
+  float: left;
+  min-height: 1px;
+  margin-left: 30px;
+  position: relative;
+}
+.logo-href {
+  font: 28px 'Gabriela', serif;
+}
+.logo-href:hover {
+  text-decoration: none;
+  color: #337ab7;
+}
+ul#langs {
+  list-style: none;
+}
+ul#langs li {
+  display: inline-block;
+}
+ul#langs li img.current {
+  border: 1px solid red;
 }

@@ -44,6 +44,15 @@ AppAsset::register($this);
                                             <li class="first current-menu-item">
                                                 <?=Html::a(Yii::t('ui', 'Home'), ['/']);?>
                                             </li>
+                                            <li class="second">
+                                                <?=Html::a(Yii::t('ui', 'Diary'), ['/']);?>
+                                            </li>
+                                            <li class="third">
+                                                <?=Html::a(Yii::t('ui', 'Test'), ['/']);?>
+                                            </li>
+                                            <li class="forth">
+                                                <?=Html::a(Yii::t('ui', 'Test'), ['/']);?>
+                                            </li>
                                         </ul>
                                     </nav>
                                 </div>
