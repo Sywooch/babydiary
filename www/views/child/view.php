@@ -2,17 +2,28 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Child */
 
-$this->title = $model->child_id;
+$this->title = $model->first_name . ' ' . $model->last_name ;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('ui', 'Children'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="child-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <section class="title-section">
+            <h1 class="title-header"><?= Html::encode($this->title) ?></h1>
+            <?= Breadcrumbs::widget([
+                'homeLink' => ['label' => Yii::t('ui', 'Admin panel'), 'url' => ['/admin']],
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+        </section>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 right" id="content">
 
     <p>
         <?= Html::a(Yii::t('ui', 'Update'), ['update', 'id' => $model->child_id], ['class' => 'btn btn-primary']) ?>
@@ -29,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'child_id',
-            'user_id',
+            'dctUser.login',
             'first_name',
             'last_name',
             'surname',
@@ -40,4 +51,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    </div>
 </div>

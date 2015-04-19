@@ -14,6 +14,8 @@ use yii\filters\VerbFilter;
  */
 class ChildController extends Controller
 {
+    public $layout = 'admin';
+
     public function behaviors()
     {
         return [
@@ -33,9 +35,8 @@ class ChildController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Child::find(),
+            'query' => Child::find()->with('dctUser'),
         ]);
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);

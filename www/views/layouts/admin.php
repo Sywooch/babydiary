@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 use app\widgets\Lang;
 use app\assets\AppAsset;
 
@@ -32,7 +33,6 @@ AppAsset::register($this);
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
-                                    тут будут кнопки соц. сетей
                                     <?= Lang::widget();?>
                                 </div>
                             </div>
@@ -40,6 +40,7 @@ AppAsset::register($this);
                                 <div class="col-md-12 col-sm-12">
                                     <nav class="nav nav__primary">
                                         <ul id="topnav" class="sf-menu sf-js-enabled">
+                                            <?php $currentUrl = Yii::$app->getRequest()->getLangUrl(); ?>
                                             <li class="first current-menu-item">
                                                 <?=Html::a(Yii::t('ui', 'Home'), ['/admin']);?>
                                             </li>
@@ -57,6 +58,15 @@ AppAsset::register($this);
                     </div>
                 </div>
             </header>
+            <div class="content-holder">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <?= $content ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <footer class="footer">
                 <div class="container">
                     <div class="row">
@@ -75,9 +85,6 @@ AppAsset::register($this);
             </footer>
 
         </div>
-
-
-
     <?php $this->endBody();?>
     </body>
 </html>

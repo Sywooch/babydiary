@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\grid\GridView;use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -9,10 +9,19 @@ use yii\grid\GridView;
 $this->title = Yii::t('ui', 'Dct Progresses');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="dct-progress-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <section class="title-section">
+            <h1 class="title-header"><?= Html::encode($this->title) ?></h1>
+            <?= Breadcrumbs::widget([
+                'homeLink' => ['label' => Yii::t('ui', 'Admin panel'), 'url' => ['/admin']],
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+        </section>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 right" id="content">
     <p>
         <?= Html::a(Yii::t('ui', 'Create Dct Progress'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -30,4 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 sidebar" id="sidebar">
+        <?=$this->render('../templates/dictionariesMenu');?>
+    </div>
 </div>

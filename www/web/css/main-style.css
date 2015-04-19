@@ -1,6 +1,7 @@
-@import url("../CherryFramework/style.css");
-@import url(//fonts.googleapis.com/css?family=Fredericka+the+Great|Gabriela|Henny+Penny);
-.main-holder { overflow:hidden; }
+@font-face {
+	font-family: Gabriela;
+	src: url('../fonts/Gabriela-Regular.ttf');
+}.main-holder { overflow:hidden; }
 
 
 

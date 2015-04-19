@@ -47,6 +47,8 @@ $config = [
             'rules' => array(
                 'admin' => 'admin/index',
                 'admin/<action:\w+>' => 'admin/<action>',
+                'admin/dictionaries/<controller:\w+>' => '<controller>/index',
+                'admin/dictionaries/<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ),
         ),
