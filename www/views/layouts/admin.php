@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use app\widgets\Lang;
 use app\assets\AppAsset;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -37,7 +38,7 @@ AppAsset::register($this);
                                     <?= Lang::widget();?>
                                 </div>
                             </div>
-                            <div class="row  block">
+                            <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                     <nav class="nav nav__primary">
                                         <ul id="topnav" class="sf-menu sf-js-enabled">
@@ -51,9 +52,20 @@ AppAsset::register($this);
                                             <li class="third">
                                                 <?=Html::a(Yii::t('ui', 'Diaries'), ['/admin/diaries']);?>
                                             </li>
+                                            <li class="fourth">
+                                                <?=Html::a(Yii::t('ui', 'Children'), ['/admin/child']);?>
+                                            </li>
                                         </ul>
                                     </nav>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                <?= Breadcrumbs::widget([
+                                    'homeLink' => ['label' => Yii::t('ui', 'Admin panel'), 'url' => ['/admin']],
+                                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                                ]) ?>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -61,11 +73,7 @@ AppAsset::register($this);
             </header>
             <div class="content-holder">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <?= $content ?>
-                        </div>
-                    </div>
+                    <?= $content ?>
                 </div>
             </div>
             <footer class="footer">
@@ -76,6 +84,7 @@ AppAsset::register($this);
                                 <div class="span9">
                                     <div if="footer-text" class="footer-text">
                                         <?=Html::a('BABYDIARY', ['/'], ['title' => Yii::t('ui', 'Babydiary title')]);?>&copy; <?= date('Y') ?>
+                                        <a href="http://www.freepik.com/free-vector/greeting-card-for-valentine-s-day_764374.htm">Designed with Freepik</a>
                                     </div>
                                 </div>
 
