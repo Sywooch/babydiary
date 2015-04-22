@@ -5,6 +5,18 @@
 .main-holder {
   overflow: hidden;
 }
+.block {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(68, 89, 98, 0.12), 0 3px 12px rgba(68, 89, 98, 0.18);
+  margin: 10px;
+}
+#background {
+  background: url("images/bg.png") no-repeat;
+  background-size: cover;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
 body {
   color: #989898;
   line-height: 20px;
@@ -226,7 +238,9 @@ input[type="color"]:focus,
 }
 .header {
   border: none;
-  padding: 28px 0 33px;
+  padding: 28px 0 0;
+  position: relative;
+  z-index: 99;
 }
 .social-nets-wrapper {
   text-align: right;
@@ -383,14 +397,11 @@ input[type="color"]:focus,
   width: 100%;
   height: 156px;
   position: absolute;
-  background: url(images/content-shadow.png) no-repeat 50% 0;
   background-size: 100% auto;
   left: 0;
 }
 #content.right {
-  padding-right: 65px;
   border-right: 1px solid #e9e9e9;
-  margin-right: 34px;
 }
 @media (min-width: 768px) and (max-width: 1200px) {
   #content.right {
@@ -432,7 +443,7 @@ input[type="color"]:focus,
   padding-bottom: 13px;
 }
 .title-section {
-  margin: 87px 0 40px;
+  margin: 7px 0 40px;
   padding: 0;
   text-align: left;
   background: none;
@@ -563,20 +574,13 @@ input[type="color"]:focus,
   z-index: 1;
   overflow: hidden;
 }
-.header {
-  position: relative;
-  z-index: 99;
-  background-color: #ffffff;
-  border: none;
-  padding: 28px 0 33px;
-}
 .footer {
   background: none;
   border-color: #e8e8e8;
   padding: 44px 0 54px;
   position: relative;
   z-index: 100;
-  border-top: 1px solid #d9d9d9;
+  border-top: none;
 }
 .copyright {
   padding: 10px 0;

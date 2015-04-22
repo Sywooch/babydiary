@@ -20,6 +20,7 @@ AppAsset::register($this);
         <?php $this->head() ?>
     </head>
     <body>
+    <div id="background"></div>
     <?php $this->beginBody() ?>
         <div class="main-holder">
             <header class="header">
@@ -36,7 +37,7 @@ AppAsset::register($this);
                                     <?= Lang::widget();?>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row  block">
                                 <div class="col-md-12 col-sm-12">
                                     <nav class="nav nav__primary">
                                         <ul id="topnav" class="sf-menu sf-js-enabled">
@@ -69,7 +70,7 @@ AppAsset::register($this);
             </div>
             <footer class="footer">
                 <div class="container">
-                    <div class="row">
+                    <div class="row block">
                         <div class="span12">
                             <div class="copyright">
                                 <div class="span9">

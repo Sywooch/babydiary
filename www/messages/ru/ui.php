@@ -23,10 +23,10 @@ return [
     'Chest Circumference' => 'Chest Circumference',
     'Child ID' => 'ID',
     'Child Progress ID' => 'Child Progress ID',
-    'Child Progresses' => 'Child Progresses',
+    'Child Progresses' => 'Достижения',
     'Child Solid Food ID' => 'Child Solid Food ID',
-    'Child Solid Foods' => 'Child Solid Foods',
-    'Child Teeth' => 'Child Teeth',
+    'Child Solid Foods' => 'Прикорм',
+    'Child Teeth' => 'Зубки',
     'Child Tooth ID' => 'Child Tooth ID',
     'Children' => 'Малыши',
     'Content' => 'Content',
@@ -154,6 +154,7 @@ return [
 
     'Admin panel' => 'Админ панель',
     'Diaries' => 'Дневники',
-    'Dictionaries' => 'Справочники'
+    'Dictionaries' => 'Справочники',
+    'Children list' => 'Список малышей'
 
 ];

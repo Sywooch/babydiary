@@ -9,7 +9,7 @@ use yii\grid\GridView;use yii\widgets\Breadcrumbs;
 $this->title = Yii::t('ui', 'Dct Progresses');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="row">
+<div class="row block">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <section class="title-section">
             <h1 class="title-header"><?= Html::encode($this->title) ?></h1>
@@ -20,8 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </section>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 right" id="content">
+<div class="row" style="margin-top: 10px">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 right block" id="content">
     <p>
         <?= Html::a(Yii::t('ui', 'Create Dct Progress'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-3 sidebar" id="sidebar">
+    <div class="col-lg-3 col-md-3 col-sm-3 sidebar block" id="sidebar">
         <?=$this->render('../templates/dictionariesMenu');?>
     </div>
 </div>

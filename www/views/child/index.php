@@ -10,7 +10,7 @@ use yii\widgets\Breadcrumbs;
 $this->title = Yii::t('ui', 'Children');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="row">
+<div class="row block">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <section class="title-section">
             <h1 class="title-header"><?= Html::encode($this->title) ?></h1>
