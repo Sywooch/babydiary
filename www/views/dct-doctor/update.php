@@ -5,12 +5,17 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\DctDoctor */
 
-$this->title = Yii::t('ui', 'Update {modelClass}: ', [
-    'modelClass' => 'Dct Doctor',
-]) . ' ' . $model->dct_doctor_id;
+$curLang = app\models\DctLanguage::getCurrent();
+foreach($model->dctDoctorLocs as $doctor){
+    if($doctor->dct_language_id == $curLang->dct_language_id){
+        $this->title = Yii::t('ui', 'Update') . ': ' . $doctor->text;
+    }
+}
+
+
 $this->params['breadcrumbs'][] = Yii::t('ui', 'Dictionaries');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('ui', 'Dct Doctors'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->dct_doctor_id, 'url' => ['view', 'id' => $model->dct_doctor_id]];
+$this->params['breadcrumbs'][] = ['label' => $model->dctDoctorLocs[0]->text, 'url' => ['view', 'id' => $model->dct_doctor_id]];
 $this->params['breadcrumbs'][] = Yii::t('ui', 'Update');
 ?>
 <div class="row">

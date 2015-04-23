@@ -2,9 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\DctDoctorLoc;
+use app\models\DctLanguage;
 use Yii;
 use app\models\DctDoctor;
-use yii\data\ActiveDataProvider;
+use app\models\DctDoctorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -34,11 +36,11 @@ class DctDoctorController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => DctDoctor::find(),
-        ]);
+        $searchModel = new DctDoctorSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -82,12 +84,13 @@ class DctDoctorController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $languages = DctLanguage::find()->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->dct_doctor_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'languages' => $languages
             ]);
         }
     }

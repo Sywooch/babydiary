@@ -451,11 +451,14 @@ figure {
     text-shadow:none;
     display:inline-block;
     line-height:1.2em;
-    &.active { color:#3c3c3c; }
+    &.active {
+      color:#3c3c3c;
+    }
     a {
       color:#989898;
       text-shadow:none;
     }
+
   }
   .divider {
     padding:0 2px;
@@ -813,4 +816,7 @@ figure {
   h1 {
     font: normal 32px/38px Gabriela;
     color: #505050;
+    &:first-letter {
+      text-transform: uppercase;
+    }
   }

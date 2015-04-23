@@ -25,9 +25,9 @@ use yii\bootstrap\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'dct_doctor_id')->textInput() ?>
+    <?= $form->field($model, 'dct_doctor_id')->textInput(['disabled'=>'disabled']) ?>
 
-    <?= $form->field($model, 'enable')->textInput() ?>
+    <?= $form->field($model, 'enable')->dropDownList(['1' => Yii::t('ui', 'Yes'), '0' => Yii::t('ui', 'No')]) ?>
 
     <div class="text-right">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('ui', 'Create') : Yii::t('ui', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

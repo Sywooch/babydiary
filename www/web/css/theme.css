@@ -946,3 +946,6 @@ h1 {
   font: normal 32px/38px Gabriela;
   color: #505050;
 }
+h1:first-letter {
+  text-transform: uppercase;
+}

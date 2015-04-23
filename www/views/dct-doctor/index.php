@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
+/* @var $searchModel app\models\DctDoctorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('ui', 'Dct Doctors');
@@ -15,18 +16,34 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="block">
 
     <h1><?= Html::encode($this->title) ?></h1>
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('ui', 'Create Dct Doctor'), ['create'], ['class' => 'btn btn-success']) ?>
+            <p>
+        <?= Html::a(Yii::t('ui', 'Add'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'dct_doctor_id',
-            'enable',
+            //'dct_doctor_id',
+            [
+                'attribute' => 'dctDoctorLocs.text',
+                'value' => function ($data) {
+                    $curLang = app\models\DctLanguage::getCurrent();
+                    foreach($data->dctDoctorLocs as $doctor){
+                        if($doctor->dct_language_id == $curLang->dct_language_id){
+                            return $doctor->text;
+                        }
+                    }
+                },
+            ],
+            [
+                'attribute' => 'enable',
+                'format' => ['boolean']
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
