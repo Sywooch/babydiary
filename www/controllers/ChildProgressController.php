@@ -14,6 +14,8 @@ use yii\filters\VerbFilter;
  */
 class ChildProgressController extends Controller
 {
+    public $layout = 'admin';
+
     public function behaviors()
     {
         return [

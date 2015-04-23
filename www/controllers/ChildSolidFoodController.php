@@ -14,6 +14,8 @@ use yii\filters\VerbFilter;
  */
 class ChildSolidFoodController extends Controller
 {
+    public $layout = 'admin';
+
     public function behaviors()
     {
         return [

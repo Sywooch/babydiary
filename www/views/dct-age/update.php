@@ -8,16 +8,24 @@ use yii\helpers\Html;
 $this->title = Yii::t('ui', 'Update {modelClass}: ', [
     'modelClass' => 'Dct Age',
 ]) . ' ' . $model->name;
+$this->params['breadcrumbs'][] = Yii::t('ui', 'Dictionaries');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('ui', 'Dct Ages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->dct_age_id]];
 $this->params['breadcrumbs'][] = Yii::t('ui', 'Update');
 ?>
-<div class="dct-age-update">
-
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-9 right" id="content">
+        <div class="block">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
 
+        </div>
+
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 sidebar left" id="sidebar">
+        <?=$this->render('../templates/dictionariesMenu');?>
+    </div>
 </div>

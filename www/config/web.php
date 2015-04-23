@@ -46,12 +46,14 @@ $config = [
             'class'=>'app\components\LangUrlManager',
             'rules' => array(
                 'admin' => 'admin/index',
-                'admin/child-progress' => 'child-progress/index',
-                'admin/child-progress/' => 'child-progress/index',
-                'admin/child-progress/<action:\w+>' => 'child-progress/<action>',
 
+                'admin/dictionaries/age' => 'dct-age/index',
+                'admin/dictionaries/age/<action:\w+>' => 'dct-age/<action>',
+                'admin/dictionaries/doctors' => 'dct-doctor/index',
+                'admin/dictionaries/doctors/<action:\w+>' => 'dct-doctor/<action>',
 
                 'admin/dictionaries/progress' => 'dct-progress/index',
+                'admin/dictionaries/progress/<action:\w+>' => 'dct-progress/<action>',
                 'admin/<action:\w+>' => 'admin/<action>',
                 'admin/<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 

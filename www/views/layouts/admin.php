@@ -78,16 +78,13 @@ AppAsset::register($this);
             </div>
             <footer class="footer">
                 <div class="container">
-                    <div class="row block">
-                        <div class="span12">
-                            <div class="copyright">
-                                <div class="span9">
-                                    <div if="footer-text" class="footer-text">
-                                        <?=Html::a('BABYDIARY', ['/'], ['title' => Yii::t('ui', 'Babydiary title')]);?>&copy; <?= date('Y') ?>
-                                        <a href="http://www.freepik.com/free-vector/greeting-card-for-valentine-s-day_764374.htm">Designed with Freepik</a>
-                                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="copyright text-center">
+                                <div if="footer-text" class="footer-text">
+                                    <?=Html::a('BABYDIARY', ['/'], ['title' => Yii::t('ui', 'Babydiary title')]);?>&copy; <?= date('Y') ?>
+                                    <a href="http://www.freepik.com/free-vector/greeting-card-for-valentine-s-day_764374.htm">Designed with Freepik</a>
                                 </div>
-
                             </div>
                         </div>
                     </div>

@@ -17,6 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Add' => 'Новая запись',
     'Are you sure you want to delete this item?' => 'Are you sure you want to delete this item?',
     'Birth Date' => 'Дата рождения',
     'Birth Place' => 'Место рождения',
@@ -58,11 +59,11 @@ return [
     'Create Diary Feeding' => 'Create Diary Feeding',
     'Create Diary Vaccination' => 'Create Diary Vaccination',
     'Dct Age ID' => 'Dct Age ID',
-    'Dct Ages' => 'Dct Ages',
+    'Dct Ages' => 'Возраст',
     'Dct Doctor ID' => 'Dct Doctor ID',
     'Dct Doctor Loc ID' => 'Dct Doctor Loc ID',
     'Dct Doctor Locs' => 'Dct Doctor Locs',
-    'Dct Doctors' => 'Dct Doctors',
+    'Dct Doctors' => 'Доктора',
     'Dct Feeding Type ID' => 'Dct Feeding Type ID',
     'Dct Feeding Types' => 'Dct Feeding Types',
     'Dct Language ID' => 'Dct Language ID',
