@@ -65,12 +65,13 @@ class DctDoctorController extends Controller
     public function actionCreate()
     {
         $model = new DctDoctor();
-
+        $languages = DctLanguage::find()->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->dct_doctor_id]);
         } else {
-            return $this->render('create', [
+            return $this->render('update', [
                 'model' => $model,
+                'languages' => $languages
             ]);
         }
     }
@@ -117,7 +118,8 @@ class DctDoctorController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = DctDoctor::findOne($id)) !== null) {
+        $model = DctDoctor::find()->with('dctDoctorLocs')->where(['dct_doctor_id' => $id])->one();
+        if ($model !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

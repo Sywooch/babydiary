@@ -29,6 +29,26 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'enable')->dropDownList(['1' => Yii::t('ui', 'Yes'), '0' => Yii::t('ui', 'No')]) ?>
 
+    <div id="tabpanel" role="tabpanel">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <?php foreach($languages as $index => $language): ?>
+                <li role="presentation" <?=($index == 0) ? 'class="active"' : '';?>><a href="#lang_<?=$language->dct_language_id;?>" aria-controls="lang_<?=$language->dct_language_id;?>" role="tab" data-toggle="tab"><?=$language->name;?></a></li>
+            <?php endforeach; ?>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <?php foreach($model->dctDoctorLocs as $index => $doctorLoc):?>
+                <div role="tabpanel" class="tab-pane" id="lang_<?=$doctorLoc->dct_language_id;?>">
+                    <?=$doctorLoc->text;?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+    </div>
+
     <div class="text-right">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('ui', 'Create') : Yii::t('ui', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
@@ -36,3 +56,5 @@ use yii\bootstrap\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+
