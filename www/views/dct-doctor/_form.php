@@ -40,10 +40,8 @@ use yii\bootstrap\ActiveForm;
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <?php foreach($model->dctDoctorLocs as $index => $doctorLoc):?>
-                <div role="tabpanel" class="tab-pane" id="lang_<?=$doctorLoc->dct_language_id;?>">
-                    <?=$doctorLoc->text;?>
-                </div>
+            <?php foreach($languages as $index => $language): ?>
+
             <?php endforeach; ?>
         </div>
 
