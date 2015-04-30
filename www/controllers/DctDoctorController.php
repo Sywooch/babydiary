@@ -66,12 +66,15 @@ class DctDoctorController extends Controller
     {
         $model = new DctDoctor();
         $languages = DctLanguage::find()->all();
+        $modelLocalization = new DctDoctorLoc();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->dct_doctor_id]);
         } else {
-            return $this->render('update', [
+            return $this->render('create', [
                 'model' => $model,
-                'languages' => $languages
+                'languages' => $languages,
+                'modelLocalization' => $modelLocalization,
+                'action' => 'create',
             ]);
         }
     }
@@ -86,15 +89,17 @@ class DctDoctorController extends Controller
     {
         $model = $this->findModel($id);
         $languages = DctLanguage::find()->all();
-        $modelLocalization = DctDoctorLoc::find()->select('dct_doctor_loc.*, dct_language.*')->leftJoin('dct_language', '`dct_language`.`dct_language_id` = `dct_doctor_loc`.`dct_language_id`')->where(['dct_doctor_id' => $id])->with('dctLanguage')->all();
-        var_dump($modelLocalization);
+        $modelLoc = DctDoctorLoc::find()->with('dctLanguage')->where(['dct_doctor_id' => $id])->all();
+
+
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->dct_doctor_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
                 'languages' => $languages,
-                'modelLocalization' => $modelLocalization
+                'modelLoc' => $modelLoc
             ]);
         }
     }

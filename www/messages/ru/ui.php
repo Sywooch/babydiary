@@ -158,6 +158,10 @@ return [
     'Admin panel' => 'Админ панель',
     'Diaries' => 'Дневники',
     'Dictionaries' => 'Справочники',
-    'Children list' => 'Список малышей'
+    'Children list' => 'Список малышей',
+    'Language' => 'Язык',
+    'Actions' => 'Действия',
+
+
 
 ];

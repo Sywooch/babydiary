@@ -30,26 +30,27 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($model, 'enable')->dropDownList(['1' => Yii::t('ui', 'Yes'), '0' => Yii::t('ui', 'No')]) ?>
 
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th><?=Yii::t('ui', 'Language')?></th>
-                <th><?=Yii::t('ui', 'Text')?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($modelLoc as $index => $item) :?>
-                <tr>
-                    <td style="width: 5%"><?=$index + 1;?></td>
-                    <td style="width: 10%"><?=$item->dctLanguage->locale;?></td>
-                    <td><span class="inline-edit"><?=$item->text;?></span></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-
-
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <?php foreach($languages as $index => $language): ?>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="lang_<?=$language->url;?>">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse_<?=$language->url;?>" aria-expanded="true" aria-controls="collapse_<?=$language->url;?>">
+                        <?=$language->name;?>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse_<?=$language->url;?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <input type="hidden" name="<?=$language->url;?>.dct_language_id" value="<?=$language->dct_language_id;?>" />
+                    <div class="form-group">
+                        <label>Название</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
 
     <div class="text-right">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('ui', 'Create') : Yii::t('ui', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
