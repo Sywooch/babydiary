@@ -17,10 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_formCreate', [
-        'model' => $model,
-        'languages' => $languages
-    ]) ?>
+            <?= $this->render('_form', [
+                'model' => $model,
+                'languages' => $languages,
+                'modelLoc' => $modelLoc
+            ]) ?>
 
         </div>
 

@@ -43,7 +43,10 @@ use yii\bootstrap\ActiveForm;
                 <tr>
                     <td style="width: 5%"><?=$index + 1;?></td>
                     <td style="width: 10%"><?=$item->dctLanguage->locale;?></td>
-                    <td><span class="inline-edit"><?=$item->text;?></span></td>
+                    <td record-id="<?=$item->dct_doctor_loc_id;?>">
+                        <span class="inline-edit"><?=($item->text != "") ? $item->text : '&nbsp;';?></span>
+                        <input class="hidden inline-input" type="text" value="<?=$item->text;?>" />
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

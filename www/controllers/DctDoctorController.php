@@ -66,14 +66,15 @@ class DctDoctorController extends Controller
     {
         $model = new DctDoctor();
         $languages = DctLanguage::find()->all();
-        $modelLocalization = new DctDoctorLoc();
+        $modelLoc = DctDoctorLoc::find()->rightJoin('dct_language','`dct_language`.`dct_language_id` = `dct_doctor_loc`.`dct_language_id`')->with('dctLanguage')->all();
+        var_dump($modelLoc);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->dct_doctor_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
                 'languages' => $languages,
-                'modelLocalization' => $modelLocalization,
+                'modelLoc' => $modelLoc,
                 'action' => 'create',
             ]);
         }
