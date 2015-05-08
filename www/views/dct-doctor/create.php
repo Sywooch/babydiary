@@ -20,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $this->render('_form', [
                 'model' => $model,
                 'languages' => $languages,
+                'langList' => $langList,
                 'modelLoc' => $modelLoc
             ]) ?>
 

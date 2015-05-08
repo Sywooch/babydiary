@@ -42,6 +42,9 @@ body {
 a {
   transition: all 0.3s ease 0s;
 }
+td {
+  vertical-align: middle !important;
+}
 .featured-thumbnail,
 .thumbnail,
 figure.frame {
@@ -142,56 +145,26 @@ figure.frame.alignnone {
   background-color: #d9534f;
   border-color: #d43f3a;
 }
-textarea,
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"],
-.uneditable-input {
-  padding: 7px 10px;
-  margin: 0 0 10px 0;
-  font-size: 14px;
-  line-height: 1.2em;
-  text-transform: none;
-  color: #989898;
-  text-decoration: none;
-  position: relative;
-  border-radius: 0;
-  background: none;
-  box-shadow: none;
-  border: 1px solid #e8e8e8 !important;
-  transition: all 0.3s ease 0s;
-}
-textarea:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus,
-.uneditable-input:focus {
-  background: #f9f9f9;
-  box-shadow: none;
-  border-color: #d8d8d8 !important;
-}
+/* textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], select, .uneditable-input {
+    padding:7px 10px;
+    margin:0 0 10px 0;
+    font-size:14px;
+    line-height:1.2em;
+    text-transform:none;
+    color:#989898;
+    text-decoration:none;
+    position:relative;
+    border-radius:0;
+    background:none;
+    box-shadow:none;
+    border:1px solid #e8e8e8 !important;
+    transition:all 0.3s ease 0s;
+    &:focus{
+      background:#f9f9f9;
+      box-shadow:none;
+      border-color:#d8d8d8 !important;
+    }
+  }*/
 .wpcf7-form p.field input {
   height: 35px;
 }
