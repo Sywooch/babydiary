@@ -66,21 +66,28 @@ class DctDoctorController extends Controller
     {
         $model = new DctDoctor();
         $languages = DctLanguage::find()->select(['dct_language_id as id', 'name', 'locale'])->asArray()->all();
-        $langList = [];
         foreach($languages as $lang){
                     $langList[$lang['id']] =$lang['name'];
         }
-        $modelLoc = DctDoctorLoc::find()->rightJoin('dct_language','`dct_language`.`dct_language_id` = `dct_doctor_loc`.`dct_language_id`')->with('dctLanguage')->all();
+        $modelLoc = new DctDoctorLoc();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->dct_doctor_id > -1){
+                $params = Yii::$app->request->post();
+                for($i = 0; $i < count($languages); $i++){
+                    $childModel = new DctDoctorLoc();
+                    $childModel->dct_doctor_id = $model->dct_doctor_id;
+                    $childModel->dct_language_id = $params[$i]['dct_language_id'];
+                    $childModel->text = $params[$i]['text'];
+                    $childModel->save();
+                }
+            }
             return $this->redirect(['view', 'id' => $model->dct_doctor_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
                 'languages' => $languages,
-                'langList' => $langList,
-                'modelLoc' => $modelLoc,
-                'action' => 'create',
+                'modelLoc' => $modelLoc
             ]);
         }
     }
@@ -94,12 +101,25 @@ class DctDoctorController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $languages = DctLanguage::find()->all();
-        $modelLoc = DctDoctorLoc::find()->with('dctLanguage')->where(['dct_doctor_id' => $id])->all();
-
-
+        $languages = DctLanguage::find()->select(['dct_language_id as id', 'name', 'locale'])->asArray()->all();
+        foreach($languages as $lang){
+            $langList[$lang['id']] =$lang['name'];
+        }
+        $doctorLoc = DctDoctorLoc::find()->with('dctLanguage')->where(['dct_doctor_id' => $id])->asArray()->all();
+        $modelLoc = [];
+        foreach($doctorLoc as $doctor){
+            $modelLoc[$doctor['dct_language_id']] = ['text' => $doctor['text'], 'id' => $doctor['dct_doctor_loc_id']];
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->dct_doctor_id > -1){
+                $params = Yii::$app->request->post();
+                for($i = 0; $i < count($languages); $i++){
+                    $childModel = DctDoctorLoc::findOne($params[$i]['dct_doctor_loc_id']);
+                    $childModel->text = $params[$i]['text'];
+                    $childModel->save();
+                }
+            }
             return $this->redirect(['view', 'id' => $model->dct_doctor_id]);
         } else {
             return $this->render('update', [

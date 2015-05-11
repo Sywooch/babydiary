@@ -135,7 +135,13 @@ figure {
         border-color: #d43f3a;
     }
 }
-
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], select, .uneditable-input, select{
+  &.changed{
+    border-color: rgba(255,185,122, 0.8);
+    background-color: rgba(255,221,136, 0.5);
+    box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+  }
+}
  /* textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], select, .uneditable-input {
     padding:7px 10px;
     margin:0 0 10px 0;

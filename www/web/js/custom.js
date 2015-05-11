@@ -6,10 +6,7 @@ $(document).ready(function(){
     var activeDiv = $("#tabpanel li.active > a").attr('aria-controls');
     $("#tabpanel div#" + activeDiv).addClass('active');
 
-
-
-    $("#cpa-form").submit(function(e){
-        return false;
-    });
-
+    $(".form-control").on("change", function(){
+        $(this).addClass('changed');
+    })
 })

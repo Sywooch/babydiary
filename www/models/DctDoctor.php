@@ -28,7 +28,6 @@ class DctDoctor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dct_doctor_id'], 'required'],
             [['dct_doctor_id', 'enable'], 'integer']
         ];
     }
