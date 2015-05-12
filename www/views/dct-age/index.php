@@ -25,8 +25,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'dct_age_id',
-            'name',
+            [
+                'attribute' => 'dctDoctorLocs.text',
+                'value' => function ($data) {
+                    $curLang = app\models\DctLanguage::getCurrent();
+                    foreach($data->dctAgeLocs as $age){
+                        if($age->dct_language_id == $curLang->dct_language_id){
+                            return $age->text;
+                        }
+                    }
+                },
+            ],
+            [
+                'attribute' => 'enable',
+                'format' => ['boolean']
+            ],
             'type',
             'position',
 

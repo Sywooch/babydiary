@@ -6,7 +6,12 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\DctAge */
 
-$this->title = $model->name;
+$curLang = app\models\DctLanguage::getCurrent();
+foreach($model->dctAgeLocs as $age){
+    if($age->dct_language_id == $curLang->dct_language_id){
+        $this->title = $age->text;
+    }
+}
 $this->params['breadcrumbs'][] = Yii::t('ui', 'Dictionaries');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('ui', 'Dct Ages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -32,7 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'dct_age_id',
-            'name',
             'type',
             'position',
         ],

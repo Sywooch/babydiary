@@ -5,12 +5,15 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\DctAge */
 
-$this->title = Yii::t('ui', 'Update {modelClass}: ', [
-    'modelClass' => 'Dct Age',
-]) . ' ' . $model->name;
+$curLang = app\models\DctLanguage::getCurrent();
+foreach($model->dctAgeLocs as $age){
+    if($age->dct_language_id == $curLang->dct_language_id){
+        $this->title = Yii::t('ui', 'Update') . ': ' . $age->text;
+    }
+}
 $this->params['breadcrumbs'][] = Yii::t('ui', 'Dictionaries');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('ui', 'Dct Ages'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->dct_age_id]];
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['view', 'id' => $model->dct_age_id]];
 $this->params['breadcrumbs'][] = Yii::t('ui', 'Update');
 ?>
 <div class="row">
@@ -18,9 +21,11 @@ $this->params['breadcrumbs'][] = Yii::t('ui', 'Update');
         <div class="block">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+            <?= $this->render('_form', [
+                'model' => $model,
+                'languages' => $languages,
+                'modelLoc' => $modelLoc
+            ]) ?>
 
         </div>
 

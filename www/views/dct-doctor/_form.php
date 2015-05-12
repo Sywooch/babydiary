@@ -41,14 +41,14 @@ use yii\bootstrap\ActiveForm;
             <?php foreach($languages as $index => $lang) :?>
                 <tr>
                     <td>
-                        <?=$index + 1;?><?=Html::input('hidden', $index . '[dct_doctor_loc_id]', ($modelLoc[$lang['id']]) ? $modelLoc[$lang['id']]['id'] : '');?>
+                        <?=$index + 1;?><?=Html::input('hidden', $index . '[dct_doctor_loc_id]', (isset($modelLoc[$lang['id']])) ? $modelLoc[$lang['id']]['id'] : '');?>
                     </td>
                     <td>
                         <span class="dct_language_id"><?=$lang['name'];?> (<?=$lang['locale'];?>)</span>
                         <?=Html::input('hidden', $index . '[dct_language_id]', $lang['id']);?>
                     </td>
                     <td>
-                        <?=Html::input('text', $index . '[text]', ($modelLoc[$lang['id']]) ? $modelLoc[$lang['id']]['text'] : '', ['class' => 'form-control']);?>
+                        <?=Html::input('text', $index . '[text]', (isset($modelLoc[$lang['id']])) ? $modelLoc[$lang['id']]['text'] : '', ['class' => 'form-control']);?>
                     </td>
                 </tr>
             <?php endforeach; ?>

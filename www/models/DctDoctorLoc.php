@@ -65,4 +65,28 @@ class DctDoctorLoc extends \yii\db\ActiveRecord
     {
         return $this->hasOne(DctLanguage::className(), ['dct_language_id' => 'dct_language_id']);
     }
+
+    public function getLocalizationData($id){
+        $data = DctDoctorLoc::find()->with('dctLanguage')->where(['dct_doctor_id' => $id])->asArray()->all();
+        $modelLoc = [];
+        foreach($data as $doctor){
+            $modelLoc[$doctor['dct_language_id']] = ['text' => $doctor['text'], 'id' => $doctor['dct_doctor_loc_id']];
+        }
+
+        return $modelLoc;
+    }
+
+    public function saveLocalizationData($model, $params, $languageCount){
+        for($i = 0; $i < $languageCount; $i++){
+            if ($model->dct_doctor_id > -1){
+                $childModel = new DctDoctorLoc();
+                $childModel->dct_doctor_id = $model->dct_doctor_id;
+                $childModel->dct_language_id = $params[$i]['dct_language_id'];
+            } else {
+                $childModel = DctDoctorLoc::findOne($params[$i]['dct_doctor_loc_id']);
+            }
+            $childModel->text = (!empty($params[$i]['text'])) ? $params[$i]['text'] : '';
+            $childModel->save();
+        }
+    }
 }

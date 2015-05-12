@@ -9,9 +9,12 @@ use Yii;
  *
  * @property integer $dct_language_id
  * @property string $name
- * @property string $prefix
+ * @property string $url
+ * @property string $locale
+ * @property integer $default
  * @property integer $enable
  *
+ * @property DctAgeLoc[] $dctAgeLocs
  * @property DctDoctorLoc[] $dctDoctorLocs
  * @property DctProgressLoc[] $dctProgressLocs
  * @property DctSolidFoodLoc[] $dctSolidFoodLocs
@@ -21,7 +24,6 @@ class DctLanguage extends \yii\db\ActiveRecord
 {
     //Переменная, для хранения текущего объекта языка
     static $current = null;
-
     /**
      * @inheritdoc
      */
@@ -36,10 +38,10 @@ class DctLanguage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'prefix'], 'required'],
-            [['enable'], 'integer'],
+            [['name', 'url', 'locale'], 'required'],
+            [['default', 'enable'], 'integer'],
             [['name'], 'string', 'max' => 20],
-            [['prefix'], 'string', 'max' => 5]
+            [['url', 'locale'], 'string', 'max' => 10]
         ];
     }
 
@@ -51,9 +53,19 @@ class DctLanguage extends \yii\db\ActiveRecord
         return [
             'dct_language_id' => Yii::t('ui', 'Dct Language ID'),
             'name' => Yii::t('ui', 'Name'),
-            'prefix' => Yii::t('ui', 'Prefix'),
+            'url' => Yii::t('ui', 'Url'),
+            'locale' => Yii::t('ui', 'Locale'),
+            'default' => Yii::t('ui', 'Default'),
             'enable' => Yii::t('ui', 'Enable'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDctAgeLocs()
+    {
+        return $this->hasMany(DctAgeLoc::className(), ['dct_language_id' => 'dct_language_id']);
     }
 
     /**
@@ -87,6 +99,7 @@ class DctLanguage extends \yii\db\ActiveRecord
     {
         return $this->hasMany(DctToothLoc::className(), ['dct_language_id' => 'dct_language_id']);
     }
+
 
     //Получение текущего объекта языка
     static function getCurrent()

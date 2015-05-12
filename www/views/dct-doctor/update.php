@@ -11,8 +11,6 @@ foreach($model->dctDoctorLocs as $doctor){
         $this->title = Yii::t('ui', 'Update') . ': ' . $doctor->text;
     }
 }
-
-
 $this->params['breadcrumbs'][] = Yii::t('ui', 'Dictionaries');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('ui', 'Dct Doctors'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->dctDoctorLocs[0]->text, 'url' => ['view', 'id' => $model->dct_doctor_id]];

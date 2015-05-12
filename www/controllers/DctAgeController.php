@@ -4,30 +4,15 @@ namespace app\controllers;
 
 use Yii;
 use app\models\DctAge;
+use app\models\DctAgeLoc;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * DctAgeController implements the CRUD actions for DctAge model.
  */
-class DctAgeController extends Controller
+class DctAgeController extends BaseController
 {
-    public $layout = 'admin';
-
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all DctAge models.
      * @return mixed
@@ -44,18 +29,6 @@ class DctAgeController extends Controller
     }
 
     /**
-     * Displays a single DctAge model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new DctAge model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -63,12 +36,26 @@ class DctAgeController extends Controller
     public function actionCreate()
     {
         $model = new DctAge();
+        $languages = $this->getLanguages();
+        $modelLoc = new DctAgeLoc();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->dct_age_id > -1){
+                $params = Yii::$app->request->post();
+                for($i = 0; $i < count($languages); $i++){
+                    $childModel = new DctAgeLoc();
+                    $childModel->dct_age_id = $model->dct_age_id;
+                    $childModel->dct_language_id = $params[$i]['dct_language_id'];
+                    $childModel->text = $params[$i]['text'];
+                    $childModel->save();
+                }
+            }
             return $this->redirect(['view', 'id' => $model->dct_age_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'languages' => $languages,
+                'modelLoc' => $modelLoc
             ]);
         }
     }
@@ -82,27 +69,25 @@ class DctAgeController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $languages = $this->getLanguages();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->dct_age_id > -1){
+                $params = Yii::$app->request->post();
+                for($i = 0; $i < count($languages); $i++){
+                    $childModel = DctAgeLoc::findOne($params[$i]['dct_age_loc_id']);
+                    $childModel->text = $params[$i]['text'];
+                    $childModel->save();
+                }
+            }
             return $this->redirect(['view', 'id' => $model->dct_age_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'languages' => $languages,
+                'modelLoc' => DctAgeLoc::getLocalizationData($id)
             ]);
         }
-    }
-
-    /**
-     * Deletes an existing DctAge model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
     }
 
     /**
@@ -114,7 +99,8 @@ class DctAgeController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = DctAge::findOne($id)) !== null) {
+        $model = DctAge::find()->with('dctAgeLocs')->where(['dct_age_id' => $id])->one();
+        if ($model !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
