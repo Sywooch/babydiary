@@ -75,4 +75,18 @@ class DctAgeLoc extends \yii\db\ActiveRecord
 
         return $modelLoc;
     }
+
+    public function saveLocalizationData($model, $params, $languageCount){
+        for($i = 0; $i < $languageCount; $i++){
+            if ($model->dct_age_id > -1){
+                $childModel = new DctAgeLoc();
+                $childModel->dct_age_id = $model->dct_age_id;
+                $childModel->dct_language_id = $params[$i]['dct_language_id'];
+            } else {
+                $childModel = DctAgeLoc::findOne($params[$i]['dct_age_loc_id']);
+            }
+            $childModel->text = (!empty($params[$i]['text'])) ? $params[$i]['text'] : '';
+            $childModel->save();
+        }
+    }
 }

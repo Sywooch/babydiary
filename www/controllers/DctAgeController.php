@@ -40,16 +40,8 @@ class DctAgeController extends BaseController
         $modelLoc = new DctAgeLoc();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if ($model->dct_age_id > -1){
-                $params = Yii::$app->request->post();
-                for($i = 0; $i < count($languages); $i++){
-                    $childModel = new DctAgeLoc();
-                    $childModel->dct_age_id = $model->dct_age_id;
-                    $childModel->dct_language_id = $params[$i]['dct_language_id'];
-                    $childModel->text = $params[$i]['text'];
-                    $childModel->save();
-                }
-            }
+            $params = Yii::$app->request->post();
+            DctAgeLoc::saveLocalizationData($model, $params, count($languages));
             return $this->redirect(['view', 'id' => $model->dct_age_id]);
         } else {
             return $this->render('create', [
@@ -72,14 +64,8 @@ class DctAgeController extends BaseController
         $languages = $this->getLanguages();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if ($model->dct_age_id > -1){
-                $params = Yii::$app->request->post();
-                for($i = 0; $i < count($languages); $i++){
-                    $childModel = DctAgeLoc::findOne($params[$i]['dct_age_loc_id']);
-                    $childModel->text = $params[$i]['text'];
-                    $childModel->save();
-                }
-            }
+            $params = Yii::$app->request->post();
+            DctAgeLoc::saveLocalizationData($model, $params, count($languages));
             return $this->redirect(['view', 'id' => $model->dct_age_id]);
         } else {
             return $this->render('update', [

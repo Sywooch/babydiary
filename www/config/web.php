@@ -51,12 +51,11 @@ $config = [
                 'admin/dictionaries/age/<action:\w+>' => 'dct-age/<action>',
                 'admin/dictionaries/doctors' => 'dct-doctor/index',
                 'admin/dictionaries/doctors/<action:\w+>' => 'dct-doctor/<action>',
-
                 'admin/dictionaries/progress' => 'dct-progress/index',
                 'admin/dictionaries/progress/<action:\w+>' => 'dct-progress/<action>',
+
                 'admin/<action:\w+>' => 'admin/<action>',
                 'admin/<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-
 
                 'admin/dictionaries/<controller:\w+>' => '<controller>/index',
                 'admin/dictionaries/<controller:\w+>/' => '<controller>/index',

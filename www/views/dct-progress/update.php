@@ -5,9 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\DctProgress */
 
-$this->title = Yii::t('ui', 'Update {modelClass}: ', [
-    'modelClass' => 'Dct Progress',
-]) . ' ' . $model->dct_progress_id;
+$curLang = app\models\DctLanguage::getCurrent();
+foreach($model->dctProgressLocs as $progress){
+    if($progress->dct_language_id == $curLang->dct_language_id){
+        $this->title = Yii::t('ui', 'Update') . ': ' . $progress->text;
+    }
+}
 $this->params['breadcrumbs'][] = ['label' => Yii::t('ui', 'Dct Progresses'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->dct_progress_id, 'url' => ['view', 'id' => $model->dct_progress_id]];
 $this->params['breadcrumbs'][] = Yii::t('ui', 'Update');

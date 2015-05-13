@@ -68,7 +68,6 @@ class DctDoctorController extends BaseController
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $params = Yii::$app->request->post();
             DctDoctorLoc::saveLocalizationData($model, $params, count($languages));
-
             return $this->redirect(['view', 'id' => $model->dct_doctor_id]);
         } else {
             return $this->render('update', [

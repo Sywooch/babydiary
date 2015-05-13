@@ -14,23 +14,40 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <div class="col-lg-9 col-md-9 col-sm-9 right" id="content">
         <div class="block">
-                <h1 class="title-header"><?= Html::encode($this->title) ?></h1>
-                <p>
-                    <?= Html::a(Yii::t('ui', 'Create Dct Progress'), ['create'], ['class' => 'btn btn-success']) ?>
-                </p>
 
-                <?= GridView::widget([
-                    'dataProvider' => $dataProvider,
-                    'columns' => [
-                        ['class' => 'yii\grid\SerialColumn'],
+            <h1><?= Html::encode($this->title) ?></h1>
+            <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
-                        'dct_progress_id',
-                        'position',
-                        'enable',
+            <p>
+                <?= Html::a(Yii::t('ui', 'Add'), ['create'], ['class' => 'btn btn-success']) ?>
+            </p>
 
-                        ['class' => 'yii\grid\ActionColumn'],
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+
+                    //'dct_doctor_id',
+                    [
+                        'attribute' => 'dctDoctorLocs.text',
+                        'value' => function ($data) {
+                            $curLang = app\models\DctLanguage::getCurrent();
+                            foreach($data->dctProgressLocs as $progress){
+                                if($progress->dct_language_id == $curLang->dct_language_id){
+                                    return $progress->text;
+                                }
+                            }
+                        },
                     ],
-                ]); ?>
+                    [
+                        'attribute' => 'enable',
+                        'format' => ['boolean']
+                    ],
+
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
+
         </div>
 
     </div>

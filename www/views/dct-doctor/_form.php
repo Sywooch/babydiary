@@ -62,41 +62,10 @@ use yii\bootstrap\ActiveForm;
 </div>
 
 <script type="text/javascript">
-    //inline-edit
     function editRow(elem){
         var curRow = $(elem).parents('tr');
         $(curRow).find(".hidden").toggleClass("hidden");
-
-//        console.log($(curRow).find(".hidden"));
     }
-
-
-
-
-
-
-
-/*
-    $(".inline-edit").on('click', function(e){
-        e.preventDefault();
-        $(this).toggle();
-        $(this).siblings('input').toggleClass('hidden');
-    });
-    var setValue = function(elem){
-        $(elem).siblings('span').toggle().text($(elem).val());
-        $(elem).toggleClass('hidden');
-    }
-
-    $(document).on('blur', "input.inline-input", function(){
-        setValue(this);
-    });
-    $('input').on('keyDown', ".inline-input", function(e){
-        debugger;
-        e.preventDefault();
-        if (e.keyCode == 13){
-            setValue($(this));
-        }
-    });*/
 </script>
 
 

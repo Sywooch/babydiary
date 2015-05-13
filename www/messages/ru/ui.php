@@ -73,7 +73,7 @@ return [
     'Dct Progress ID' => 'ID',
     'Dct Progress Loc ID' => 'ID',
     'Dct Progress Locs' => 'Dct Progress Locs',
-    'Dct Progresses' => 'Dct Progresses',
+    'Dct Progresses' => 'Достижения',
     'Dct Solid Food ID' => 'ID',
     'Dct Solid Food Loc ID' => 'ID',
     'Dct Solid Food Locs' => 'Dct Solid Food Locs',

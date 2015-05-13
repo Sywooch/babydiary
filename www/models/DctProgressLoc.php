@@ -65,4 +65,28 @@ class DctProgressLoc extends \yii\db\ActiveRecord
     {
         return $this->hasOne(DctLanguage::className(), ['dct_language_id' => 'dct_language_id']);
     }
+
+    public function getLocalizationData($id){
+        $data = DctProgressLoc::find()->with('dctLanguage')->where(['dct_progress_id' => $id])->asArray()->all();
+        $modelLoc = [];
+        foreach($data as $progress){
+            $modelLoc[$progress['dct_language_id']] = ['text' => $progress['text'], 'id' => $progress['dct_progress_loc_id']];
+        }
+
+        return $modelLoc;
+    }
+
+    public function saveLocalizationData($model, $params, $languageCount){
+        for($i = 0; $i < $languageCount; $i++){
+            if ($model->dct_doctor_id > -1){
+                $childModel = new DctProgressLoc();
+                $childModel->dct_progress_id = $model->dct_progress_id;
+                $childModel->dct_language_id = $params[$i]['dct_language_id'];
+            } else {
+                $childModel = DctProgressLoc::findOne($params[$i]['dct_progress_loc_id']);
+            }
+            $childModel->text = (!empty($params[$i]['text'])) ? $params[$i]['text'] : '';
+            $childModel->save();
+        }
+    }
 }
