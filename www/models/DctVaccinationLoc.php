@@ -31,7 +31,7 @@ class DctVaccinationLoc extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dct_vaccination_id', 'text', 'genitive_text', 'dct_language_id'], 'required'],
+            [['dct_vaccination_id', 'dct_language_id'], 'required'],
             [['dct_vaccination_id', 'dct_language_id'], 'integer'],
             [['text', 'genitive_text'], 'string', 'max' => 250]
         ];
@@ -57,5 +57,38 @@ class DctVaccinationLoc extends \yii\db\ActiveRecord
     public function getDctVaccination()
     {
         return $this->hasOne(DctVaccination::className(), ['dct_vaccination_id' => 'dct_vaccination_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDctLanguage()
+    {
+        return $this->hasOne(DctLanguage::className(), ['dct_language_id' => 'dct_language_id']);
+    }
+
+    public function getLocalizationData($id){
+        $data = DctVaccinationLoc::find()->with('dctLanguage')->where(['dct_vaccination_id' => $id])->asArray()->all();
+        $modelLoc = [];
+        foreach($data as $vaccination){
+            $modelLoc[$vaccination['dct_language_id']] = ['text' => $vaccination['text'], 'id' => $vaccination['dct_vaccination_id'], 'genitive_text' => $vaccination['genitive_text']];
+        }
+
+        return $modelLoc;
+    }
+
+    public function saveLocalizationData($model, $params, $languageCount){
+        for($i = 0; $i < $languageCount; $i++){
+            if ($model->dct_vaccination_id > -1){
+                $childModel = new DctVaccinationLoc();
+                $childModel->dct_vaccination_id = $model->dct_vaccination_id;
+                $childModel->dct_language_id = $params[$i]['dct_language_id'];
+            } else {
+                $childModel = DctVaccinationLoc::findOne($params[$i]['dct_vaccination_loc_id']);
+            }
+            $childModel->text = (!empty($params[$i]['text'])) ? $params[$i]['text'] : '';
+            $childModel->genitive_text = (!empty($params[$i]['genitive_text'])) ? $params[$i]['genitive_text'] : '';
+            $childModel->save();
+        }
     }
 }

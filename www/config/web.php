@@ -45,7 +45,7 @@ $config = [
             'showScriptName' => false,
             'class'=>'app\components\LangUrlManager',
             'rules' => array(
-                'admin' => 'admin/index',
+                'admin/home' => 'admin/index',
 
                 'admin/dictionaries/age' => 'dct-age/index',
                 'admin/dictionaries/age/<action:\w+>' => 'dct-age/<action>',
@@ -53,6 +53,12 @@ $config = [
                 'admin/dictionaries/doctors/<action:\w+>' => 'dct-doctor/<action>',
                 'admin/dictionaries/progress' => 'dct-progress/index',
                 'admin/dictionaries/progress/<action:\w+>' => 'dct-progress/<action>',
+                'admin/dictionaries/solidFood' => 'dct-solid-food/index',
+                'admin/dictionaries/solidFood/<action:\w+>' => 'dct-solid-food/<action>',
+                'admin/dictionaries/teeth' => 'dct-tooth/index',
+                'admin/dictionaries/teeth/<action:\w+>' => 'dct-tooth/<action>',
+                'admin/dictionaries/vaccination' => 'dct-vaccination/index',
+                'admin/dictionaries/vaccination/<action:\w+>' => 'dct-vaccination/<action>',
 
                 'admin/<action:\w+>' => 'admin/<action>',
                 'admin/<controller:\w+>/<action:\w+>' => '<controller>/<action>',

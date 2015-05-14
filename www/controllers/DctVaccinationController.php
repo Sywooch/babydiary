@@ -4,30 +4,15 @@ namespace app\controllers;
 
 use Yii;
 use app\models\DctVaccination;
+use app\models\DctVaccinationLoc;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * DctVaccinationController implements the CRUD actions for DctVaccination model.
  */
-class DctVaccinationController extends Controller
+class DctVaccinationController extends BaseController
 {
-    public $layout = 'admin';
-
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all DctVaccination models.
      * @return mixed
@@ -44,18 +29,6 @@ class DctVaccinationController extends Controller
     }
 
     /**
-     * Displays a single DctVaccination model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new DctVaccination model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -63,12 +36,18 @@ class DctVaccinationController extends Controller
     public function actionCreate()
     {
         $model = new DctVaccination();
+        $languages = $this->getLanguages();
+        $modelLoc = new DctVaccinationLoc();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $params = Yii::$app->request->post();
+            DctVaccinationLoc::saveLocalizationData($model, $params, count($languages));
             return $this->redirect(['view', 'id' => $model->dct_vaccination_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'languages' => $languages,
+                'modelLoc' => $modelLoc
             ]);
         }
     }
@@ -82,27 +61,19 @@ class DctVaccinationController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $languages = $this->getLanguages();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $params = Yii::$app->request->post();
+            DctVaccinationLoc::saveLocalizationData($model, $params, count($languages));
             return $this->redirect(['view', 'id' => $model->dct_vaccination_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'languages' => $languages,
+                'modelLoc' => DctVaccinationLoc::getLocalizationData($id)
             ]);
         }
-    }
-
-    /**
-     * Deletes an existing DctVaccination model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
     }
 
     /**
@@ -114,7 +85,8 @@ class DctVaccinationController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = DctVaccination::findOne($id)) !== null) {
+        $model = DctVaccination::find()->with('dctVaccinationLocs')->where(['dct_vaccination_id' => $id])->one();
+        if ($model !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -65,4 +65,28 @@ class DctToothLoc extends \yii\db\ActiveRecord
     {
         return $this->hasOne(DctLanguage::className(), ['dct_language_id' => 'dct_language_id']);
     }
+
+    public function getLocalizationData($id){
+        $data = DctToothLoc::find()->with('dctLanguage')->where(['dct_tooth_id' => $id])->asArray()->all();
+        $modelLoc = [];
+        foreach($data as $tooth){
+            $modelLoc[$tooth['dct_language_id']] = ['text' => $tooth['text'], 'id' => $tooth['dct_tooth_id']];
+        }
+
+        return $modelLoc;
+    }
+
+    public function saveLocalizationData($model, $params, $languageCount){
+        for($i = 0; $i < $languageCount; $i++){
+            if ($model->dct_tooth_id > -1){
+                $childModel = new DctToothLoc();
+                $childModel->dct_tooth_id = $model->dct_tooth_id;
+                $childModel->dct_language_id = $params[$i]['dct_language_id'];
+            } else {
+                $childModel = DctToothLoc::findOne($params[$i]['dct_tooth_loc_id']);
+            }
+            $childModel->text = (!empty($params[$i]['text'])) ? $params[$i]['text'] : '';
+            $childModel->save();
+        }
+    }
 }

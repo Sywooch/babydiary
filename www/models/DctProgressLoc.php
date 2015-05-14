@@ -78,7 +78,7 @@ class DctProgressLoc extends \yii\db\ActiveRecord
 
     public function saveLocalizationData($model, $params, $languageCount){
         for($i = 0; $i < $languageCount; $i++){
-            if ($model->dct_doctor_id > -1){
+            if ($model->dct_progress_id > -1){
                 $childModel = new DctProgressLoc();
                 $childModel->dct_progress_id = $model->dct_progress_id;
                 $childModel->dct_language_id = $params[$i]['dct_language_id'];

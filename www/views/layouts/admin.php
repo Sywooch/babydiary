@@ -43,16 +43,16 @@ AppAsset::register($this);
                                     <nav class="nav nav__primary">
                                         <ul id="topnav" class="sf-menu sf-js-enabled">
                                             <?php $currentUrl = Yii::$app->getRequest()->getLangUrl(); ?>
-                                            <li class="first current-menu-item">
-                                                <?=Html::a(Yii::t('ui', 'Home'), ['/admin']);?>
+                                            <li class="first <?=(stristr($currentUrl, '/admin/home')) ? 'current-menu-item' : '';?>">
+                                                <?=Html::a(Yii::t('ui', 'Home'), ['/admin/home']);?>
                                             </li>
-                                            <li class="second">
+                                            <li class="second <?=(stristr($currentUrl, '/admin/dictionaries')) ? 'current-menu-item' : '';?>">
                                                 <?=Html::a(Yii::t('ui', 'Dictionaries'), ['/admin/dictionaries']);?>
                                             </li>
-                                            <li class="third">
+                                            <li class="third <?=(stristr($currentUrl, '/admin/diaries')) ? 'current-menu-item' : '';?>">
                                                 <?=Html::a(Yii::t('ui', 'Diaries'), ['/admin/diaries']);?>
                                             </li>
-                                            <li class="fourth">
+                                            <li class="fourth <?=(stristr($currentUrl, '/admin/child')) ? 'current-menu-item' : '';?>">
                                                 <?=Html::a(Yii::t('ui', 'Children'), ['/admin/child']);?>
                                             </li>
                                         </ul>

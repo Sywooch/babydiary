@@ -4,30 +4,16 @@ namespace app\controllers;
 
 use Yii;
 use app\models\DctSolidFood;
+use app\models\DctSolidFoodLoc;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * DctSolidFoodController implements the CRUD actions for DctSolidFood model.
  */
-class DctSolidFoodController extends Controller
+class DctSolidFoodController extends BaseController
 {
-    public $layout = 'admin';
-
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all DctSolidFood models.
      * @return mixed
@@ -44,18 +30,6 @@ class DctSolidFoodController extends Controller
     }
 
     /**
-     * Displays a single DctSolidFood model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new DctSolidFood model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -63,12 +37,18 @@ class DctSolidFoodController extends Controller
     public function actionCreate()
     {
         $model = new DctSolidFood();
+        $languages = $this->getLanguages();
+        $modelLoc = new DctSolidFoodLoc();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $params = Yii::$app->request->post();
+            DctSolidFoodLoc::saveLocalizationData($model, $params, count($languages));
             return $this->redirect(['view', 'id' => $model->dct_solid_food_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'languages' => $languages,
+                'modelLoc' => $modelLoc
             ]);
         }
     }
@@ -82,27 +62,19 @@ class DctSolidFoodController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $languages = $this->getLanguages();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $params = Yii::$app->request->post();
+            DctSolidFoodLoc::saveLocalizationData($model, $params, count($languages));
             return $this->redirect(['view', 'id' => $model->dct_solid_food_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'languages' => $languages,
+                'modelLoc' => DctSolidFoodLoc::getLocalizationData($id)
             ]);
         }
-    }
-
-    /**
-     * Deletes an existing DctSolidFood model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
     }
 
     /**
@@ -114,7 +86,8 @@ class DctSolidFoodController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = DctSolidFood::findOne($id)) !== null) {
+        $model = DctSolidFood::find()->with('dctSolidFoodLocs')->where(['dct_solid_food_id' => $id])->one();
+        if ($model !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

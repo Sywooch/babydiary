@@ -65,4 +65,28 @@ class DctSolidFoodLoc extends \yii\db\ActiveRecord
     {
         return $this->hasOne(DctLanguage::className(), ['dct_language_id' => 'dct_language_id']);
     }
+
+    public function getLocalizationData($id){
+        $data = DctSolidFoodLoc::find()->with('dctLanguage')->where(['dct_solid_food_id' => $id])->asArray()->all();
+        $modelLoc = [];
+        foreach($data as $solid_food){
+            $modelLoc[$solid_food['dct_language_id']] = ['text' => $solid_food['text'], 'id' => $solid_food['dct_solid_food_loc_id']];
+        }
+
+        return $modelLoc;
+    }
+
+    public function saveLocalizationData($model, $params, $languageCount){
+        for($i = 0; $i < $languageCount; $i++){
+            if ($model->dct_solid_food_id > -1){
+                $childModel = new DctSolidFoodLoc();
+                $childModel->dct_solid_food_id = $model->dct_solid_food_id;
+                $childModel->dct_language_id = $params[$i]['dct_language_id'];
+            } else {
+                $childModel = DctSolidFoodLoc::findOne($params[$i]['dct_solid_food_loc_id']);
+            }
+            $childModel->text = (!empty($params[$i]['text'])) ? $params[$i]['text'] : '';
+            $childModel->save();
+        }
+    }
 }

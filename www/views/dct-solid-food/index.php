@@ -9,25 +9,47 @@ use yii\grid\GridView;
 $this->title = Yii::t('ui', 'Dct Solid Foods');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="dct-solid-food-index">
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-9 right" id="content">
+        <div class="block">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+            <h1><?= Html::encode($this->title) ?></h1>
+            <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('ui', 'Create Dct Solid Food'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+            <p>
+                <?= Html::a(Yii::t('ui', 'Add'), ['create'], ['class' => 'btn btn-success']) ?>
+            </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-            'dct_solid_food_id',
-            'position',
-            'enable',
+                    //'dct_doctor_id',
+                    [
+                        'attribute' => 'dctSolidFoodLocs.text',
+                        'value' => function ($data) {
+                            $curLang = app\models\DctLanguage::getCurrent();
+                            foreach($data->dctSolidFoodLocs as $solidFood){
+                                if($solidFood->dct_language_id == $curLang->dct_language_id){
+                                    return $solidFood->text;
+                                }
+                            }
+                        },
+                    ],
+                    [
+                        'attribute' => 'enable',
+                        'format' => ['boolean']
+                    ],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
 
+        </div>
+
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 sidebar left" id="sidebar">
+        <?=$this->render('../templates/dictionariesMenu');?>
+    </div>
 </div>

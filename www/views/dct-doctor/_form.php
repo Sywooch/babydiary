@@ -60,12 +60,3 @@ use yii\bootstrap\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 </div>
-
-<script type="text/javascript">
-    function editRow(elem){
-        var curRow = $(elem).parents('tr');
-        $(curRow).find(".hidden").toggleClass("hidden");
-    }
-</script>
-
-
