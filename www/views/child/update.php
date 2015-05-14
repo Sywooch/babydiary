@@ -7,17 +7,20 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('ui', 'Update {modelClass}: ', [
     'modelClass' => 'Child',
-]) . ' ' . $model->child_id;
+]) . ' ' . $model->first_name . ' ' . $model->last_name ;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('ui', 'Children'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->child_id, 'url' => ['view', 'id' => $model->child_id]];
 $this->params['breadcrumbs'][] = Yii::t('ui', 'Update');
 ?>
-<div class="child-update">
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12" id="content">
+        <div class="block">
+            <h1><?= Html::encode($this->title) ?></h1>
+                <?= $this->render('_form', [
+                    'model' => $model,
+                ]) ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+        </div>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+    </div>
 </div>

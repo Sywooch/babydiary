@@ -60,6 +60,9 @@ $config = [
                 'admin/dictionaries/vaccination' => 'dct-vaccination/index',
                 'admin/dictionaries/vaccination/<action:\w+>' => 'dct-vaccination/<action>',
 
+                'admin/child' => 'child/index',
+                'admin/child/<action:\w+>' => 'child/<action>',
+
                 'admin/<action:\w+>' => 'admin/<action>',
                 'admin/<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 
