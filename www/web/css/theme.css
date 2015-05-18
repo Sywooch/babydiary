@@ -908,6 +908,9 @@ select.changed {
 .float-left {
   float: left;
 }
+.float-right {
+  float: right;
+}
 [class*="span"] {
   float: left;
   min-height: 1px;
@@ -939,4 +942,10 @@ h1:first-letter {
 }
 .inline-edit {
   border-bottom: 1px dotted;
+}
+.ng-invalid.ng-dirty {
+  border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+  border-color: #78FA89;
 }

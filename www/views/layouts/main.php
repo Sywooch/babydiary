@@ -12,13 +12,16 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?= Yii::$app->language ?>" ng-app="store">
     <head>
         <meta charset="<?= Yii::$app->charset ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
+        <script type="text/javascript" src="js/angular/angular.js"></script>
+        <script type="text/javascript" src="js/app/app.js"></script>
+
     </head>
     <body>
     <?php $this->beginBody() ?>
@@ -45,7 +48,7 @@ AppAsset::register($this);
                                                 <?=Html::a(Yii::t('ui', 'Home'), ['/']);?>
                                             </li>
                                             <li class="second">
-                                                <?=Html::a(Yii::t('ui', 'Diary'), ['/']);?>
+                                                <?=Html::a(Yii::t('ui', 'Diary'), ['/diary']);?>
                                             </li>
                                             <li class="third">
                                                 <?=Html::a(Yii::t('ui', 'Test'), ['/']);?>
@@ -61,6 +64,11 @@ AppAsset::register($this);
                     </div>
                 </div>
             </header>
+            <div class="content-holder">
+                <div class="container">
+                    <?= $content ?>
+                </div>
+            </div>
             <footer class="footer">
                 <div class="container">
                     <div class="row">
