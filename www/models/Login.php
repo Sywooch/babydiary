@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use yii\web\IdentityInterface;
 
 /**
  * LoginForm is the model behind the login form.
@@ -12,6 +13,7 @@ class Login extends Model
 {
     public $email;
     public $password;
+    public $rememberMe = false;
 
     private $_user = false;
 
@@ -50,9 +52,8 @@ class Login extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+            if (!$user || !(crypt($this->password, $user->login) == crypt($user->password, $user->login))) {
+                $this->addError($attribute, Yii::t('ui', 'Incorrect username or password.'));
             }
         }
     }
@@ -78,7 +79,7 @@ class Login extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = DctUser::find()->where(['email' => $this->email])->one();
+            $this->_user = User::findByEmail($this->email);
         }
 
         return $this->_user;

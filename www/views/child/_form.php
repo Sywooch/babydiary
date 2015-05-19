@@ -35,7 +35,10 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'surname')->textInput(['maxlength' => 100]) ?>
 
-    <?= $form->field($model, 'birth_date')->textInput() ?>
+    <?= $form->field($model, 'birth_date')->widget(\yii\jui\DatePicker::classname(), [
+        //'language' => 'ru',
+        //'dateFormat' => 'yyyy-MM-dd',
+    ]) ?>
 
     <?= $form->field($model, 'time_birth')->textInput() ?>
 

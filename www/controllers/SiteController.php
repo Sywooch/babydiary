@@ -35,14 +35,17 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $model = new Login();
-        var_dump(Yii::$app->request->post());
-        /*if ($model->load(Yii::$app->request->post())) {
+        $params = json_decode(trim(file_get_contents('php://input')), true);
+        $model->email = $params['email'];
+        $model->password = $params['password'];
+        $model->rememberMe = isset($params['remember']) ? $params['remember'] : false;
+        if ($model->login()) {
             return '{success : true}';
         } else {
             return $this->render('widgetLogin', [
                 'model' => $model,
             ]);
-        }*/
+        }
     }
 
     public function actionLogout()
@@ -52,3 +55,4 @@ class SiteController extends Controller
         return $this->goHome();
     }
 }
+
