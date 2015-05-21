@@ -33,6 +33,6 @@ use yii\bootstrap\ActiveForm;
             </div>
         </form>
     <?php else :?>
-
+        <a href="site/logout">Logout</a>
     <?php endif;?>
 </div>

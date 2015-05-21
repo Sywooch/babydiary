@@ -5,7 +5,10 @@ namespace app\models;
 class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {
     public $id;
-    public $username;
+    public $dct_user_id;
+    public $login;
+    public $email;
+    public $enable;
     public $password;
     public $authKey;
     public $accessToken;
@@ -13,9 +16,9 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id)
+    public static function findIdentity($dct_user_id)
     {
-        $user = DctUser::find()->where(['dct_user_id' => $id])->asArray()->one();
+        $user = DctUser::find()->where(['dct_user_id' => $dct_user_id])->asArray()->one();
         if ($user){
             return new static($user);
         }

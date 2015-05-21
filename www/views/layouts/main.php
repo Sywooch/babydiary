@@ -88,9 +88,7 @@ AppAsset::register($this);
         </div>
 
 
-    <script type="text/javascript" src="js/angular/angular.js"></script>
-    <script type="text/javascript" src="js/app/app.js"></script>
-    <script type="text/javascript" src="js/app/directives.js"></script>
+
     <?php $this->endBody();?>
     </body>
 </html>
