@@ -12,17 +12,16 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" ng-app="main">
+<html lang="<?= Yii::$app->language ?>">
     <head>
         <meta charset="<?= Yii::$app->charset ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
-
-
     </head>
     <body>
+    <div id="background"></div>
     <?php $this->beginBody() ?>
         <div class="main-holder">
             <header class="header">
@@ -44,19 +43,21 @@ AppAsset::register($this);
                                     <nav class="nav nav__primary">
                                         <ul id="topnav" class="sf-menu sf-js-enabled">
                                             <li class="first current-menu-item">
-                                                <?=Html::a(Yii::t('ui', 'Home'), ['/']);?>
+                                                <a href="#/index" title="<?=Yii::t('ui', 'Main');?>"><?=Yii::t('ui', 'Main');?></a>
                                             </li>
                                             <li class="second">
-                                                <?=Html::a(Yii::t('ui', 'Diary'), ['/diary']);?>
-                                            </li>
-                                            <li class="third">
-                                                <?=Html::a(Yii::t('ui', 'Test'), ['/']);?>
-                                            </li>
-                                            <li class="forth">
-                                                <?=Html::a(Yii::t('ui', 'Test'), ['/']);?>
+                                                <a href="#/diary" title="<?=Yii::t('ui', 'Diary');?>"><?=Yii::t('ui', 'Diary');?></a>
                                             </li>
                                         </ul>
                                     </nav>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <?= Breadcrumbs::widget([
+
+                                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                                    ]) ?>
                                 </div>
                             </div>
                         </div>

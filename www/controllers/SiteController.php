@@ -54,5 +54,10 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
+    public function actionDiary(){
+        $this->layout = 'blank';
+        return $this->render('diary');
+    }
 }
 

@@ -24,10 +24,8 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/bootstrap.min.js',
         'js/custom.js',
-        'js/angular/angular.js',
-        'js/angular/angular-route.js',
-        'js/app/app.js',
-        'js/app/directives.js',
+        'js/knockout-3.3.0',
+        'js/app/main'
     ];
     public $depends = [
         'yii\web\YiiAsset',

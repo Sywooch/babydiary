@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\backend;
 
 use Yii;
 use app\models\Diary;
@@ -12,8 +12,10 @@ use yii\filters\VerbFilter;
 /**
  * DiaryController implements the CRUD actions for Diary model.
  */
-class DiaryController extends BaseController
+class DiaryController extends Controller
 {
+    public $layout = 'admin';
+
     public function behaviors()
     {
         return [

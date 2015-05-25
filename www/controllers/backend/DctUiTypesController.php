@@ -1,19 +1,21 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\backend;
 
 use Yii;
-use app\models\Diary;
+use app\models\DctUiTypes;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DiaryController implements the CRUD actions for Diary model.
+ * DctUiTypesController implements the CRUD actions for DctUiTypes model.
  */
-class DiaryController extends BaseController
+class DctUiTypesController extends Controller
 {
+    public $layout = 'admin';
+
     public function behaviors()
     {
         return [
@@ -27,13 +29,13 @@ class DiaryController extends BaseController
     }
 
     /**
-     * Lists all Diary models.
+     * Lists all DctUiTypes models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Diary::find(),
+            'query' => DctUiTypes::find(),
         ]);
 
         return $this->render('index', [
@@ -42,7 +44,7 @@ class DiaryController extends BaseController
     }
 
     /**
-     * Displays a single Diary model.
+     * Displays a single DctUiTypes model.
      * @param integer $id
      * @return mixed
      */
@@ -54,16 +56,16 @@ class DiaryController extends BaseController
     }
 
     /**
-     * Creates a new Diary model.
+     * Creates a new DctUiTypes model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Diary();
+        $model = new DctUiTypes();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->diary_id]);
+            return $this->redirect(['view', 'id' => $model->dct_ui_types_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -72,7 +74,7 @@ class DiaryController extends BaseController
     }
 
     /**
-     * Updates an existing Diary model.
+     * Updates an existing DctUiTypes model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -82,7 +84,7 @@ class DiaryController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->diary_id]);
+            return $this->redirect(['view', 'id' => $model->dct_ui_types_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -91,7 +93,7 @@ class DiaryController extends BaseController
     }
 
     /**
-     * Deletes an existing Diary model.
+     * Deletes an existing DctUiTypes model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +106,15 @@ class DiaryController extends BaseController
     }
 
     /**
-     * Finds the Diary model based on its primary key value.
+     * Finds the DctUiTypes model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Diary the loaded model
+     * @return DctUiTypes the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Diary::findOne($id)) !== null) {
+        if (($model = DctUiTypes::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

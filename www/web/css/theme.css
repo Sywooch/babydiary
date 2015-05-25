@@ -946,3 +946,31 @@ h1:first-letter {
 .ng-invalid.ng-dirty {
   border-color: #FA787E;
 }
+.alert-panel {
+  padding: 10px 0;
+}
+.freeze-panel {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  opacity: 0.7;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.freeze-panel .loader {
+  background: url("images/loader.GIF") no-repeat;
+  left: 50%;
+  top: 50%;
+  margin-left: -80px;
+  margin-top: -10px;
+  position: absolute;
+  height: 20px;
+  width: 160px;
+}
+.tab-content {
+  position: relative;
+}

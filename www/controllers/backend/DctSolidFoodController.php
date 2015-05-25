@@ -1,39 +1,27 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\backend;
 
 use Yii;
-use app\models\Diary;
+use app\models\DctSolidFood;
+use app\models\DctSolidFoodLoc;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DiaryController implements the CRUD actions for Diary model.
+ * DctSolidFoodController implements the CRUD actions for DctSolidFood model.
  */
-class DiaryController extends BaseController
+class DctSolidFoodController extends BaseController
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     /**
-     * Lists all Diary models.
+     * Lists all DctSolidFood models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Diary::find(),
+            'query' => DctSolidFood::find(),
         ]);
 
         return $this->render('index', [
@@ -42,37 +30,31 @@ class DiaryController extends BaseController
     }
 
     /**
-     * Displays a single Diary model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new Diary model.
+     * Creates a new DctSolidFood model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Diary();
+        $model = new DctSolidFood();
+        $languages = $this->getLanguages();
+        $modelLoc = new DctSolidFoodLoc();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->diary_id]);
+            $params = Yii::$app->request->post();
+            DctSolidFoodLoc::saveLocalizationData($model, $params, count($languages));
+            return $this->redirect(['view', 'id' => $model->dct_solid_food_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'languages' => $languages,
+                'modelLoc' => $modelLoc
             ]);
         }
     }
 
     /**
-     * Updates an existing Diary model.
+     * Updates an existing DctSolidFood model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -80,39 +62,32 @@ class DiaryController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $languages = $this->getLanguages();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->diary_id]);
+            $params = Yii::$app->request->post();
+            DctSolidFoodLoc::saveLocalizationData($model, $params, count($languages));
+            return $this->redirect(['view', 'id' => $model->dct_solid_food_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'languages' => $languages,
+                'modelLoc' => DctSolidFoodLoc::getLocalizationData($id)
             ]);
         }
     }
 
     /**
-     * Deletes an existing Diary model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Diary model based on its primary key value.
+     * Finds the DctSolidFood model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Diary the loaded model
+     * @return DctSolidFood the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Diary::findOne($id)) !== null) {
+        $model = DctSolidFood::find()->with('dctSolidFoodLocs')->where(['dct_solid_food_id' => $id])->one();
+        if ($model !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

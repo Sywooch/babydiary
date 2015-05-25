@@ -6,13 +6,15 @@
  * Time: 23:47
  */
 
-namespace app\controllers;
+namespace app\controllers\backend;
 use app\models\DctLanguage;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 
 class BaseController extends Controller
 {
+
+    public $layout = 'admin';
 
     public function behaviors()
     {

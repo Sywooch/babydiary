@@ -3,6 +3,11 @@
   font-family: Gabriela;
   src: url('../fonts/Gabriela-Regular.ttf');
 }
+.striped(@color: rgba(255,255,255,.15); @angle: 45deg) {
+  background-image: -webkit-linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+  background-image: linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+}
 .main-holder { overflow:hidden; }
 
 #background{
@@ -844,3 +849,34 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   .ng-invalid.ng-dirty{
     border-color: #FA787E;
   }
+
+  .alert-panel {
+    padding: 10px 0;
+  }
+
+  .freeze-panel {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    opacity: 0.7;
+    border-radius: 4px;
+    overflow: hidden;
+    .loader{
+      background: url("images/loader.GIF") no-repeat;
+      left: 50%;
+      top: 50%;
+      margin-left: -80px;
+      margin-top: -10px;
+      position: absolute;
+      height: 20px;
+      width: 160px;
+    }
+  }
+
+.tab-content{
+  position: relative;
+}

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\base\NotSupportedException;
 
 /**
  * This is the model class for table "dct_user".
@@ -13,7 +14,7 @@ use Yii;
  * @property string $email
  * @property integer $enable
  */
-class DctUser extends \yii\db\ActiveRecord
+class DctUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * @inheritdoc
@@ -49,5 +50,45 @@ class DctUser extends \yii\db\ActiveRecord
             'email' => Yii::t('ui', 'Email'),
             'enable' => Yii::t('ui', 'Enable'),
         ];
+    }
+
+    public static function findIdentity($id)
+    {
+        return static::findOne(['dct_user_d' => $id]);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+    }
+
+    public static function findByUsername($username)
+    {
+        return static::findOne(['username' => $username]);
+    }
+
+    public static function findByEmail($email)
+    {
+        return static::findOne(['email' => $email]);
+    }
+
+    public function getId()
+    {
+        return $this->getPrimaryKey();
+    }
+
+    public function getAuthKey()
+    {
+        return $this->authKey;
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        return $this->getAuthKey() === $authKey;
+    }
+
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
 }

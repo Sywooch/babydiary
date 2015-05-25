@@ -1,39 +1,27 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\backend;
 
 use Yii;
-use app\models\Diary;
+use app\models\DctToothLoc;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DiaryController implements the CRUD actions for Diary model.
+ * DctToothLocController implements the CRUD actions for DctToothLoc model.
  */
-class DiaryController extends BaseController
+class DctToothLocController extends BaseController
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     /**
-     * Lists all Diary models.
+     * Lists all DctToothLoc models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Diary::find(),
+            'query' => DctToothLoc::find(),
         ]);
 
         return $this->render('index', [
@@ -42,28 +30,16 @@ class DiaryController extends BaseController
     }
 
     /**
-     * Displays a single Diary model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new Diary model.
+     * Creates a new DctToothLoc model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Diary();
+        $model = new DctToothLoc();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->diary_id]);
+            return $this->redirect(['view', 'id' => $model->dtc_tooth_loc_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -72,7 +48,7 @@ class DiaryController extends BaseController
     }
 
     /**
-     * Updates an existing Diary model.
+     * Updates an existing DctToothLoc model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -82,7 +58,7 @@ class DiaryController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->diary_id]);
+            return $this->redirect(['view', 'id' => $model->dtc_tooth_loc_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -91,28 +67,15 @@ class DiaryController extends BaseController
     }
 
     /**
-     * Deletes an existing Diary model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Diary model based on its primary key value.
+     * Finds the DctToothLoc model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Diary the loaded model
+     * @return DctToothLoc the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Diary::findOne($id)) !== null) {
+        if (($model = DctToothLoc::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
