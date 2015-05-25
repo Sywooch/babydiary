@@ -974,3 +974,6 @@ h1:first-letter {
 .tab-content {
   position: relative;
 }
+.row .form-group div {
+  line-height: 34px;
+}
