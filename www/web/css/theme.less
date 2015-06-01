@@ -3,6 +3,12 @@
   font-family: Gabriela;
   src: url('../fonts/Gabriela-Regular.ttf');
 }
+
+* {
+  -moz-border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
 .striped(@color: rgba(255,255,255,.15); @angle: 45deg) {
   background-image: -webkit-linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
   background-image: -o-linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
@@ -883,9 +889,31 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 
 
 .row{
-  .form-group{
-    div{
-      line-height: 34px;
+  &.form-group{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    div.vert-aling{
+      display: table;
+      min-height: 34px;
+      span{
+        display: table-cell;
+        vertical-align: middle;
+        label{
+          margin-bottom: 0;
+          word-break: break-all;
+        }
+      }
     }
   }
+}
+
+.solid_foods-form{
+  columns: 200px 3;
+}
+
+input[type='number']{
+  -moz-appearance: textfield;
+}
+input[type='number']::-webkit-inner-spin-button {
+  display: none;
 }

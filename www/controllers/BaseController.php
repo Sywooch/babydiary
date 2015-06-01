@@ -7,12 +7,20 @@
  */
 
 namespace app\controllers;
+use Yii;
 use app\models\DctLanguage;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 
 class BaseController extends Controller
 {
+    public $currentLngId;
+
+    public function init() {
+        $lang = DctLanguage::find()->select('dct_language_id')->where(['locale' => Yii::$app->language])->one();
+        $this->currentLngId = $lang->dct_language_id;
+        parent::init();
+    }
 
     public function behaviors()
     {
@@ -59,4 +67,4 @@ class BaseController extends Controller
 
         return $languages;
     }
-} 
+}

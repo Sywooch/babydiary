@@ -41,7 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?=$this->render('../templates/diaryGeneral');?>
                         </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="profile">Aenean vel molestie ante, vel molestie justo. Mauris at dolor nec justo faucibus porta eget et velit. Etiam ut auctor nibh. Morbi sit amet quam tempus, mattis ante at, suscipit mi. Morbi gravida eu nibh ut eleifend. Fusce vel ante in nisi rutrum lacinia. Vestibulum non velit blandit, tempor odio rhoncus, interdum ipsum. Sed malesuada nisi suscipit nunc eleifend tempus. Curabitur vel sollicitudin sem. Nam imperdiet consectetur lectus vel placerat. Sed vitae bibendum felis. Mauris consequat porta rutrum. Aenean pellentesque diam ut dolor consectetur, nec auctor turpis scelerisque. Ut congue diam risus, sed mattis nibh scelerisque vitae.</div>
+                    <div role="tabpanel" class="tab-pane" id="profile">
+                        <div>
+                            <?=$this->render('../templates/diaryFood', ['solidFood' => $solidFood]);?>
+                        </div>
+                    </div>
                     <div role="tabpanel" class="tab-pane" id="messages">Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras sapien mi, facilisis et facilisis a, consectetur ut mauris. Fusce turpis augue, tristique venenatis nulla at, ullamcorper mattis justo. Nulla a augue eget felis fermentum tristique non porttitor est. Mauris dignissim nulla egestas dapibus consequat. Ut mattis metus venenatis, posuere est a, vehicula ante. Cras tincidunt commodo posuere. Etiam dignissim lacus neque. Mauris sodales nunc sit amet mi elementum elementum. Cras leo purus, mollis non urna quis, porttitor volutpat metus. Quisque aliquam, turpis ut vestibulum finibus, velit orci elementum mauris, eget varius enim ex eu lacus.</div>
                     <div role="tabpanel" class="tab-pane" id="settings">Ut fermentum metus sed maximus condimentum. Suspendisse sed risus porta, ultricies felis tincidunt, consectetur elit. Proin condimentum eget felis nec ullamcorper. Aliquam tempor ornare consequat. Pellentesque eget vehicula augue, tempor elementum est. Mauris vitae nulla nibh. In tristique semper augue vel aliquam. Nam imperdiet orci nec arcu luctus, non pulvinar ex aliquet.</div>
                 </div>

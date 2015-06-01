@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Diary;
+use app\models\DctSolidFood;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -36,8 +37,17 @@ class DiaryController extends BaseController
             'query' => Diary::find(),
         ]);
 
+        $solidFood = DctSolidFood::find()
+            ->select('`dct_solid_food`.*, `dct_solid_food_loc`.`text` as text')
+            ->leftJoin('dct_solid_food_loc', '`dct_solid_food_loc`.`dct_solid_food_id` = `dct_solid_food`.`dct_solid_food_id`')
+            ->where(['dct_solid_food_loc.dct_language_id' => $this->currentLngId])
+            ->with('dctSolidFoodLocs')
+            ->asArray()
+            ->all();
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'solidFood' => $solidFood
         ]);
     }
 

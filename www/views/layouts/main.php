@@ -43,10 +43,10 @@ AppAsset::register($this);
                                     <nav class="nav nav__primary">
                                         <ul id="topnav" class="sf-menu sf-js-enabled">
                                             <li class="first current-menu-item">
-                                                <a href="#/index" title="<?=Yii::t('ui', 'Main');?>"><?=Yii::t('ui', 'Main');?></a>
+                                                <a href="index" title="<?=Yii::t('ui', 'Main');?>"><?=Yii::t('ui', 'Main');?></a>
                                             </li>
                                             <li class="second">
-                                                <a href="#/diary" title="<?=Yii::t('ui', 'Diary');?>"><?=Yii::t('ui', 'Diary');?></a>
+                                                <a href="diary" title="<?=Yii::t('ui', 'Diary');?>"><?=Yii::t('ui', 'Diary');?></a>
                                             </li>
                                         </ul>
                                     </nav>

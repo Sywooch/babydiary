@@ -2,6 +2,11 @@
   font-family: Gabriela;
   src: url('../fonts/Gabriela-Regular.ttf');
 }
+* {
+  -moz-border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
 .main-holder {
   overflow: hidden;
 }
@@ -974,6 +979,28 @@ h1:first-letter {
 .tab-content {
   position: relative;
 }
-.row .form-group div {
-  line-height: 34px;
+.row.form-group {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.row.form-group div.vert-aling {
+  display: table;
+  min-height: 34px;
+}
+.row.form-group div.vert-aling span {
+  display: table-cell;
+  vertical-align: middle;
+}
+.row.form-group div.vert-aling span label {
+  margin-bottom: 0;
+  word-break: break-all;
+}
+.solid_foods-form {
+  columns: 200px 3;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+input[type='number']::-webkit-inner-spin-button {
+  display: none;
 }
