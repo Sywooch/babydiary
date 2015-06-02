@@ -22,8 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><?=Yii::t('ui', 'Home');?></a></li>
                     <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><?=Yii::t('ui', 'Food');?></a></li>
-                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><?=Yii::t('ui', 'Health');?></a></li>
-                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><?=Yii::t('ui', 'Sleep and walks');?></a></li>
+                    <li role="presentation"><a href="#health" aria-controls="health" role="tab" data-toggle="tab"><?=Yii::t('ui', 'Health');?></a></li>
+                    <li role="presentation"><a href="#sleeping" aria-controls="sleeping" role="tab" data-toggle="tab"><?=Yii::t('ui', 'Sleep and walks');?></a></li>
                 </ul>
 
                 <!-- Tab panes -->
@@ -46,8 +46,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?=$this->render('../templates/diaryFood', ['solidFood' => $solidFood]);?>
                         </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="messages">Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras sapien mi, facilisis et facilisis a, consectetur ut mauris. Fusce turpis augue, tristique venenatis nulla at, ullamcorper mattis justo. Nulla a augue eget felis fermentum tristique non porttitor est. Mauris dignissim nulla egestas dapibus consequat. Ut mattis metus venenatis, posuere est a, vehicula ante. Cras tincidunt commodo posuere. Etiam dignissim lacus neque. Mauris sodales nunc sit amet mi elementum elementum. Cras leo purus, mollis non urna quis, porttitor volutpat metus. Quisque aliquam, turpis ut vestibulum finibus, velit orci elementum mauris, eget varius enim ex eu lacus.</div>
-                    <div role="tabpanel" class="tab-pane" id="settings">Ut fermentum metus sed maximus condimentum. Suspendisse sed risus porta, ultricies felis tincidunt, consectetur elit. Proin condimentum eget felis nec ullamcorper. Aliquam tempor ornare consequat. Pellentesque eget vehicula augue, tempor elementum est. Mauris vitae nulla nibh. In tristique semper augue vel aliquam. Nam imperdiet orci nec arcu luctus, non pulvinar ex aliquet.</div>
+                    <div role="tabpanel" class="tab-pane" id="health">Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras sapien mi, facilisis et facilisis a, consectetur ut mauris. Fusce turpis augue, tristique venenatis nulla at, ullamcorper mattis justo. Nulla a augue eget felis fermentum tristique non porttitor est. Mauris dignissim nulla egestas dapibus consequat. Ut mattis metus venenatis, posuere est a, vehicula ante. Cras tincidunt commodo posuere. Etiam dignissim lacus neque. Mauris sodales nunc sit amet mi elementum elementum. Cras leo purus, mollis non urna quis, porttitor volutpat metus. Quisque aliquam, turpis ut vestibulum finibus, velit orci elementum mauris, eget varius enim ex eu lacus.</div>
+                    <div role="tabpanel" class="tab-pane" id="sleeping">
+                        <div>
+                            <?=$this->render('../templates/diarySleepAndWalk');?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

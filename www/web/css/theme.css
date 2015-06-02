@@ -998,7 +998,8 @@ h1:first-letter {
 .solid_foods-form {
   columns: 200px 3;
 }
-input[type='number'] {
+input[type='number'],
+input[type='time'] {
   -moz-appearance: textfield;
 }
 input[type='number']::-webkit-inner-spin-button {
