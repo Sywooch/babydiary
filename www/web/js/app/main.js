@@ -1,4 +1,9 @@
 $(function(){
+    var vm ={
+
+    }
+
+
 
     function AppViewModel() {
         this.showLoader = function(){
@@ -8,8 +13,6 @@ $(function(){
         this.hideLoader = function(){
             $('.freeze-panel').hide();
         };
-
-        this.lastName = "Bertington";
     }
 
     ko.applyBindings(new AppViewModel());
