@@ -22,10 +22,10 @@ class AppAsset extends AssetBundle
         'css/theme.css',
     ];
     public $js = [
-        'js/bootstrap.min.js',
-        'js/custom.js',
-        'js/knockout-3.3.0',
-        'js/app/main'
+        'js/vendor/bootstrap.min.js',
+        'js/vendor/backbone.min.js',
+        'js/vendor/jquery-2.1.4.min.js',
+        'js/vendor/underscore-min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
