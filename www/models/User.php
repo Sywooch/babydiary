@@ -14,14 +14,14 @@ use yii\base\NotSupportedException;
  * @property string $email
  * @property integer $enable
  */
-class DctUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'dct_user';
+        return 'user';
     }
 
     /**
@@ -48,6 +48,7 @@ class DctUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'login' => Yii::t('ui', 'Login'),
             'password' => Yii::t('ui', 'Password'),
             'email' => Yii::t('ui', 'Email'),
+            'name' => Yii::t('ui', 'Name'),
             'enable' => Yii::t('ui', 'Enable'),
         ];
     }
@@ -60,11 +61,6 @@ class DctUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public static function findIdentityByAccessToken($token, $type = null)
     {
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-    }
-
-    public static function findByUsername($username)
-    {
-        return static::findOne(['username' => $username]);
     }
 
     public static function findByEmail($email)
