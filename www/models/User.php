@@ -8,7 +8,7 @@ use yii\base\NotSupportedException;
 /**
  * This is the model class for table "dct_user".
  *
- * @property integer $dct_user_id
+ * @property integer $user_id
  * @property string $login
  * @property string $password
  * @property string $email
@@ -44,7 +44,7 @@ class DctUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function attributeLabels()
     {
         return [
-            'dct_user_id' => Yii::t('ui', 'Dct User ID'),
+            'user_id' => Yii::t('ui', 'User ID'),
             'login' => Yii::t('ui', 'Login'),
             'password' => Yii::t('ui', 'Password'),
             'email' => Yii::t('ui', 'Email'),
@@ -54,7 +54,7 @@ class DctUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public static function findIdentity($id)
     {
-        return static::findOne(['dct_user_d' => $id]);
+        return static::findOne(['user_d' => $id]);
     }
 
     public static function findIdentityByAccessToken($token, $type = null)

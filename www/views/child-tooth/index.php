@@ -1,0 +1,38 @@
+<?php
+
+use yii\helpers\Html;
+use yii\grid\GridView;
+
+/* @var $this yii\web\View */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = Yii::t('ui', 'Child Teeth');
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="child-tooth-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <p>
+        <?= Html::a(Yii::t('ui', 'Create Child Tooth'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'child_tooth_id',
+            'child_id',
+            'dct_tooth_id',
+            'tooth_order',
+            'tooth_date',
+            // 'tooth_age_months',
+            // 'tooth_age_days',
+            // 'notes:ntext',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+
+</div>
