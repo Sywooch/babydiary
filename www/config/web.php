@@ -12,6 +12,9 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '3NJmF1OaoyabQlZTkGxYjZ2HvFyDGVKK',
             'class' => 'app\components\LangRequest',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -45,9 +48,10 @@ $config = [
         'urlManager' => array(
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'class'=>'app\components\LangUrlManager',
+            'enableStrictParsing' => true,
+            //'class'=>'app\components\LangUrlManager',
             'rules' => array(
-                'admin/home' => 'backend/admin/index',
+                /*'admin/home' => 'backend/admin/index',
 
                 'admin/dictionaries/age' => 'backend/dct-age/index',
                 'admin/dictionaries/age/<action:\w+>' => 'backend/dct-age/<action>',
@@ -71,7 +75,10 @@ $config = [
                 'admin/dictionaries/<controller:\w+>' => 'backend/<controller>/index',
                 'admin/dictionaries/<controller:\w+>/' => 'backend/<controller>/index',
                 'admin/dictionaries/<controller:\w+>/<action:\w+>' => 'backend/<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',*/
+
+                // REST for UI
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
             ),
         ),
 
