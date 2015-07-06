@@ -22,11 +22,12 @@ class AppAsset extends AssetBundle
         'css/theme.css',
     ];
     public $js = [
+        'js/vendor/jquery-2.1.4.min.js',
+        'js/vendor/bootstrap.min.js',
+        'js/vendor/underscore-min.js',
         'js/vendor/backbone.js',
         'js/vendor/backbone-validation.js',
-        'js/vendor/bootstrap.min.js',
-        'js/vendor/jquery-2.1.4.min.js',
-        'js/vendor/underscore-min.js',
+        'js/vendor/backbone.stickit.js',
         'js/app/app.js'
     ];
     public $depends = [

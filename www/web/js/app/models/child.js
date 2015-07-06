@@ -11,7 +11,7 @@ var app = app || {};
 
     app.Child = Backbone.Model.extend({
 
-        idAttribute:"child_id",
+        idAttribute: 'child_id',
         defaults: {
 
         }

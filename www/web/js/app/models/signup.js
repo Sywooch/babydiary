@@ -9,10 +9,8 @@ var app = app || {};
     // Child Model
     // -----------
 
-    app.User = Backbone.Model.extend({
+    app.SignUp = Backbone.Model.extend({
 
-        idAttribute: "user_id",
-        urlRoot: "/users",
         defaults: {
 
         },
@@ -27,7 +25,7 @@ var app = app || {};
             password: {
                 minLength: 8
             },
-            repeatPassword: {
+            confirmPassword: {
                 equalTo: 'password',
                 msg: 'The passwords does not match'
             }

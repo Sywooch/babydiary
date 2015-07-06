@@ -8,7 +8,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="user-frmSignUp">
+<div class="user-frmSignUp" id="frmSignUp">
 
     <?php $form = ActiveForm::begin([
         'layout' => 'horizontal',
@@ -21,7 +21,8 @@ use yii\bootstrap\ActiveForm;
                 'wrapper' => 'col-sm-9',
                 'error' => '',
                 'hint' => '',
-            ]
+            ],
+            'enableClientValidation'=>false
         ],
     ]); ?>
 
@@ -33,7 +34,7 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($model, 'login')->textInput(['maxlength' => 100]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('ui', 'Create'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('ui', 'Create'), ['class' => 'btn btn-success', 'id' => 'signUpButton']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
