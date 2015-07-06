@@ -75,7 +75,7 @@ $config = [
                 'admin/dictionaries/<controller:\w+>' => 'backend/<controller>/index',
                 'admin/dictionaries/<controller:\w+>/' => 'backend/<controller>/index',
                 'admin/dictionaries/<controller:\w+>/<action:\w+>' => 'backend/<controller>/<action>',
-                'user/sign-up' => 'user/sign-up',
+                'sign-up' => 'user/sign-up',
                 '<controller:\w+>/' => '<controller>/index',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 
