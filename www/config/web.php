@@ -23,7 +23,7 @@ $config = [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
             'enableSession' => true,
-            'loginUrl' => null
+            'loginUrl' => '/user/auth'
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -75,12 +75,14 @@ $config = [
                 'admin/dictionaries/<controller:\w+>' => 'backend/<controller>/index',
                 'admin/dictionaries/<controller:\w+>/' => 'backend/<controller>/index',
                 'admin/dictionaries/<controller:\w+>/<action:\w+>' => 'backend/<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                'user/sign-up' => 'user/sign-up',
                 '<controller:\w+>/' => '<controller>/index',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+
                 '/' => 'site',
 
                 // REST for UI
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+                //['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
             ],
         ),
 

@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use Yii;
 use app\models\User;
+use app\models\SignUp;
+use app\models\Login;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
@@ -104,5 +106,19 @@ class UserController extends BaseController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionSignUp()
+    {
+        $model = new SignUp();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['/']);
+        } else {
+            return $this->render('signUp', [
+                'model' => $model,
+            ]);
+        }
+
     }
 }
