@@ -22,7 +22,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-            'enableSession' => false,
+            'enableSession' => true,
             'loginUrl' => null
         ],
         'errorHandler' => [
@@ -50,8 +50,8 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => true,
             //'class'=>'app\components\LangUrlManager',
-            'rules' => array(
-                /*'admin/home' => 'backend/admin/index',
+            'rules' => [
+                'admin/home' => 'backend/admin/index',
 
                 'admin/dictionaries/age' => 'backend/dct-age/index',
                 'admin/dictionaries/age/<action:\w+>' => 'backend/dct-age/<action>',
@@ -75,11 +75,13 @@ $config = [
                 'admin/dictionaries/<controller:\w+>' => 'backend/<controller>/index',
                 'admin/dictionaries/<controller:\w+>/' => 'backend/<controller>/index',
                 'admin/dictionaries/<controller:\w+>/<action:\w+>' => 'backend/<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',*/
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                '<controller:\w+>/' => '<controller>/index',
+                '/' => 'site',
 
                 // REST for UI
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
-            ),
+            ],
         ),
 
         'i18n' => [

@@ -6,26 +6,17 @@ use Yii;
 use app\models\Diary;
 use app\models\DctSolidFood;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+
 
 /**
  * DiaryController implements the CRUD actions for Diary model.
  */
 class DiaryController extends BaseController
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
+    public $modelClass = 'app\models\Diary';
+
+
 
     /**
      * Lists all Diary models.

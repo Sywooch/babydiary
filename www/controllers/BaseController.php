@@ -9,10 +9,10 @@
 namespace app\controllers;
 use Yii;
 use app\models\DctLanguage;
+use yii\web\Controller;
 use yii\filters\VerbFilter;
-use yii\rest\ActiveController;
 
-class BaseController extends ActiveController
+class BaseController extends Controller
 {
     public $currentLngId;
 
@@ -33,6 +33,7 @@ class BaseController extends ActiveController
             ],
         ];
     }
+
 
     /**
      * Displays a single model.

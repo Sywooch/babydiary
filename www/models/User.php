@@ -6,7 +6,7 @@ use Yii;
 use yii\base\NotSupportedException;
 
 /**
- * This is the model class for table "dct_user".
+ * This is the model class for table "user".
  *
  * @property integer $user_id
  * @property string $login
