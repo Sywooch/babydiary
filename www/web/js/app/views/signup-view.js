@@ -8,35 +8,42 @@ var SignUpForm = Backbone.View.extend({
         'click #signUpButton': function (e) {
             e.preventDefault();
             this.signUp();
+        },
+        'keydown .form-control': function (e) {
+            LayoutHelper.hideError($(e.currentTarget));
         }
     },
 
     // Use stickit to perform binding between
     // the model and the view
     bindings: {
-        '[name=login]': {
+        '#signup-login': {
             observe: 'login',
             setOptions: {
                 validate: true
-            }
+            },
+            events: ['blur']
         },
-        '[name=email]': {
+        '#signup-email': {
             observe: 'email',
             setOptions: {
                 validate: true
-            }
+            },
+            events: ['blur']
         },
-        '[name=password]': {
+        '#signup-password': {
             observe: 'password',
             setOptions: {
                 validate: true
-            }
+            },
+            events: ['blur']
         },
-        '[name=repeatPassword]': {
-            observe: 'repeatPassword',
+        '#signup-confirmpassword': {
+            observe: 'confirmPassword',
             setOptions: {
                 validate: true
-            }
+            },
+            events: ['blur']
         }
     },
 
@@ -51,6 +58,7 @@ var SignUpForm = Backbone.View.extend({
     },
 
     signUp: function () {
+        alert('signUp!');
         // Check if the model is valid before saving
         if(this.model.isValid(true)) {
             // this.model.save();
