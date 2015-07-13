@@ -14,6 +14,9 @@ var LayoutHelper = function(){
 
             $group.addClass('has-error');
             $group.find('.help-block').html(error).removeClass('hidden');
+        },
+        getCsrf: function(){
+           return $('meta[name="csrf-token"]').attr("content");
         }
     };
     return api;

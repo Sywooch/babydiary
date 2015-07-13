@@ -29,6 +29,13 @@ var app = app || {};
                 equalTo: 'password',
                 msg: 'The passwords does not match'
             }
+        },
+
+        isUnique : function(fieldName) {
+            AjaxHelper.post('/user/check-unique', {fieldName: fieldName, value: this.get(fieldName)},
+                function(data) {
+                    alert(data)
+                });
         }
     });
 })();

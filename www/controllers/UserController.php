@@ -14,7 +14,7 @@ use yii\web\NotFoundHttpException;
  */
 class UserController extends BaseController
 {
-
+    //$this->enableCsrfValidation = false;
     /**
      * Lists all User models.
      * @return mixed
@@ -120,5 +120,21 @@ class UserController extends BaseController
             ]);
         }
 
+    }
+
+    /**
+     * Checks whether email or login is unique
+     */
+    public function actionCheckUnique()
+    {
+        $post = Yii::$app->request->post();
+        if ($post['field'] == 'email') {
+            $isUnique = User::findByEmail($post['value']) === null;
+        }
+        else {
+
+        }
+        \Yii::$app->response->format = 'json';
+        return $isUnique;
     }
 }
