@@ -13,7 +13,7 @@ use yii\bootstrap\ActiveForm;
     <?php $form = ActiveForm::begin([
         'layout' => 'horizontal',
         'fieldConfig' => [
-            'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+            'template' => "{label}\n{beginWrapper}\n{input}<span class='validation-icon icon-spin4 animate-spin'></span>\n{hint}\n{error}\n{endWrapper}",
             'horizontalCheckboxTemplate' => "{beginLabel}\n{endLabel}\n{beginWrapper}\n{input}\n{error}\n{endWrapper}\n{hint}",
             'horizontalCssClasses' => [
                 'label' => 'col-sm-3',
@@ -21,6 +21,7 @@ use yii\bootstrap\ActiveForm;
                 'wrapper' => 'col-sm-9',
                 'error' => '',
                 'hint' => '',
+                'state' => ''
             ],
             'enableClientValidation'=>false
         ],
