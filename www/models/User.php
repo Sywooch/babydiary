@@ -13,9 +13,11 @@ use yii\base\NotSupportedException;
  * @property string $password
  * @property string $email
  * @property integer $enable
+ * @property string $name
  */
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+    public $confirmPassword;
     /**
      * @inheritdoc
      */
@@ -30,11 +32,12 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['login', 'password', 'email'], 'required'],
+            [['login', 'password', 'confirmPassword', 'email'], 'required'],
             [['enable'], 'integer'],
             [['login'], 'string', 'max' => 50],
             [['password'], 'string', 'max' => 255],
-            [['email'], 'string', 'max' => 100]
+            [['email'], 'string', 'max' => 100],
+            [['name'], 'string']
         ];
     }
 
@@ -66,6 +69,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public static function findByEmail($email)
     {
         return static::findOne(['email' => $email]);
+    }
+
+    public static function findByLogin($login)
+    {
+        return static::findOne(['login' => $login]);
     }
 
     public function getId()

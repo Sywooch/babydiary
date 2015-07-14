@@ -8,6 +8,7 @@
 
         <p>
             <a href="#/diary">Diary</a>
+            <div class="icon-spin4"></div>
         </p>
     </div>
 </main>

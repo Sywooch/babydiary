@@ -9,13 +9,11 @@ use yii\web\IdentityInterface;
 /**
  * LoginForm is the model behind the login form.
  */
-class SignUp extends Model
+class Login extends Model
 {
     public $email;
     public $password;
-    public $confirmPassword;
-    public $login;
-    public $name;
+    public $rememberMe = false;
 
     private $_user = false;
 
@@ -27,7 +25,9 @@ class SignUp extends Model
     {
         return [
             // username and password are both required
-            [['email', 'password', 'confirmPassword'], 'required'],
+            [['email', 'password'], 'required'],
+            // rememberMe must be a boolean value
+            ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
@@ -36,10 +36,8 @@ class SignUp extends Model
     public function attributeLabels()
     {
         return [
-            'login' => Yii::t('ui', 'Login'),
-            'password' => Yii::t('ui', 'Password'),
-            'email' => Yii::t('ui', 'Email'),
-            'name' => Yii::t('ui', 'Name'),
+            'username' => 'Логин',
+            'password' => 'Пароль'
         ];
     }
 

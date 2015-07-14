@@ -4,8 +4,6 @@ namespace app\controllers;
 
 use Yii;
 use app\models\User;
-use app\models\SignUp;
-use app\models\Login;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
@@ -108,10 +106,12 @@ class UserController extends BaseController
         }
     }
 
+    /**
+     * @return string|\yii\web\Response
+     */
     public function actionSignUp()
     {
-        $model = new SignUp();
-
+        $model = new User();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['/']);
         } else {
@@ -128,13 +128,18 @@ class UserController extends BaseController
     public function actionCheckUnique()
     {
         $post = Yii::$app->request->post();
-        if ($post['field'] == 'email') {
-            $isUnique = User::findByEmail($post['value']) === null;
+        switch ($post['field']){
+            case 'email':
+                $isUnique = User::findByEmail($post['value']) === null;
+                break;
+            case 'login':
+                $isUnique = User::findByLogin($post['value']) === null;
+                break;
+            default:
+                break;
         }
-        else {
 
-        }
-        \Yii::$app->response->format = 'json';
-        return $isUnique;
+        Yii::$app->response->format = 'json';
+        return ["result" => $isUnique];
     }
 }

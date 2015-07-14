@@ -20,6 +20,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/theme.css',
+        'css/fontello/fontello.css',
     ];
     public $js = [
         'js/vendor/jquery-2.1.4.min.js',
