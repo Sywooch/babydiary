@@ -17,7 +17,8 @@ $(function () {
     _.extend(Backbone.Validation.callbacks, {
         valid: function (view, attr, selector) {
             var $el = view.$("[name*='" + attr + "']");
-            LayoutHelper.hideError($el);
+            LayoutHelper.showValid($el);
+
         },
         invalid: function (view, attr, error, selector) {
             var $el = view.$("[name*='" + attr + "']")
