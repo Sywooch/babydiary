@@ -3,12 +3,6 @@
  */
 var app = app || {};
 
-Backbone.Stickit.addHandler({
-    selector: '*',
-    events: ['blur'],
-    onSet: 'showValidationResultIfNotChanged'
-});
-
 var SignUpForm = Backbone.View.extend({
     events: {
         'click #signUpButton': function (e) {
@@ -25,10 +19,22 @@ var SignUpForm = Backbone.View.extend({
     // Use stickit to perform binding between
     // the model and the view
     bindings: {
-        '#user-login':  'login',
-        '#user-email':  'email',
-        '#user-password': 'password',
-        '#user-confirmpassword': 'confirmPassword'
+        '#user-login': {
+            observe: 'login',
+            onSet: 'showValidationResultIfNotChanged'
+        },
+        '#user-email': {
+            observe: 'email',
+            onSet: 'showValidationResultIfNotChanged'
+        },
+        '#user-password': {
+            observe: 'password',
+            onSet: 'showValidationResultIfNotChanged'
+        },
+        '#user-confirmpassword': {
+            observe: 'confirmPassword',
+            onSet: 'showValidationResultIfNotChanged'
+        }
     },
 
     initialize: function () {
@@ -43,12 +49,7 @@ var SignUpForm = Backbone.View.extend({
 
 
     signUp: function () {
-        alert('signUp!');
-        // Check if the model is valid before saving
-        if(this.model.isValid(true)) {
-            // this.model.save();
-            alert('Great Success!');
-        }
+        this.model.signUp(this.showValidationError);
     },
 
     showValidationResultIfNotChanged: function (value, options) {
@@ -56,6 +57,12 @@ var SignUpForm = Backbone.View.extend({
             this.model.isValid(options.observe);
         }
         return value;
+    },
+
+    showValidationError: function (errors) {
+        _.each(errors, function (value, key){
+            LayoutHelper.showError(key, value);
+        });
     },
 
     remove: function() {

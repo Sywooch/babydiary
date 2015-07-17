@@ -6,6 +6,10 @@ var app = app || {};
 $(function () {
     'use strict';
 
+    Backbone.Stickit.addHandler({
+        selector: '*',
+        events: ['blur']
+    });
     // Since we are automatically updating the model, we want the model
     // to also hold invalid values, otherwise, we might be validating
     // something else than the user has entered in the form.
@@ -13,7 +17,7 @@ $(function () {
         forceUpdate: true
     });
 
-    // Extend the callbacks to work with Bootstrap, as used in this example
+    // Extend the callbacks to work with Bootstrap
     _.extend(Backbone.Validation.callbacks, {
         valid: function (view, attr, selector) {
             var $el = view.$("[name*='" + attr + "']");
@@ -26,6 +30,11 @@ $(function () {
         }
     });
 
-    // kick things off by creating the `App`
-    // new app.AppView();
+    _.extend( Backbone.Model.prototype, {
+        blacklist: [],
+        toJSON: function(options) {
+            return _.omit(this.attributes, this.blacklist);
+        }
+    } );
+
 });
