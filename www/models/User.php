@@ -37,7 +37,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['login'], 'string', 'max' => 50],
             [['password'], 'string', 'max' => 255],
             [['email'], 'string', 'max' => 100],
-            [['name'], 'string']
+            [['name'], 'string'],
+            ['login', 'validateLogin'],
+            ['email', 'validateEmail'],
+            //[['confirmPassword'], ['require', 'validatePasswords'], 'on' => 'register']
         ];
     }
 
@@ -95,4 +98,17 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return Yii::$app->security->validatePassword($password, $this->password);
     }
+
+    public function validateLogin($attribute){
+        return true;
+    }
+
+    public function validateEmail($attribute){
+        return true;
+    }
+
+    public function validatePasswords($attribute){
+        return true;
+    }
+
 }

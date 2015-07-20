@@ -112,14 +112,31 @@ class UserController extends BaseController
     public function actionSignUp()
     {
         $model = new User();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['/']);
-        } else {
+        if(Yii::$app->request->post()){
+            $request_data = Yii::$app->request->post();
+            $model->login = $request_data['login'];
+            $model->password = $request_data['password'];
+            $model->confirmPassword = $request_data['confirmPassword'];
+            $model->email = $request_data['email'];
+            if($model->save()){
+                return $this->redirect('/');
+            }
+        }else {
             return $this->render('signUp', [
                 'model' => $model,
             ]);
         }
 
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['/']);
+        } else {
+            var_dump(Yii::$app->request->post());
+            var_dump($model->load(Yii::$app->request->post()));
+            return $this->render('signUp', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**
