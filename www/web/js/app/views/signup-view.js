@@ -49,7 +49,7 @@ var SignUpForm = Backbone.View.extend({
 
 
     signUp: function () {
-        this.model.signUp(this.showValidationError);
+        this.model.signUp();
     },
 
     showValidationResultIfNotChanged: function (value, options) {
@@ -59,11 +59,11 @@ var SignUpForm = Backbone.View.extend({
         return value;
     },
 
-    showValidationError: function (errors) {
-        _.each(errors, function (value, key){
-            LayoutHelper.showError(key, value);
-        });
-    },
+    //showValidationError: function (errors) {
+    //    _.each(errors, function (error, attr){
+    //        LayoutHelper.showError(this.$("[name*='" + attr + "']"), error);
+    //    });
+    //},
 
     remove: function() {
         // Remove the validation binding

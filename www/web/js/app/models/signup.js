@@ -10,13 +10,10 @@ var app = app || {};
     // -----------
 
     app.SignUp = Backbone.Model.extend({
-
+        serverErrors: {},
         defaults: {
-            // will be true/false
-            emailUnique: null,
-            loginUnique: null
         },
-        blacklist: ['emailUnique', 'loginUnique'],
+        blacklist: ['serverErrors'],
 
         validation: {
             email: {
@@ -29,21 +26,20 @@ var app = app || {};
                 fn: 'validateServerResult'
             },
             password: {
-                minLength: 8
+                minLength: 8,
+                fn: 'validateServerResult'
             },
             confirmPassword: {
                 required: true,
                 equalTo: 'password',
-                msg: 'The passwords does not match'
+                msg: 'The passwords does not match',
+                fn: 'validateServerResult'
             }
         },
 
         validateServerResult: function(value, attr, computedState) {
-            if(attr == 'email' && this.get('emailUnique') === false) {
-                return 'This email has already been registered';
-            }
-            if(attr == 'login' && this.get('loginUnique') === false) {
-                return 'This login is already being used';
+            if (_.has(this.serverErrors,attr)) {
+                return this.serverErrors[attr];
             }
         },
 
@@ -52,7 +48,9 @@ var app = app || {};
         },
 
         validateChange: function (model, options) {
+            //var self = this;
             _.each(model.changedAttributes(), function (value, key){
+                delete this.serverErrors[key];
                 switch(key) {
                     // in case of email and login we should check
                     // if it is unique in addition to validation
@@ -66,7 +64,7 @@ var app = app || {};
                         // simple validation for changed attribute only
                         model.isValid(key);
                 }
-            });
+            }, this);
         },
 
         isUnique : function(fieldName) {
@@ -77,8 +75,15 @@ var app = app || {};
                 var self = this;
                 AjaxHelper.post('/user/check-unique', {field: fieldName, value: this.get(fieldName)},
                     function(data) {
-                        self.set(fieldName + "Unique", data.result, {silent: true});
-                        // run validation
+                        if (!data.result) {
+                            if(fieldName == 'email') {
+                                self.serverErrors.email = 'This email has already been registered';
+                            }
+                            if(fieldName == 'login') {
+                                self.serverErrors.login = 'This login is already being used';
+                            }
+                        }
+                        // run validation to display server result
                         self.isValid(fieldName);
                     });
             }
@@ -87,10 +92,14 @@ var app = app || {};
             }
         },
 
-        signUp: function(errorCallback) {
+        signUp: function() {
             if (this.isValid(true)) {
+                var self = this;
                 AjaxHelper.post('/sign-up', this.toJSON(),
-                   null, errorCallback);
+                   null, function(data) {
+                        _.extend(self.serverErrors, data);
+                        self.isValid(true);
+                    });
             }
         }
     });
