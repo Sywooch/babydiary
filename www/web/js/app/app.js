@@ -30,6 +30,20 @@ $(function () {
         }
     });
 
+    _.extend(Backbone.Validation.patterns, {
+        //letters, numbers, underscores and hyphens only
+        login: /^[a-zA-Z0-9_-]*$/,
+
+        //It matches all printable ASCII characters from ! to the tilde
+        password:/^[!-~]*$/
+    });
+
+    _.extend(Backbone.Validation.messages, {
+        login: 'Login can only contain letters, numbers, underscores or hyphens',
+        password: 'Password can only contain latin letters, numbers or special characters'
+    });
+
+
     _.extend( Backbone.Model.prototype, {
         blacklist: [],
         toJSON: function(options) {

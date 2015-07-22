@@ -23,10 +23,12 @@ var app = app || {};
             },
             login: {
                 required: true,
+                pattern: 'login',
                 fn: 'validateServerResult'
             },
             password: {
                 minLength: 8,
+                pattern: 'password',
                 fn: 'validateServerResult'
             },
             confirmPassword: {
