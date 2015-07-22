@@ -49,7 +49,9 @@ var SignUpForm = Backbone.View.extend({
 
 
     signUp: function () {
-        this.model.signUp();
+        if (this.model.isValid(true)) {
+            this.model.save();
+        }
     },
 
     showValidationResultIfNotChanged: function (value, options) {

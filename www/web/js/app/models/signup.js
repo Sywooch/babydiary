@@ -10,10 +10,9 @@ var app = app || {};
     // -----------
 
     app.SignUp = Backbone.Model.extend({
-        serverErrors: {},
+        url: '/sign-up',
         defaults: {
         },
-        blacklist: ['serverErrors'],
 
         validation: {
             email: {
@@ -70,7 +69,6 @@ var app = app || {};
         },
 
         isUnique : function(fieldName) {
-            this.set(fieldName + "Unique", null, {silent: true});
             // quiet prevalidate first, in case of valid result check it on server
             // otherwise run simple validation
             if (_.isEmpty(this.preValidate(fieldName, this.get(fieldName)))) {
@@ -92,17 +90,17 @@ var app = app || {};
             else {
                 this.isValid(fieldName);
             }
-        },
-
-        signUp: function() {
-            if (this.isValid(true)) {
-                var self = this;
-                AjaxHelper.post('/sign-up', this.toJSON(),
-                   null, function(data) {
-                        _.extend(self.serverErrors, data);
-                        self.isValid(true);
-                    });
-            }
         }
+
+        //signUp: function() {
+        //    if (this.isValid(true)) {
+        //        var self = this;
+        //        AjaxHelper.post('/sign-up', this.toJSON(),
+        //           null, function(data) {
+        //                _.extend(self.serverErrors, data);
+        //                self.isValid(true);
+        //            });
+        //    }
+        //}
     });
 })();

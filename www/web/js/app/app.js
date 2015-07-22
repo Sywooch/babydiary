@@ -43,11 +43,37 @@ $(function () {
         password: 'Password can only contain latin letters, numbers or special characters'
     });
 
-
+    Backbone.Model.prototype._save = Backbone.Model.prototype.save;
     _.extend( Backbone.Model.prototype, {
-        blacklist: [],
+        serverErrors: {},
+        blacklist: ['serverErrors'],
+
         toJSON: function(options) {
             return _.omit(this.attributes, this.blacklist);
+        },
+
+        // override save method to handle error callback
+        save: function(key, value, options) {
+
+            var attributes, opts;
+
+            if (_.isObject(key) || key == null) {
+                attributes = key || {};
+                opts = value || {};
+            } else {
+                (attributes = {})[key] = value;
+                opts = options || {};
+            }
+            var model = this;
+            var error = opts.error;
+            opts.error = function(data) {
+                // save server validation errors and run validation on the model
+                _.extend(model.serverErrors, data);
+                model.isValid(true);
+                if (error) error.call(opts.context, model, data, opts);
+            };
+            attributes['_csrf'] = LayoutHelper.getCsrf();
+            Backbone.Model.prototype._save.call(this, attributes, opts);
         }
     } );
 
