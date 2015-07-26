@@ -124,10 +124,7 @@ class UserController extends BaseController
                 $model->save();
                 return "";
             } else{
-                $errors = $model->getErrors();
-                Yii::$app->response->setStatusCode(400);
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return $errors;
+                Yii::$app->response->setStatusCode(402);
             }
 
         }else {
