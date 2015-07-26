@@ -34,8 +34,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             [['login', 'password', 'confirmPassword', 'email'], 'required'],
             [['enable'], 'integer'],
-            [['login'], 'string', 'max' => 50],
-            [['password'], 'string', 'max' => 255],
+            [['login'], 'string', 'max' => 5],
+            [['password'], 'string', 'max' => 255, 'min' => 8],
             [['email'], 'string', 'max' => 100],
             [['name'], 'string'],
             ['login', 'validateLogin'],
@@ -100,11 +100,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     public function validateLogin($attribute){
-        return true;
+        return $this->findByLogin($attribute);
     }
 
     public function validateEmail($attribute){
-        return true;
+        return $this->findByEmail($attribute);
     }
 
     public function validatePasswords($attribute){

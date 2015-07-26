@@ -6,6 +6,7 @@ use Yii;
 use app\models\User;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -118,21 +119,18 @@ class UserController extends BaseController
             $model->password = $request_data['password'];
             $model->confirmPassword = $request_data['confirmPassword'];
             $model->email = $request_data['email'];
-            if($model->save()){
-                return $this->redirect('/');
+
+            if($model->validate()){
+                $model->save();
+                return "";
+            } else{
+                $errors = $model->getErrors();
+                Yii::$app->response->setStatusCode(400);
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return $errors;
             }
+
         }else {
-            return $this->render('signUp', [
-                'model' => $model,
-            ]);
-        }
-
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['/']);
-        } else {
-            var_dump(Yii::$app->request->post());
-            var_dump($model->load(Yii::$app->request->post()));
             return $this->render('signUp', [
                 'model' => $model,
             ]);
