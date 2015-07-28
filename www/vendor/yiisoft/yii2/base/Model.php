@@ -333,7 +333,7 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
             $validator->validateAttributes($this, $attributeNames);
         }
         $this->afterValidate();
-var_dump($this->errors);
+
         return !$this->hasErrors();
     }
 

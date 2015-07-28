@@ -13,7 +13,20 @@ use yii\web\Response;
  */
 class UserController extends BaseController
 {
-    //$this->enableCsrfValidation = false;
+   /* public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['contentNegotiator'] = [
+            'class' => ContentNegotiator::className(),
+            'formats' => [
+                'application/json' => Response::FORMAT_JSON
+            ]
+
+        ];
+
+        return $behaviors;
+    }*/
+
     /**
      * Lists all User models.
      * @return mixed
@@ -113,18 +126,22 @@ class UserController extends BaseController
     public function actionSignUp()
     {
         $model = new User();
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+        }
+
         if(Yii::$app->request->post()){
             $request_data = Yii::$app->request->post();
             $model->login = $request_data['login'];
             $model->password = $request_data['password'];
             $model->confirmPassword = $request_data['confirmPassword'];
             $model->email = $request_data['email'];
-
             if($model->validate()){
                 $model->save();
                 return "";
             } else{
                 Yii::$app->response->setStatusCode(402);
+                return $model->getErrors();
             }
 
         }else {

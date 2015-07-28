@@ -40,7 +40,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['name'], 'string'],
             ['login', 'validateLogin'],
             ['email', 'validateEmail'],
-            //[['confirmPassword'], ['require', 'validatePasswords'], 'on' => 'register']
+            [['confirmPassword'], 'compare', 'compareAttribute' => 'password'],
         ];
     }
 
@@ -100,11 +100,21 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     public function validateLogin($attribute){
-        return $this->findByLogin($attribute);
+        if( User::findOne(['login' => 'LOWER(' . $this->login . ')'])){
+            $this->addError($attribute, 'Извините, но этот логин уже занят.');
+            return false;
+        }
+
+        return true;
     }
 
     public function validateEmail($attribute){
-        return $this->findByEmail($attribute);
+        if( User::findOne(['email' => 'LOWER(' . $this->email . ')'])){
+            $this->addError($attribute, 'Извините, но этот адрес уже используется.');
+            return false;
+        }
+
+        return true;
     }
 
     public function validatePasswords($attribute){
