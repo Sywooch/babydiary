@@ -64,13 +64,13 @@ $(function () {
                 (attributes = {})[key] = value;
                 opts = options || {};
             }
-            var model = this;
+
             var error = opts.error;
-            opts.error = function(data) {
+            opts.error = function(model, response) {
                 // save server validation errors and run validation on the model
-                _.extend(model.serverErrors, data);
+                _.extend(model.serverErrors, response.responseJSON);
                 model.isValid(true);
-                if (error) error.call(opts.context, model, data, opts);
+                if (error) error.call(opts.context, model, response, opts);
             };
             attributes['_csrf'] = LayoutHelper.getCsrf();
             Backbone.Model.prototype._save.call(this, attributes, opts);

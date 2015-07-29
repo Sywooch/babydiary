@@ -40,7 +40,7 @@ var app = app || {};
 
         validateServerResult: function(value, attr, computedState) {
             if (_.has(this.serverErrors,attr)) {
-                return this.serverErrors[attr];
+                return this.serverErrors[attr].join("<br />");
             }
         },
 
@@ -77,10 +77,10 @@ var app = app || {};
                     function(data) {
                         if (!data.result) {
                             if(fieldName == 'email') {
-                                self.serverErrors.email = 'This email has already been registered';
+                                self.serverErrors.email = ['This email has already been registered'];
                             }
                             if(fieldName == 'login') {
-                                self.serverErrors.login = 'This login is already being used';
+                                self.serverErrors.login = ['This login is already being used'];
                             }
                         }
                         // run validation to display server result
