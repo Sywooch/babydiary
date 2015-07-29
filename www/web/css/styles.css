@@ -397,6 +397,7 @@ select.changed {
   background-color: #ffffff;
   box-shadow: 0 0 0 1px rgba(68, 89, 98, 0.12), 0 3px 12px rgba(68, 89, 98, 0.18);
   padding: 10px 15px;
+  position: relative;
 }
 #sidebar.right,
 #content.right {
@@ -1133,4 +1134,29 @@ a.desc:after {
   border-left: 3px solid #eed3d7;
   padding: 10px 20px;
   margin: 0 0 15px 0;
+}
+.ajax-loader {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: url("../img/ajax-loader-bg.png");
+  z-index: 1000;
+}
+.ajax-loader .spinner {
+  background: url("../img/ajax-loader.gif");
+  width: 80px;
+  height: 80px;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -40px;
+  margin-left: -40px;
+}
+.sign-up-block {
+  width: 50%;
+  margin: 0 auto;
 }

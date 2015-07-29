@@ -35,7 +35,7 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($model, 'login')->textInput(['maxlength' => 100]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('ui', 'Create'), ['class' => 'btn btn-success', 'id' => 'signUpButton']) ?>
+        <?= Html::submitButton(Yii::t('ui', 'Sing-up'), ['class' => 'btn btn-success', 'id' => 'signUpButton']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
