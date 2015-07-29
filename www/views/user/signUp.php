@@ -25,6 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'model' => $model,
                 ]) ?>
             </div>
+            <div class="sign-up-result">
+                <?= Yii::t("ui","Registration completed."); ?>
+            </div>
         </div>
     </div>
 </div>

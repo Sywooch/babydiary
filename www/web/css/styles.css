@@ -1160,3 +1160,10 @@ a.desc:after {
   width: 50%;
   margin: 0 auto;
 }
+.sign-up-result {
+  font-size: 22px;
+  text-align: center;
+  width: 70%;
+  margin: 0 auto;
+  display: none;
+}
