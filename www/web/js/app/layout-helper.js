@@ -2,6 +2,7 @@
  * Created by Tatyana on 08.07.2015.
  */
 var LayoutHelper = function(){
+    var $loader = $('.ajax-loader');
     var api = {
         hideError: function($el) {
             var $group = $el.closest('.form-group');
@@ -23,6 +24,14 @@ var LayoutHelper = function(){
         },
         showSpin: function($el) {
             $el.next('span').attr('class', 'validation-icon icon-spin4 animate-spin');
+        },
+        showLoader: function() {
+            console.log("show");
+            $loader.show();
+        },
+        hideLoader: function() {
+            console.log("hide");
+            $loader.hide();
         },
         getCsrf: function(){
            return $('meta[name="csrf-token"]').attr("content");

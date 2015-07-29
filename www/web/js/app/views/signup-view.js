@@ -3,7 +3,7 @@
  */
 var app = app || {};
 
-var SignUpForm = Backbone.View.extend({
+var SignUpView = Backbone.View.extend({
     events: {
         'click #signUpButton': function (e) {
             e.preventDefault();
@@ -49,8 +49,15 @@ var SignUpForm = Backbone.View.extend({
 
 
     signUp: function () {
+        var self = this;
         if (this.model.isValid(true)) {
-            this.model.save();
+            LayoutHelper.showLoader();
+            this.model.save(null, {success:function() {
+                LayoutHelper.hideLoader();
+                self.remove();
+                var view = new ConfirmEmailView();
+                view.render();
+            } });
         }
     },
 
@@ -74,8 +81,19 @@ var SignUpForm = Backbone.View.extend({
     }
 });
 
+var ConfirmEmailView = Backbone.View.extend({
+
+    el: ".sign-up-result",
+
+    render : function() {
+        this.$el.show();
+        return this;
+    }
+});
+
+
 $(function () {
-    var view = new SignUpForm({
+    var view = new SignUpView({
         el: '#frmSignUp',
         model: new app.SignUp()
     });
