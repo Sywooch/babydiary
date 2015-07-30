@@ -5,6 +5,6 @@ var LocalizationMessages = {};
 $(function(){
     AjaxHelper.get('api/get-validation-messages', null,
         function(data) {
-            LocalizationMessages = data;
+            LocalizationMessages = JSON.parse(data);
         });
 });
