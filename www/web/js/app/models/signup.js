@@ -17,16 +17,19 @@ var app = app || {};
         validation: {
             email: {
                 required: true,
+                maxLength: 100,
                 pattern: 'email',
                 fn: 'validateServerResult'
             },
             login: {
                 required: true,
+                maxLength: 100,
                 pattern: 'login',
                 fn: 'validateServerResult'
             },
             password: {
                 minLength: 8,
+                maxLength: 255,
                 pattern: 'password',
                 fn: 'validateServerResult'
             },
@@ -36,6 +39,9 @@ var app = app || {};
                 msg: 'The passwords does not match',
                 fn: 'validateServerResult'
             }
+        },
+        labels: {
+            email: 'email'
         },
 
         validateServerResult: function(value, attr, computedState) {
@@ -92,15 +98,5 @@ var app = app || {};
             }
         }
 
-        //signUp: function() {
-        //    if (this.isValid(true)) {
-        //        var self = this;
-        //        AjaxHelper.post('/sign-up', this.toJSON(),
-        //           null, function(data) {
-        //                _.extend(self.serverErrors, data);
-        //                self.isValid(true);
-        //            });
-        //    }
-        //}
     });
 })();
