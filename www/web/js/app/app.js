@@ -39,8 +39,12 @@ $(function () {
     });
 
     _.extend(Backbone.Validation.messages, {
-        login: 'Login can only contain letters, numbers, underscores or hyphens',
-        password: 'Password can only contain latin letters, numbers or special characters'
+        required: LocalizationMessages['required'],
+        minLength: LocalizationMessages['minLength'],
+        maxLength: LocalizationMessages['maxLength'],
+        email: LocalizationMessages['emailPattern'],
+        login: LocalizationMessages['loginPattern'],
+        password: LocalizationMessages['passwordPattern']
     });
 
     Backbone.Model.prototype._save = Backbone.Model.prototype.save;
@@ -57,6 +61,7 @@ $(function () {
 
             var attributes, opts;
 
+            // Handle both `"key", value` and `{key: value}` -style arguments.
             if (_.isObject(key) || key == null) {
                 attributes = key || {};
                 opts = value || {};
@@ -65,10 +70,21 @@ $(function () {
                 opts = options || {};
             }
 
+            // show loader
+            if (opts.showLoader) {
+                LayoutHelper.showLoader();
+                // and hide on success
+                var success = opts.success;
+                opts.success = function (model, resp) {
+                    LayoutHelper.hideLoader();
+                    if (success) success.call(opts.context, model, resp, opts);
+                };
+            }
+
             var error = opts.error;
             opts.error = function(model, response) {
+                if (opts.showLoader) LayoutHelper.hideLoader();
                 // save server validation errors and run validation on the model
-                LayoutHelper.hideLoader();
                 _.extend(model.serverErrors, response.responseJSON);
                 model.isValid(true);
                 if (error) error.call(opts.context, model, response, opts);

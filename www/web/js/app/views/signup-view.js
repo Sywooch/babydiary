@@ -51,9 +51,7 @@ var SignUpView = Backbone.View.extend({
     signUp: function () {
         var self = this;
         if (this.model.isValid(true)) {
-            LayoutHelper.showLoader();
-            this.model.save(null, {success:function() {
-                LayoutHelper.hideLoader();
+            this.model.save(null, {showLoader: true, success:function() {
                 self.remove();
                 var view = new ConfirmEmailView();
                 view.render();

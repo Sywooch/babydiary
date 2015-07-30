@@ -36,12 +36,15 @@ var app = app || {};
             confirmPassword: {
                 required: true,
                 equalTo: 'password',
-                msg: 'The passwords does not match',
+                msg: LocalizationMessages['passwordDoesNotMatch'],
                 fn: 'validateServerResult'
             }
         },
         labels: {
-            email: 'email'
+            email: LocalizationMessages['emailLabel'],
+            login: LocalizationMessages['loginLabel'],
+            password: LocalizationMessages['passwordLabel'],
+            confirmPassword: LocalizationMessages['confirmPasswordLabel']
         },
 
         validateServerResult: function(value, attr, computedState) {
@@ -83,10 +86,10 @@ var app = app || {};
                     function(data) {
                         if (!data.result) {
                             if(fieldName == 'email') {
-                                self.serverErrors.email = ['This email has already been registered'];
+                                self.serverErrors.email = [LocalizationMessages['emailNotUnique']];
                             }
                             if(fieldName == 'login') {
-                                self.serverErrors.login = ['This login is already being used'];
+                                self.serverErrors.login = [LocalizationMessages['loginNotUnique']];
                             }
                         }
                         // run validation to display server result

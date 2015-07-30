@@ -29,6 +29,7 @@ class AppAsset extends AssetBundle
         'js/vendor/backbone.stickit.js',
         'js/app/layout-helper.js',
         'js/app/ajax-helper.js',
+        'js/app/localization-messages.js',
         'js/app/app.js'
     ];
     public $depends = [
