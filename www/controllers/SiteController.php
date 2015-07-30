@@ -4,6 +4,8 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\Login;
+use yii\web\Response;
+use yii\helpers\BaseFileHelper;
 
 class SiteController extends Controller
 {
@@ -58,6 +60,35 @@ class SiteController extends Controller
     public function actionDiary(){
         $this->layout = 'blank';
         return $this->render('diary');
+    }
+
+    public function actionTest(){
+/*        header('Access-Control-Allow-Origin: *');
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Methods: GET, POST, PUT');
+        header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        //Yii::$app->response->setStatusCode(302);
+
+        return ["message" => "Услуга не может быть подключена без добавления номера. Беспл. справка 678.",
+            "isAvailable" => true,
+            "isActivated" => false,
+            "responseCode" => "OK",
+            "numbers" => null,
+            "servicePrices" => [],
+            "maxEntries" => 30];
+*/
+        //static::$app->language
+        /*return $files = yii\helpers\FileHelper::findFiles('@app/messages/" . Yii::$app->sourceLanguage', [
+            'only' => ['filename.ext'],
+            'recursive' => true,
+        ]);*/
+
+    }
+
+    public function actionGetValidationMessages(){
+        $localizationFile = include_once("../messages/ru/validation.php");
+        return json_encode($localizationFile);
     }
 }
 

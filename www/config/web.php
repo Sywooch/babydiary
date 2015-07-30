@@ -52,6 +52,10 @@ $config = [
             'enableStrictParsing' => true,
             //'class'=>'app\components\LangUrlManager',
             'rules' => [
+                //API
+                'api/get-validation-messages' => 'site/get-validation-messages',
+
+                //ADMIN
                 'admin/home' => 'backend/admin/index',
 
                 'admin/dictionaries/age' => 'backend/dct-age/index',
@@ -81,7 +85,8 @@ $config = [
                 '<controller:\w+>/' => '<controller>/index',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 
-                '/' => 'site'
+                '/' => 'site',
+
 
                 // REST for UI
                 //['class' => 'yii\rest\UrlRule', 'controller' => 'user'],

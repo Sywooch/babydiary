@@ -100,7 +100,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     public function validateLogin($attribute){
-        if( User::findOne(['login' => 'LOWER(' . $this->login . ')'])){
+        if( User::find()->where('LOWER(login) > :threshold', [':threshold' => mb_strtolower($this->login)])->one()){
             $this->addError($attribute, 'Извините, но этот логин уже занят.');
             return false;
         }
@@ -109,7 +109,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     public function validateEmail($attribute){
-        if( User::findOne(['email' => 'LOWER(' . $this->email . ')'])){
+        if(User::find()->where('LOWER(email) > :threshold', [':threshold' => mb_strtolower($this->email)])->one()){
             $this->addError($attribute, 'Извините, но этот адрес уже используется.');
             return false;
         }

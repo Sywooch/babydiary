@@ -28,11 +28,11 @@ use yii\bootstrap\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => 100]) ?>
-
+    <?= $form->field($model, 'login')->textInput(['maxlength' => 100]) ?>
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => 255]) ?>
     <?= $form->field($model, 'confirmPassword')->passwordInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'login')->textInput(['maxlength' => 100]) ?>
+
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('ui', 'Sing-up'), ['class' => 'btn btn-success', 'id' => 'signUpButton']) ?>
