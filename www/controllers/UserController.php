@@ -126,6 +126,7 @@ class UserController extends BaseController
     public function actionSignUp()
     {
         $model = new User();
+        $model->scenario = User::SCENARIO_REGISTER;
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
         }
@@ -138,6 +139,7 @@ class UserController extends BaseController
             $model->email = $request_data['email'];
             if($model->validate()){
                 $model->save();
+                $this->sendEmail();
                 return "";
             } else{
                 Yii::$app->response->setStatusCode(402);
@@ -170,5 +172,13 @@ class UserController extends BaseController
 
         Yii::$app->response->format = 'json';
         return ["result" => $isUnique];
+    }
+
+    private function sendEmail(){
+        Yii::$app->mail->compose()
+            ->setFrom('babydiary@alkov.16mb.com')
+            ->setTo('kovalchuk.aleksey.s@yandex.ru')
+            ->setSubject('Email sent from Yii2-Swiftmailer')
+            ->send();
     }
 }

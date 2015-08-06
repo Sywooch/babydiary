@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\NotSupportedException;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "user".
@@ -15,7 +16,7 @@ use yii\base\NotSupportedException;
  * @property integer $enable
  * @property string $name
  */
-class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
     public $confirmPassword;
     /**
@@ -24,6 +25,17 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public static function tableName()
     {
         return 'user';
+    }
+
+    const SCENARIO_LOGIN = 'login';
+    const SCENARIO_REGISTER = 'register';
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_LOGIN] = ['email', 'password'];
+        $scenarios[self::SCENARIO_REGISTER] = ['login', 'email', 'password'];
+        return $scenarios;
     }
 
     /**
@@ -40,7 +52,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['name'], 'string'],
             ['login', 'validateLogin'],
             ['email', 'validateEmail'],
-            [['confirmPassword'], 'compare', 'compareAttribute' => 'password'],
+            [['password'], 'compare', 'compareAttribute' => 'confirmPassword', 'on' => 'register'],
         ];
     }
 
@@ -100,8 +112,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     public function validateLogin($attribute){
-        if( User::find()->where('LOWER(login) > :threshold', [':threshold' => mb_strtolower($this->login)])->one()){
-            $this->addError($attribute, 'Извините, но этот логин уже занят.');
+        if( User::find()->where('LOWER(login) = :threshold', [':threshold' => mb_strtolower($this->login)])->one()){
+            $this->addError($attribute, Yii::t('validation', 'loginNotUnique'));
             return false;
         }
 
@@ -109,8 +121,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     public function validateEmail($attribute){
-        if(User::find()->where('LOWER(email) > :threshold', [':threshold' => mb_strtolower($this->email)])->one()){
-            $this->addError($attribute, 'Извините, но этот адрес уже используется.');
+        if(User::find()->where('LOWER(email) = :threshold', [':threshold' => mb_strtolower($this->email)])->one()){
+            $this->addError($attribute, Yii::t('validation', 'emailNotUnique'));
             return false;
         }
 
