@@ -36,25 +36,15 @@ var app = app || {};
             confirmPassword: {
                 required: true,
                 equalTo: 'password',
-                msg: LocalizationMessages['passwordDoesNotMatch'],
+                msg: function () {return ValidationMessages.get('passwordDoesNotMatch')},
                 fn: 'validateServerResult'
-            }
-        },
-        labels: {
-            email: LocalizationMessages['emailLabel'],
-            login: LocalizationMessages['loginLabel'],
-            password: LocalizationMessages['passwordLabel'],
-            confirmPassword: LocalizationMessages['confirmPasswordLabel']
-        },
-
-        validateServerResult: function(value, attr, computedState) {
-            if (_.has(this.serverErrors,attr)) {
-                return this.serverErrors[attr].join("<br />");
             }
         },
 
         initialize: function() {
+            //Backbone.Model.prototype.initialize.apply(this, arguments);
             this.listenTo(this, 'change', this.validateChange);
+            this.setValidationLabels('user');
         },
 
         validateChange: function (model, options) {
@@ -86,10 +76,10 @@ var app = app || {};
                     function(data) {
                         if (!data.result) {
                             if(fieldName == 'email') {
-                                self.serverErrors.email = [LocalizationMessages['emailNotUnique']];
+                                self.serverErrors.email = [ValidationMessages.get('emailNotUnique')];
                             }
                             if(fieldName == 'login') {
-                                self.serverErrors.login = [LocalizationMessages['loginNotUnique']];
+                                self.serverErrors.login = [ValidationMessages.get('loginNotUnique')];
                             }
                         }
                         // run validation to display server result

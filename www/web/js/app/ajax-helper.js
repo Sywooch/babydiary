@@ -10,17 +10,20 @@ var AjaxHelper = function(){
                 type: 'POST',
                 url: url,
                 data: data,
+                dataType: "json",
                 success: successCallback,
                 error: errorCallback
             });
         },
-        get: function(url, data, successCallback, errorCallback) {
+        getSync: function(url, data, successCallback, errorCallback) {
             data = data || {};
             data._csrf = LayoutHelper.getCsrf();
             $.ajax({
                 type: 'GET',
+                async: false,
                 url: url,
                 data: data,
+                dataType: "json",
                 success: successCallback,
                 error: errorCallback
             });

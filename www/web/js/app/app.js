@@ -39,18 +39,35 @@ $(function () {
     });
 
     _.extend(Backbone.Validation.messages, {
-        required: LocalizationMessages['required'],
-        minLength: LocalizationMessages['minLength'],
-        maxLength: LocalizationMessages['maxLength'],
-        email: LocalizationMessages['emailPattern'],
-        login: LocalizationMessages['loginPattern'],
-        password: LocalizationMessages['passwordPattern']
+        login: 'Login can only contain letters, numbers, underscores or hyphens',
+        password: 'Password can only contain latin letters, numbers or special characters'
     });
 
+    Backbone.Validation.configure({
+        labelFormatter: 'label'
+    });
+
+    // MODEL
     Backbone.Model.prototype._save = Backbone.Model.prototype.save;
+    Backbone.Model.prototype._constructor = Backbone.Model.prototype.constructor;
     _.extend( Backbone.Model.prototype, {
         serverErrors: {},
+        validation: {},
+        labels: {},
         blacklist: ['serverErrors'],
+
+
+        setValidationLabels: function (label) {
+            _.each(_.keys(this.validation), function (value){
+                this.labels[value] = LayoutHelper.getLabelTextFor(label + '-' + value.toLowerCase());
+            }, this)
+        },
+
+        validateServerResult: function(value, attr, computedState) {
+            if (_.has(this.serverErrors,attr)) {
+                return this.serverErrors[attr].join("<br />");
+            }
+        },
 
         toJSON: function(options) {
             return _.omit(this.attributes, this.blacklist);

@@ -35,6 +35,9 @@ var LayoutHelper = function(){
         },
         getCsrf: function(){
            return $('meta[name="csrf-token"]').attr("content");
+        },
+        getLabelTextFor: function(inputId) {
+            return $('label[for*="' + inputId + '"]').text();
         }
     };
     return api;
