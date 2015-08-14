@@ -53,7 +53,7 @@ var SignUpView = Backbone.View.extend({
         if (this.model.isValid(true)) {
             this.model.save(null, {showLoader: true, success:function() {
                 self.remove();
-                var view = new ConfirmEmailView();
+                var view = new ConfirmEmailView(self.model);
                 view.render();
             } });
         }
@@ -84,7 +84,7 @@ var ConfirmEmailView = Backbone.View.extend({
     el: ".sign-up-result",
 
     render : function() {
-        this.$el.show();
+        this.$el.append(this.model.activated_hash).show();
         return this;
     }
 });
