@@ -51,7 +51,7 @@ var SignUpView = Backbone.View.extend({
     signUp: function () {
         var self = this;
         if (this.model.isValid(true)) {
-            this.model.save(null, {showLoader: true, success:function() {
+            this.model.save(null, {showLoader: true, success:function(model, response) {
                 self.remove();
                 var view = new ConfirmEmailView({model: self.model});
                 view.render();
@@ -84,7 +84,8 @@ var ConfirmEmailView = Backbone.View.extend({
     el: ".sign-up-result",
 
     render : function() {
-        var link = $('<a>').attr({'href':'/confirm-email/' + this.model.activated_hash}).text(this.model.activated_hash);
+        var link = $('<a>').attr({'href':'/confirm-email/' + this.model.get('activated_hash')})
+            .text(this.model.get('activated_hash'));
         this.$el.append(link).show();
         return this;
     }

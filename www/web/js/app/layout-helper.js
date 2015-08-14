@@ -26,11 +26,9 @@ var LayoutHelper = function(){
             $el.next('span').attr('class', 'validation-icon icon-spin4 animate-spin');
         },
         showLoader: function() {
-            console.log("show");
             $loader.show();
         },
         hideLoader: function() {
-            console.log("hide");
             $loader.hide();
         },
         getCsrf: function(){
