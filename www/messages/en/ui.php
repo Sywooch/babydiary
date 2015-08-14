@@ -152,7 +152,6 @@ return [
     'Test page' => 'Test',
 
 
-
     'Diaries' => 'Diaries',
     'Dictionaries' => 'Dictionaries'
 ];

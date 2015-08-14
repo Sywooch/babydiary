@@ -91,6 +91,7 @@ $config = [
                 'admin/dictionaries/<controller:\w+>/' => 'backend/<controller>/index',
                 'admin/dictionaries/<controller:\w+>/<action:\w+>' => 'backend/<controller>/<action>',
                 'sign-up' => 'user/sign-up',
+                'sign-in' => 'user/sign-in',
                 'user/check-unique' => 'user/check-unique',
                 '<controller:\w+>/' => '<controller>/index',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',

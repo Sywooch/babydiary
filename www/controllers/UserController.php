@@ -154,6 +154,38 @@ class UserController extends BaseController
     }
 
     /**
+     * @return string|\yii\web\Response
+     */
+    public function actionSignIn()
+    {
+        $model = new User();
+        $model->scenario = User::SCENARIO_LOGIN;
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+        }
+
+        if(Yii::$app->request->post()){
+            $request_data = Yii::$app->request->post();
+            $model->email = $request_data['email'];
+            $model->password = $request_data['password'];
+            $model->rememberMe = $request_data['rememberMe'];
+            // TODO
+            if($model->validate()){
+
+                return "";
+            } else{
+                Yii::$app->response->setStatusCode(400);
+                return $model->getErrors();
+            }
+
+        }else {
+            return $this->render('signIn', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
      * Checks whether email or login is unique
      */
     public function actionCheckUnique()

@@ -30,6 +30,7 @@ class AppAsset extends AssetBundle
         'js/app/layout-helper.js',
         'js/app/ajax-helper.js',
         'js/app/validation-messages.js',
+        'js/app/models/common.js',
         'js/app/app.js'
     ];
     public $depends = [

@@ -19,6 +19,7 @@ use yii\db\ActiveRecord;
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
     public $confirmPassword;
+    public $rememberMe;
     /**
      * @inheritdoc
      */
@@ -68,6 +69,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             'email' => Yii::t('ui', 'Email'),
             'name' => Yii::t('ui', 'Name'),
             'enable' => Yii::t('ui', 'Enable'),
+            'confirmPassword' => Yii::t('ui', 'Confirm Password'),
+            'rememberMe' => Yii::t('ui', 'Remember Me'),
         ];
     }
 
