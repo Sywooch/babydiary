@@ -40,10 +40,11 @@ $config = [
             'class' => 'yii\swiftmailer\Mailer',
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.yandex.ru',
+                'host' => 'smtp.gmail.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
                 'username' => 'kovalchuk.aleksey.s',
                 'password' => 'h_2!|?=0',
-                'port' => '465'
+                'port' => '25', // Port 25 is a very common port too
+                'encryption' => 'tls', // It is often used, check your provider or mail server specs
             ],
         ],
         'log' => [

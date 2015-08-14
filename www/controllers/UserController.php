@@ -7,6 +7,7 @@ use app\models\User;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\helpers\Url;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -139,10 +140,14 @@ class UserController extends BaseController
             $model->email = $request_data['email'];
             if($model->validate()){
                 $model->save();
-                $this->sendEmail();
-                return "";
+                $activated_hash = $this->sendEmail($model);
+                $model->activated_hash = $activated_hash;
+                $model->save();
+                //$this->redirect($url = Url::to(['confirm-email/'.$activated_hash]));
+                return ['activated_hash' => $activated_hash];
+                //return $activated_hash;
             } else{
-                Yii::$app->response->setStatusCode(402);
+                Yii::$app->response->setStatusCode(400);
                 return $model->getErrors();
             }
 
@@ -206,11 +211,15 @@ class UserController extends BaseController
         return ["result" => $isUnique];
     }
 
-    private function sendEmail(){
-        Yii::$app->mail->compose()
+    private function sendEmail($model){
+/*        Yii::$app->mail->compose()
             ->setFrom('babydiary@alkov.16mb.com')
             ->setTo('kovalchuk.aleksey.s@yandex.ru')
             ->setSubject('Email sent from Yii2-Swiftmailer')
-            ->send();
+            ->send();*/
+        $userId = $model->user_id;
+        $email = $model->email;
+        $md5hash = md5($userId . $email);
+        return $md5hash;
     }
 }

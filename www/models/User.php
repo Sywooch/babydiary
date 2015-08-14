@@ -15,6 +15,7 @@ use yii\db\ActiveRecord;
  * @property string $email
  * @property integer $enable
  * @property string $name
+ * @property string $activated_hash
  */
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
