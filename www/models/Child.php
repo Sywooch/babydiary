@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "child".
  *
  * @property integer $child_id
- * @property integer $dct_user_id
+ * @property integer $user_id
  * @property string $first_name
  * @property string $last_name
  * @property string $surname
@@ -87,8 +87,8 @@ class Child extends \yii\db\ActiveRecord
         return $this->hasMany(ChildTooth::className(), ['child_id' => 'child_id']);
     }
 
-    public function getDctUser()
+    public function getUser()
     {
-        return $this->hasOne(DctUser::className(), ['user_id' => 'user_id']);
+        return $this->hasOne(User::className(), ['user_id' => 'user_id']);
     }
 }

@@ -127,7 +127,7 @@ class UserController extends BaseController
     public function actionSignUp()
     {
         $model = new User();
-        $model->scenario = User::SCENARIO_REGISTER;
+
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
         }
@@ -164,7 +164,7 @@ class UserController extends BaseController
     public function actionSignIn()
     {
         $model = new User();
-        $model->scenario = User::SCENARIO_LOGIN;
+
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
         }

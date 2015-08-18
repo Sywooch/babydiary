@@ -4,6 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\widgets\Lang;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -35,7 +36,7 @@ AppAsset::register($this);
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
-                                    тут будут кнопки соц. сетей
+                                    <?= Lang::widget();?>
                                 </div>
                             </div>
                             <div class="row">

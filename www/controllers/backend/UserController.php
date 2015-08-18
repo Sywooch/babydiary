@@ -10,9 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DctUserController implements the CRUD actions for DctUser model.
+ * UserController implements the CRUD actions for User model.
  */
-class DctUserController extends Controller
+class UserController extends Controller
 {
     public $layout = 'admin';
 
@@ -29,7 +29,7 @@ class DctUserController extends Controller
     }
 
     /**
-     * Lists all DctUser models.
+     * Lists all User models.
      * @return mixed
      */
     public function actionIndex()
@@ -44,7 +44,7 @@ class DctUserController extends Controller
     }
 
     /**
-     * Displays a single DctUser model.
+     * Displays a single User model.
      * @param integer $id
      * @return mixed
      */
@@ -56,7 +56,7 @@ class DctUserController extends Controller
     }
 
     /**
-     * Creates a new DctUser model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -74,7 +74,7 @@ class DctUserController extends Controller
     }
 
     /**
-     * Updates an existing DctUser model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -93,7 +93,7 @@ class DctUserController extends Controller
     }
 
     /**
-     * Deletes an existing DctUser model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -106,7 +106,7 @@ class DctUserController extends Controller
     }
 
     /**
-     * Finds the DctUser model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
      * @return User the loaded model

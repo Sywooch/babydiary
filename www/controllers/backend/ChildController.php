@@ -21,7 +21,7 @@ class ChildController extends BaseController
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Child::find()->with('User'),
+            'query' => Child::find()->with('user'),
         ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,

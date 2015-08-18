@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <div role="tabpanel" class="tab-pane active" id="home">
                         <div>
-                            <?=$this->render('../templates/diaryGeneral');?>
+                            <?=$this->render('../templates/diaryCommon');?>
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="profile">

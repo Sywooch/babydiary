@@ -29,17 +29,6 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return 'user';
     }
 
-    const SCENARIO_LOGIN = 'login';
-    const SCENARIO_REGISTER = 'register';
-
-    public function scenarios()
-    {
-        $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_LOGIN] = ['email', 'password'];
-        $scenarios[self::SCENARIO_REGISTER] = ['login', 'email', 'password'];
-        return $scenarios;
-    }
-
     /**
      * @inheritdoc
      */
