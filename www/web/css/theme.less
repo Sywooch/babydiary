@@ -1,3 +1,5 @@
+@import "variables";
+
 @font-face
 {
   font-family: Gabriela;
@@ -917,4 +919,20 @@ input[type='number'],input[type='time']{
 }
 input[type='number']::-webkit-inner-spin-button {
   display: none;
+}
+
+
+.tooltip {
+  .tooltip-inner {
+    background-color: @tooltip-bg;
+  }
+  &.top {
+    .tooltip-arrow {
+      bottom: 0;
+      left: 50%;
+      margin-left: -@tooltip-arrow-width;
+      border-width: @tooltip-arrow-width @tooltip-arrow-width 0;
+      border-top-color: @tooltip-arrow-color;
+    }
+  }
 }

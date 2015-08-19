@@ -1006,3 +1006,13 @@ input[type='time'] {
 input[type='number']::-webkit-inner-spin-button {
   display: none;
 }
+.tooltip .tooltip-inner {
+  background-color: #fa5858;
+}
+.tooltip.top .tooltip-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px 5px 0;
+  border-top-color: #fa5858;
+}
