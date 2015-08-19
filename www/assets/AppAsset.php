@@ -29,9 +29,9 @@ class AppAsset extends AssetBundle
         'js/vendor/backbone.stickit.js',
         'js/app/layout-helper.js',
         'js/app/ajax-helper.js',
+        'js/app/app.js',
         'js/app/validation-messages.js',
-        'js/app/models/common.js',
-        'js/app/app.js'
+        'js/app/models/common.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
