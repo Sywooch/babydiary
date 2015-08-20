@@ -12,28 +12,24 @@ var SignUpView = Backbone.View.extend({
         'keydown .form-control': function (e) {
             LayoutHelper.hideError($(e.currentTarget));
         },
-        'blur #user-email,#user-login': function (e) {
+        'blur #email,#login': function (e) {
             LayoutHelper.showSpin($(e.currentTarget));
         }
     },
     // Use stickit to perform binding between
     // the model and the view
     bindings: {
-        '#user-login': {
-            observe: 'login',
-            onSet: 'showValidationResultIfNotChanged'
+        '#login': {
+            observe: 'login'
         },
-        '#user-email': {
-            observe: 'email',
-            onSet: 'showValidationResultIfNotChanged'
+        '#email': {
+            observe: 'email'
         },
-        '#user-password': {
-            observe: 'password',
-            onSet: 'showValidationResultIfNotChanged'
+        '#password': {
+            observe: 'password'
         },
-        '#user-confirmpassword': {
-            observe: 'confirmPassword',
-            onSet: 'showValidationResultIfNotChanged'
+        '#confirmPassword': {
+            observe: 'confirmPassword'
         }
     },
 
@@ -57,13 +53,6 @@ var SignUpView = Backbone.View.extend({
                 view.render();
             } });
         }
-    },
-
-    showValidationResultIfNotChanged: function (value, options) {
-        if (value == this.model.get(options.observe)) {
-            this.model.isValid(options.observe);
-        }
-        return value;
     },
 
     //showValidationError: function (errors) {

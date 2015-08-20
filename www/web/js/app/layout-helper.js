@@ -58,5 +58,5 @@ $(document).ready(function(){
         }
     });
     //$('[data-toggle="tooltip"]').tooltip();
-    //$("<span class='validation-icon'></span>").insertAfter(".form-control");
+    $("<span class='validation-icon'></span>").insertAfter(".form-control");
 });

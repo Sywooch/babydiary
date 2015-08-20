@@ -41,11 +41,11 @@ var app = app || {};
             }
         },
 
-        initialize: function() {
-            //Backbone.Model.prototype.initialize.apply(this, arguments);
-            this.listenTo(this, 'change', this.validateChange);
-            this.setValidationLabels('user');
-        },
+        //initialize: function() {
+        //    //Backbone.Model.prototype.initialize.apply(this, arguments);
+        //    this.listenTo(this, 'change', this.validateChange);
+        //    this.setValidationLabels();
+        //},
 
         validateChange: function (model, options) {
             //var self = this;

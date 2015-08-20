@@ -13,11 +13,23 @@ $(function () {
         labels: {},
         blacklist: ['serverErrors'],
 
+        initialize: function() {
+            this.listenTo(this, 'change', this.validateChange);
+            this.setValidationLabels();
+        },
 
-        setValidationLabels: function (label) {
+        setValidationLabels: function () {
             _.each(_.keys(this.validation), function (value){
-                this.labels[value] = LayoutHelper.getLabelTextFor(label + '-' + value.toLowerCase());
+                this.labels[value] = LayoutHelper.getLabelTextFor(value);
             }, this)
+        },
+
+        validateChange: function (model, options) {
+            _.each(model.changedAttributes(), function (value, key){
+                delete this.serverErrors[key];
+                // simple validation for changed attribute only
+                model.isValid(key);
+            }, this);
         },
 
         validateServerResult: function(value, attr, computedState) {
