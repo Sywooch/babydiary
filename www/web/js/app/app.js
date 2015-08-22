@@ -8,8 +8,17 @@ $(function () {
 
     Backbone.Stickit.addHandler({
         selector: '*',
-        events: ['blur']
+        events: ['blur'],
+        onSet: function (value, options) {
+            var model = options.view.model;
+            if (value == model.get(options.observe)) {
+                model.isValid(options.observe);
+            }
+            return value;
+        }
     });
+
+
     // Since we are automatically updating the model, we want the model
     // to also hold invalid values, otherwise, we might be validating
     // something else than the user has entered in the form.
@@ -20,12 +29,12 @@ $(function () {
     // Extend the callbacks to work with Bootstrap
     _.extend(Backbone.Validation.callbacks, {
         valid: function (view, attr, selector) {
-            var $el = view.$("[name*='" + attr + "']");
+            var $el = view.$("#" + attr );
             LayoutHelper.showValid($el);
 
         },
         invalid: function (view, attr, error, selector) {
-            var $el = view.$("[name*='" + attr + "']")
+            var $el = view.$("#" + attr );
             LayoutHelper.showError($el, error);
         }
     });

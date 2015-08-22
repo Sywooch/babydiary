@@ -9,35 +9,33 @@ use yii\bootstrap\ActiveForm;
 ?>
 
 <div class="user-frmSignUp" id="frmSignUp">
+        <div class="form-group">
+            <label for="email" class="control-label col-sm-3"><?=Yii::t('ui', 'Email');?></label>
+            <div class="col-sm-9">
+                <input type="text" maxlength="100" name="email" class="form-control" id="email" title="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="login" class="control-label col-sm-3"><?=Yii::t('ui', 'Login');?></label>
+            <div class="col-sm-9">
+                <input type="text" maxlength="100" name="login" class="form-control" id="login" title="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="control-label col-sm-3"><?=Yii::t('ui', 'Password');?></label>
+            <div class="col-sm-9">
+                <input type="password" maxlength="255" name="password" class="form-control" id="password" title="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword" class="control-label col-sm-3"><?=Yii::t('ui', 'Confirm Password');?></label>
+            <div class="col-sm-9">
+                <input type="password" maxlength="255" name="confirmPassword" class="form-control" id="confirmPassword" title="">
+            </div>
+        </div>
 
-    <?php $form = ActiveForm::begin([
-        'layout' => 'horizontal',
-        'fieldConfig' => [
-            'template' => "{label}\n{beginWrapper}\n{input}<span class='validation-icon'></span>\n{hint}\n{error}\n{endWrapper}",
-            'horizontalCheckboxTemplate' => "{beginLabel}\n{endLabel}\n{beginWrapper}\n{input}\n{error}\n{endWrapper}\n{hint}",
-            'horizontalCssClasses' => [
-                'label' => 'col-sm-3',
-                'offset' => 'col-sm-offset-3',
-                'wrapper' => 'col-sm-9',
-                'error' => '',
-                'hint' => '',
-                'state' => ''
-            ],
-            'enableClientValidation'=>false
-        ],
-    ]); ?>
-
-    <?= $form->field($model, 'email')->textInput(['maxlength' => 100]) ?>
-    <?= $form->field($model, 'login')->textInput(['maxlength' => 100]) ?>
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => 255]) ?>
-    <?= $form->field($model, 'confirmPassword')->passwordInput(['maxlength' => 255]) ?>
-
-
-
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('ui', 'Sing-up'), ['class' => 'btn btn-success', 'id' => 'signUpButton']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
+        <div class="form-group">
+            <button class="btn btn-success" id="signUpButton" type="submit"><?=Yii::t('ui', 'Sign-up');?></button>
+        </div>
 
 </div>

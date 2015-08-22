@@ -8,6 +8,7 @@ use yii\grid\GridView;
 $childName = "Кира";
 $this->title = $childName . ": " . Yii::t('ui', 'Diary');
 $this->params['breadcrumbs'][] = $this->title;
+\app\assets\DiaryAsset::register($this);
 ?>
 
 <div class="row">
