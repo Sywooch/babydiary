@@ -15,14 +15,14 @@ $(function () {
 
         initialize: function() {
             this.listenTo(this, 'change', this.validateChange);
-            this.setValidationLabels();
+            //this.setValidationLabels();
         },
 
-        setValidationLabels: function () {
-            _.each(_.keys(this.validation), function (value){
-                this.labels[value] = LayoutHelper.getLabelTextFor(value);
-            }, this)
-        },
+        //setValidationLabels: function () {
+        //    _.each(_.keys(this.validation), function (value){
+        //        this.labels[value] = LayoutHelper.getLabelTextFor(value);
+        //    }, this)
+        //},
 
         validateChange: function (model, options) {
             _.each(model.changedAttributes(), function (value, key){

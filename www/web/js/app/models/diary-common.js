@@ -12,23 +12,26 @@ var app = app || {};
     app.DiaryCommon = Backbone.Model.extend({
         url: '/diary-common',
         defaults: {
+            other : ""
         },
 
         validation: {
             weight: {
-                pattern: 'number',
+                required: false,
+                pattern: 'float',
                 fn: 'validateServerResult'
             },
             height: {
-                pattern: 'number',
+                required: false,
+                pattern: 'float',
                 fn: 'validateServerResult'
             },
             headCircumference: {
-                pattern: 'number',
+                pattern: 'float',
                 fn: 'validateServerResult'
             },
             chestCircumference: {
-                pattern: 'number',
+                pattern: 'float',
                 fn: 'validateServerResult'
             },
            other: {

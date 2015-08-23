@@ -26,16 +26,11 @@ $(function () {
         forceUpdate: true
     });
 
-    // Extend the callbacks to work with Bootstrap
-    _.extend(Backbone.Validation.callbacks, {
-        valid: function (view, attr, selector) {
-            var $el = view.$("#" + attr );
-            LayoutHelper.showValid($el);
-
-        },
-        invalid: function (view, attr, error, selector) {
-            var $el = view.$("#" + attr );
-            LayoutHelper.showError($el, error);
+    _.extend(Backbone.Validation.validators, {
+        numberOrEmpty: function(value, attr, customValue, model) {
+            if(value !== customValue){
+                return 'error';
+            }
         }
     });
 
@@ -44,7 +39,9 @@ $(function () {
         login: /^[a-zA-Z0-9_-]*$/,
 
         //It matches all printable ASCII characters from ! to the tilde
-        password:/^[!-~]*$/
+        password:/^[!-~]*$/,
+
+        float: /^\d*(\.\d+)?$/
     });
 
     _.extend(Backbone.Validation.messages, {

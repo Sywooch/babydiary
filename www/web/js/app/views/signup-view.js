@@ -3,6 +3,19 @@
  */
 var app = app || {};
 
+// Extend the callbacks to work with Bootstrap
+_.extend(Backbone.Validation.callbacks, {
+    valid: function (view, attr, selector) {
+        var $el = view.$("#" + attr );
+        LayoutHelper.showFieldValid($el);
+
+    },
+    invalid: function (view, attr, error, selector) {
+        var $el = view.$("#" + attr );
+        LayoutHelper.showFieldError($el, error);
+    }
+});
+
 var SignUpView = Backbone.View.extend({
     events: {
         'click #signUpButton': function (e) {
@@ -10,7 +23,7 @@ var SignUpView = Backbone.View.extend({
             this.signUp();
         },
         'keydown .form-control': function (e) {
-            LayoutHelper.hideError($(e.currentTarget));
+            LayoutHelper.hideFieldError($(e.currentTarget));
         },
         'blur #email,#login': function (e) {
             LayoutHelper.showSpin($(e.currentTarget));
