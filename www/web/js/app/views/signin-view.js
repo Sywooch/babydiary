@@ -24,11 +24,6 @@ var SignInView = Backbone.View.extend({
         }
     },
 
-    initialize: function () {
-        // This hooks up the validation
-        Backbone.Validation.bind(this);
-    },
-
     render: function() {
         this.stickit();
         return this;

@@ -13,6 +13,8 @@ var app = app || {};
         url: '/sign-up',
         defaults: {
         },
+        serverErrors: {},
+        blacklist: ['serverErrors'],
 
         validation: {
             email: {
@@ -41,11 +43,24 @@ var app = app || {};
             }
         },
 
-        //initialize: function() {
-        //    //Backbone.Model.prototype.initialize.apply(this, arguments);
-        //    this.listenTo(this, 'change', this.validateChange);
-        //    this.setValidationLabels();
-        //},
+        initialize: function() {
+            //Backbone.Model.prototype.initialize.apply(this, arguments);
+            this.listenTo(this, 'change', this.validateChange);
+            this.setValidationLabels();
+        },
+
+        setValidationLabels: function () {
+            _.each(_.keys(this.validation), function (value){
+                this.labels[value] = LayoutHelper.getLabelTextFor(value);
+            }, this)
+        },
+
+
+        validateServerResult: function(value, attr, computedState) {
+            if (_.has(this.serverErrors,attr)) {
+                return this.serverErrors[attr].join("<br />");
+            }
+        },
 
         validateChange: function (model, options) {
             //var self = this;

@@ -8,9 +8,6 @@ var DiaryCommonView = Backbone.View.extend({
         'click #diaryCommonButton': function (e) {
             e.preventDefault();
             this.saveDiary();
-        },
-        'keydown .form-control': function (e) {
-            LayoutHelper.hideError($(e.currentTarget));
         }
     },
     // Use stickit to perform binding between
@@ -37,8 +34,6 @@ var DiaryCommonView = Backbone.View.extend({
     },
 
     initialize: function () {
-        // This hooks up the validation
-        Backbone.Validation.bind(this);
     },
 
     render: function() {
@@ -55,13 +50,8 @@ var DiaryCommonView = Backbone.View.extend({
                 //self.remove();
             } });
         }
-    },
-
-    remove: function() {
-        // Remove the validation binding
-        Backbone.Validation.unbind(this);
-        return Backbone.View.prototype.remove.apply(this, arguments);
     }
+
 });
 
 $(function () {

@@ -33,16 +33,20 @@ var SignUpView = Backbone.View.extend({
     // the model and the view
     bindings: {
         '#login': {
-            observe: 'login'
+            observe: 'login',
+            onSet: 'showValidationResultIfNotChanged'
         },
         '#email': {
-            observe: 'email'
+            observe: 'email',
+            onSet: 'showValidationResultIfNotChanged'
         },
         '#password': {
-            observe: 'password'
+            observe: 'password',
+            onSet: 'showValidationResultIfNotChanged'
         },
         '#confirmPassword': {
-            observe: 'confirmPassword'
+            observe: 'confirmPassword',
+            onSet: 'showValidationResultIfNotChanged'
         }
     },
 
@@ -64,10 +68,22 @@ var SignUpView = Backbone.View.extend({
                 self.remove();
                 var view = new ConfirmEmailView({model: self.model});
                 view.render();
+            },error:function(model, response){
+                if (response.status == 400) {
+                    // save validation errors from server and run validation on the model
+                    _.extend(model.serverErrors, response.responseJSON);
+                    model.isValid(true);
+                }
             } });
         }
     },
-
+    showValidationResultIfNotChanged: function (value, options) {
+        var model = options.view.model;
+        if (value == model.get(options.observe)) {
+            model.isValid(options.observe);
+        }
+        return value;
+    },
     //showValidationError: function (errors) {
     //    _.each(errors, function (error, attr){
     //        LayoutHelper.showError(this.$("[name*='" + attr + "']"), error);
