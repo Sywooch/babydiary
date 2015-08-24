@@ -21,12 +21,24 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
     public $confirmPassword;
     public $rememberMe;
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'user';
+    }
+
+    const SCENARIO_SIGN_IN = 'sign_in';
+    const SCENARIO_SIGN_UP = 'sign_up';
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_SIGN_IN] = ['email', 'password'];
+        $scenarios[self::SCENARIO_SIGN_UP] = ['login', 'email', 'password'];
+        return $scenarios;
     }
 
     /**
@@ -37,7 +49,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return [
             [['login', 'password', 'confirmPassword', 'email'], 'required'],
             [['enable'], 'integer'],
-            [['login'], 'string', 'max' => 5],
+            [['login'], 'string', 'max' => 100],
             [['password'], 'string', 'max' => 255, 'min' => 8],
             [['email'], 'string', 'max' => 100],
             [['name'], 'string'],
@@ -66,7 +78,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 
     public static function findIdentity($id)
     {
-        return static::findOne(['user_d' => $id]);
+        return static::findOne(['user_id' => $id]);
     }
 
     public static function findIdentityByAccessToken($token, $type = null)
@@ -122,8 +134,29 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return true;
     }
 
-    public function validatePasswords($attribute){
-        return true;
+    public function validateSignIn(){
+        $user = $this->findByEmail($this->email);
+        if ($user != null){
+            if ($user->password == md5($this->password)){
+                return true;
+            } else {
+                $this->addError('Password', Yii::t('validation', 'emailNotUnique'));
+            }
+        } else {
+            $this->addError('Email', Yii::t('validation', 'userNotFound'));
+        }
+        return false;
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->auth_key = \Yii::$app->security->generateRandomString();
+            }
+            return true;
+        }
+        return false;
     }
 
 }

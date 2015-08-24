@@ -127,7 +127,7 @@ class UserController extends BaseController
     public function actionSignUp()
     {
         $model = new User();
-
+        $model->scenario = User::SCENARIO_SIGN_UP;
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
         }
@@ -138,13 +138,13 @@ class UserController extends BaseController
             $model->password = $request_data['password'];
             $model->confirmPassword = $request_data['confirmPassword'];
             $model->email = $request_data['email'];
+	        $model->enable = 0;
+	        $model->activated_hash = $this->getMD5Hash($model);
             if($model->validate()){
-                $model->save();
-                $activated_hash = $this->sendEmail($model);
-                $model->activated_hash = $activated_hash;
+                $model->password = md5($model->password);
                 $model->save();
                 //$this->redirect($url = Url::to(['confirm-email/'.$activated_hash]));
-                return ['activated_hash' => $activated_hash];
+	            return ['activated_hash' => $model->activated_hash];
                 //return $activated_hash;
             } else{
                 Yii::$app->response->setStatusCode(400);
@@ -164,6 +164,7 @@ class UserController extends BaseController
     public function actionSignIn()
     {
         $model = new User();
+        $model->scenario = User::SCENARIO_SIGN_IN;
 
         if (Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -171,19 +172,19 @@ class UserController extends BaseController
 
         if(Yii::$app->request->post()){
             $request_data = Yii::$app->request->post();
-            $model->email = $request_data['email'];
-            $model->password = $request_data['password'];
-            $model->rememberMe = $request_data['rememberMe'];
-            // TODO
-            if($model->validate()){
-
-                return "";
-            } else{
-                Yii::$app->response->setStatusCode(400);
-                return $model->getErrors();
+            $model->email = $request_data['User']['email'];
+            $model->password = $request_data['User']['password'];
+            $model->rememberMe = $request_data['User']['rememberMe'];
+            if ($model->validateSignIn()){
+                $identity = User::findByEmail($model->email);
+                Yii::$app->user->login($identity);
+                $this->redirect("/");
+            } else {
+                return $this->render('signIn', [
+                    'model' => $model,
+                ]);
             }
-
-        }else {
+        } else {
             return $this->render('signIn', [
                 'model' => $model,
             ]);
@@ -211,15 +212,36 @@ class UserController extends BaseController
         return ["result" => $isUnique];
     }
 
+	public function actionConfirmEmail($hash){
+		$model = User::findOne(['activated_hash' => $hash, 'enable' => 0]);
+		if ($model->login != ''){
+			$model->enable = 1;
+			$model->update();
+			return $this->render('confirmEmail', [
+				'message' => Yii::t('ui', 'Email confirmed')
+			]);
+		} else {
+			return $this->render('../site/errorPage', [
+				'message' => Yii::t('ui', 'Something happened')
+			]);
+		}
+
+
+	}
+
+	private function getMD5Hash($model){
+		$userId = $model->login;
+		$email = $model->email;
+		$md5hash = md5($userId . $email);
+		return $md5hash;
+
+	}
+
     private function sendEmail($model){
 /*        Yii::$app->mail->compose()
             ->setFrom('babydiary@alkov.16mb.com')
             ->setTo('kovalchuk.aleksey.s@yandex.ru')
             ->setSubject('Email sent from Yii2-Swiftmailer')
             ->send();*/
-        $userId = $model->user_id;
-        $email = $model->email;
-        $md5hash = md5($userId . $email);
-        return $md5hash;
     }
 }

@@ -1012,7 +1012,7 @@ input[type='number']::-webkit-inner-spin-button {
 }
 .tooltip .tooltip-inner {
   background-color: #fa5858;
-  max-width: 100%;
+  max-width: 200px;
 }
 .tooltip.top .tooltip-arrow {
   bottom: 0;

@@ -12,6 +12,15 @@ class SiteController extends Controller
     public $enableCsrfValidation = false;
     public function actionIndex()
     {
+        // the current user identity. Null if the user is not authenticated.
+        $identity = Yii::$app->user->identity;
+var_dump($identity);
+// the ID of the current user. Null if the user not authenticated.
+        $id = Yii::$app->user->id;
+var_dump($id);
+// whether the current user is a guest (not authenticated)
+        $isGuest = Yii::$app->user->isGuest;
+        var_dump($isGuest);
         return $this->render('index');
     }
 
@@ -89,6 +98,10 @@ class SiteController extends Controller
     public function actionGetValidationMessages(){
         $localizationFile = include_once("../messages/ru/validation.php");
         return json_encode($localizationFile);
+    }
+
+    public function actionErrorPage(){
+
     }
 }
 

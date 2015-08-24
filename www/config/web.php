@@ -24,7 +24,7 @@ $config = [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
             'enableSession' => true,
-            'loginUrl' => '/user/auth'
+            'loginUrl' => '/sign-in'
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -93,6 +93,7 @@ $config = [
                 'admin/dictionaries/<controller:\w+>/<action:\w+>' => 'backend/<controller>/<action>',
                 'sign-up' => 'user/sign-up',
                 'sign-in' => 'user/sign-in',
+                'confirm-email/<hash:\w+>' => 'user/confirm-email',
                 'user/check-unique' => 'user/check-unique',
                 '<controller:\w+>/' => '<controller>/index',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
