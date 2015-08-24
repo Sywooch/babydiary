@@ -15,6 +15,7 @@ var app = app || {};
         },
         serverErrors: {},
         blacklist: ['serverErrors'],
+        labels:[],
 
         validation: {
             email: {
