@@ -1,14 +1,14 @@
-form .validation-icon {
+.form .validation-icon {
   position: absolute;
   top: 7px;
   right: 19px;
 }
-form .validation-icon.icon-spin4 {
+.form .validation-icon.icon-spin4 {
   color: #000000;
 }
-form .validation-icon.icon-ok {
+.form .validation-icon.icon-ok {
   color: #5cb85c;
 }
-form .validation-icon.icon-cancel {
+.form .validation-icon.icon-cancel {
   color: #BE0D10;
 }

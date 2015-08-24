@@ -9,7 +9,6 @@ use yii\web\View;
 
 $this->title = Yii::t('ui', 'User sign in');
 $this->params['breadcrumbs'][] = $this->title;
-\app\assets\SignInAsset::register($this);
 
 ?>
 <div class="row">

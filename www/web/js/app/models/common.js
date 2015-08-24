@@ -8,35 +8,7 @@ $(function () {
     Backbone.Model.prototype._save = Backbone.Model.prototype.save;
     Backbone.Model.prototype._constructor = Backbone.Model.prototype.constructor;
     _.extend( Backbone.Model.prototype, {
-        serverErrors: {},
-        validation: {},
-        labels: {},
-        blacklist: ['serverErrors'],
-
-        initialize: function() {
-            this.listenTo(this, 'change', this.validateChange);
-            this.setValidationLabels();
-        },
-
-        setValidationLabels: function () {
-            _.each(_.keys(this.validation), function (value){
-                this.labels[value] = LayoutHelper.getLabelTextFor(value);
-            }, this)
-        },
-
-        validateChange: function (model, options) {
-            _.each(model.changedAttributes(), function (value, key){
-                delete this.serverErrors[key];
-                // simple validation for changed attribute only
-                model.isValid(key);
-            }, this);
-        },
-
-        validateServerResult: function(value, attr, computedState) {
-            if (_.has(this.serverErrors,attr)) {
-                return this.serverErrors[attr].join("<br />");
-            }
-        },
+        blacklist: [],
 
         toJSON: function(options) {
             return _.omit(this.attributes, this.blacklist);
@@ -70,10 +42,9 @@ $(function () {
             var error = opts.error;
             opts.error = function(model, response) {
                 if (opts.showLoader) LayoutHelper.hideLoader();
-                if (response.status == 400 && !_.isEmpty(model.validation)) {
-                    // save validation errors from server and run validation on the model
-                    _.extend(model.serverErrors, response.responseJSON);
-                    model.isValid(true);
+                if (response.status == 400) {
+                }
+                if (response.status == 500) {
                 }
                 if (error) error.call(opts.context, model, response, opts);
             };

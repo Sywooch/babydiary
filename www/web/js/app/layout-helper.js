@@ -4,25 +4,27 @@
 var LayoutHelper = function(){
     var $loader = $('.ajax-loader');
     var api = {
-        hideError: function($el) {
-            //var $group = $el.closest('.form-group');
-            //
-            //$group.removeClass('has-error');
-            //$group.find('.help-block').html('').addClass('hidden');
+        hideFieldError: function($el) {
+            var $group = $el.closest('.form-group');
+
+            $group.removeClass('has-error');
+            $group.find('.help-block').html('');
             $el.siblings('span').attr('class', 'validation-icon');
-            $el.attr('data-original-title','');
+            //$el.attr('data-original-title','');
         },
-        showError: function($el, error) {
-            //var $group = $el.closest('.form-group');
-            //
-            //$group.addClass('has-error');
-            //$group.find('.help-block').html(error).removeClass('hidden');
-            $el.attr('data-original-title',error);
+        showFieldError: function($el, error) {
+            var $group = $el.closest('.form-group');
+
+            $group.addClass('has-error');
+            $group.find('.help-block').html(error);
             $el.siblings('span').attr('class', 'validation-icon icon-cancel');
+            //$el.attr('data-original-title',error);
         },
-        showValid: function($el) {
-            this.hideError($el);
-            $el.siblings('span').attr('class', 'validation-icon icon-ok');
+        showFieldValid: function($el) {
+            this.hideFieldError($el);
+            if ($el.val()) {
+                $el.siblings('span').attr('class', 'validation-icon icon-ok');
+            }
         },
         showSpin: function($el) {
             $el.siblings('span').attr('class', 'validation-icon icon-spin4 animate-spin');
@@ -37,26 +39,25 @@ var LayoutHelper = function(){
            return $('meta[name="csrf-token"]').attr("content");
         },
         getLabelTextFor: function(inputId) {
-            return $('label[for*="' + inputId + '"]').text();
+            return $('label[for="' + inputId + '"]').text();
         }
     };
     return api;
 }();
 
 $(document).ready(function(){
-    $('input').tooltip({
-        "data-toggle" : "tooltip",
-        "data-placement" : "top",
-        "data-original-title" : "",
-        "data-trigger" : "manual"
-    }).on({
-        'mouseenter': function() {
-            $(this).tooltip('show');
-        },
-        'mouseleave focusin click keydown': function() {
-            $(this).tooltip('hide');
-        }
-    });
-    //$('[data-toggle="tooltip"]').tooltip();
+    //$('input').tooltip({
+    //    "data-toggle" : "tooltip",
+    //    "data-placement" : "top",
+    //    "data-original-title" : "",
+    //    "data-trigger" : "manual"
+    //}).on({
+    //    'mouseenter': function() {
+    //        $(this).tooltip('show');
+    //    },
+    //    'mouseleave focusin click keydown': function() {
+    //        $(this).tooltip('hide');
+    //    }
+    //});
     $("<span class='validation-icon'></span>").insertAfter(".form-control");
 });

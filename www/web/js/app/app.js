@@ -8,14 +8,7 @@ $(function () {
 
     Backbone.Stickit.addHandler({
         selector: '*',
-        events: ['blur'],
-        onSet: function (value, options) {
-            var model = options.view.model;
-            if (value == model.get(options.observe)) {
-                model.isValid(options.observe);
-            }
-            return value;
-        }
+        events: ['blur']
     });
 
 
@@ -26,25 +19,13 @@ $(function () {
         forceUpdate: true
     });
 
-    // Extend the callbacks to work with Bootstrap
-    _.extend(Backbone.Validation.callbacks, {
-        valid: function (view, attr, selector) {
-            var $el = view.$("#" + attr );
-            LayoutHelper.showValid($el);
-
-        },
-        invalid: function (view, attr, error, selector) {
-            var $el = view.$("#" + attr );
-            LayoutHelper.showError($el, error);
-        }
-    });
-
     _.extend(Backbone.Validation.patterns, {
         //letters, numbers, underscores and hyphens only
         login: /^[a-zA-Z0-9_-]*$/,
 
         //It matches all printable ASCII characters from ! to the tilde
         password:/^[!-~]*$/
+
     });
 
     _.extend(Backbone.Validation.messages, {
