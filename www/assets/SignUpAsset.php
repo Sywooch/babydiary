@@ -16,6 +16,7 @@ class SignUpAsset extends AssetBundle
     public $css = [
     ];
     public $js = [
+        'js/app/validation-messages.js',
         'js/app/models/signup.js',
         'js/app/views/signup-view.js',
     ];
