@@ -179,11 +179,11 @@ class UserController extends BaseController
                 $identity = User::findByEmail($model->email);
                 Yii::$app->user->login($identity);
                 $this->redirect("/");
-            } else {
+            }/* else {
                 return $this->render('signIn', [
                     'model' => $model,
                 ]);
-            }
+            }*/
         } else {
             return $this->render('signIn', [
                 'model' => $model,
@@ -214,16 +214,19 @@ class UserController extends BaseController
 
 	public function actionConfirmEmail($hash){
 		$model = User::findOne(['activated_hash' => $hash, 'enable' => 0]);
-		if ($model->login != ''){
+		if ($model != null){
 			$model->enable = 1;
-			$model->update();
+            $model->activated_hash = '';
+            if ($model->validate()){
+                $model->save();
+            }
+
 			return $this->render('confirmEmail', [
 				'message' => Yii::t('ui', 'Email confirmed')
 			]);
 		} else {
-			return $this->render('../site/errorPage', [
-				'message' => Yii::t('ui', 'Something happened')
-			]);
+            Yii::$app->response->setStatusCode(404);
+            $this->redirect(["/404"]);
 		}
 
 

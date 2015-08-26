@@ -66,6 +66,7 @@ $config = [
                 //API
                 'api/get-validation-messages' => 'site/get-validation-messages',
 
+                '404' => 'site/page-not-found',
                 //ADMIN
                 'admin/home' => 'backend/admin/index',
 
@@ -99,6 +100,7 @@ $config = [
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 
                 '/' => 'site',
+
 
 
                 // REST for UI

@@ -47,7 +47,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['login', 'password', 'confirmPassword', 'email'], 'required'],
+            [['login', 'password', 'email'], 'required'],
+            [['confirmPassword'], 'required', 'on' => 'sign_up'],
             [['enable'], 'integer'],
             [['login'], 'string', 'max' => 100],
             [['password'], 'string', 'max' => 255, 'min' => 8],
@@ -55,7 +56,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             [['name'], 'string'],
             ['login', 'validateLogin'],
             ['email', 'validateEmail'],
-            [['password'], 'compare', 'compareAttribute' => 'confirmPassword', 'on' => 'register'],
+            [['password'], 'compare', 'compareAttribute' => 'confirmPassword', 'on' => 'sign_up'],
         ];
     }
 
@@ -91,6 +92,11 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return static::findOne(['email' => $email]);
     }
 
+    public static function findByEmailAndPassword($email, $password)
+    {
+        return static::findOne(['email' => $email, 'password' => $password]);
+    }
+
     public static function findByLogin($login)
     {
         return static::findOne(['login' => $login]);
@@ -117,31 +123,34 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     }
 
     public function validateLogin($attribute){
-        if( User::find()->where('LOWER(login) = :threshold', [':threshold' => mb_strtolower($this->login)])->one()){
-            $this->addError($attribute, Yii::t('validation', 'loginNotUnique'));
-            return false;
+        if($this->isNewRecord) {
+            if (User::find()->where('LOWER(login) = :threshold', [':threshold' => mb_strtolower($this->login)])->one()) {
+                $this->addError($attribute, Yii::t('validation', 'loginNotUnique'));
+                return false;
+            }
         }
 
         return true;
     }
 
     public function validateEmail($attribute){
-        if(User::find()->where('LOWER(email) = :threshold', [':threshold' => mb_strtolower($this->email)])->one()){
-            $this->addError($attribute, Yii::t('validation', 'emailNotUnique'));
-            return false;
+        if($this->isNewRecord) {
+            if (User::find()->where('LOWER(email) = :threshold', [':threshold' => mb_strtolower($this->email)])->one()) {
+                $this->addError($attribute, Yii::t('validation', 'emailNotUnique'));
+                return false;
+            }
         }
 
         return true;
     }
 
     public function validateSignIn(){
-        $user = $this->findByEmail($this->email);
+        $user = $this->findByEmailAndPassword($this->email, md5($this->password));
         if ($user != null){
-            if ($user->password == md5($this->password)){
+            if($user->enable){
                 return true;
-            } else {
-                $this->addError('Password', Yii::t('validation', 'emailNotUnique'));
             }
+            $this->addError('Email', Yii::t('validation', 'userNotFound'));
         } else {
             $this->addError('Email', Yii::t('validation', 'userNotFound'));
         }

@@ -103,5 +103,9 @@ var_dump($id);
     public function actionErrorPage(){
 
     }
+
+    public function actionPageNotFound(){
+        return $this->render("pageNotFound");
+    }
 }
 
