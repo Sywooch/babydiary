@@ -14,16 +14,20 @@ var DiaryCommonView = Backbone.View.extend({
     // the model and the view
     bindings: {
         '#weight': {
-            observe: 'weight'
+            observe: 'weight',
+            onSet: 'makeANumber'
         },
         '#height': {
-            observe: 'height'
+            observe: 'height',
+            onSet: 'makeANumber'
         },
         '#headCircumference': {
-            observe: 'headCircumference'
+            observe: 'headCircumference',
+            onSet: 'makeANumber'
         },
         '#chestCircumference': {
-            observe: 'chestCircumference'
+            observe: 'chestCircumference',
+            onSet: 'makeANumber'
         },
         '#other': {
             observe: 'other'
@@ -41,7 +45,15 @@ var DiaryCommonView = Backbone.View.extend({
         return this;
     },
 
-
+    makeANumber: function (value, options) {
+        if (_.isEmpty(value)) {
+            return "";
+        }
+        if($(options.selector).inputmask("isComplete")){
+                return value;
+        }
+        return NaN;
+    },
     saveDiary: function () {
         alert("Save");
         var self = this;

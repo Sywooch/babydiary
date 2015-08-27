@@ -16,6 +16,7 @@ class DiaryAsset extends AssetBundle
     public $css = [
     ];
     public $js = [
+        'js/vendor/jquery.inputmask.bundle.min.js',
         'js/app/models/diary-common.js',
         'js/app/views/diary-common-view.js',
     ];

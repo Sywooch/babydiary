@@ -8,39 +8,39 @@
 ?>
 <div id="frmDiaryCommon" class="form">
     <div class="row form-group">
-        <div class="vert-aling col-md-3 col-sm-3 col-sx-12">
+        <div class="col-md-3 col-sm-3 col-sx-12">
             <span>
                 <label for="height"><?=Yii::t('ui', 'Height');?>:</label>
             </span>
         </div>
         <div class="col-md-3 col-sm-3 col-sx-12">
-            <input type="text" id="height" class="form-control" />
+            <input type="text" id="height" class="form-control" data-inputmask-regex="^\d{2}((,|\.)\d)?$"/>
         </div>
-        <div class="vert-aling col-md-3 col-sm-3 col-sx-12">
+        <div class="col-md-3 col-sm-3 col-sx-12">
             <span>
                 <label for="headCircumference"><?=Yii::t('ui', 'Head circumference');?>:</label>
             </span>
         </div>
         <div class="col-md-3 col-sm-3 col-sx-12">
-            <input type="text" id="headCircumference" class="form-control" />
+            <input type="text" id="headCircumference" class="form-control" data-inputmask-regex="^\d{2}((,|\.)\d)?$"/>
         </div>
     </div>
     <div class="row form-group">
-        <div class="vert-aling col-md-3 col-sm-3 col-sx-12">
+        <div class="col-md-3 col-sm-3 col-sx-12">
             <span>
                 <label for="weight"><?=Yii::t('ui', 'Weight');?>:</label>
             </span>
         </div>
         <div class="col-md-3 col-sm-3 col-sx-12">
-            <input type="text" id="weight" class="form-control" />
+            <input type="text" id="weight" class="form-control" data-inputmask-regex="^\d{1,2}((,|\.)\d{1,3})?$"/>
         </div>
-        <div class="vert-aling col-md-3 col-sm-3 col-sx-12">
+        <div class="col-md-3 col-sm-3 col-sx-12">
             <span>
                 <label for="chestCircumference"><?=Yii::t('ui', 'Chest circumference');?>:</label>
             </span>
         </div>
         <div class="col-md-3 col-sm-3 col-sx-12">
-            <input type="text" id="chestCircumference" class="form-control"/>
+            <input type="text" id="chestCircumference" class="form-control" data-inputmask-regex="^\d{2}((,|\.)\d)?$"/>
         </div>
     </div>
     <div class="row form-group">

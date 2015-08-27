@@ -59,5 +59,6 @@ $(document).ready(function(){
     //        $(this).tooltip('hide');
     //    }
     //});
+    $("input[data-inputmask-regex]").inputmask('Regex', {'rightAlign':true, 'showMaskOnHover': false});
     $("<span class='validation-icon'></span>").insertAfter(".form-control");
 });
