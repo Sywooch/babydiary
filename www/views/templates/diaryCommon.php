@@ -7,13 +7,13 @@
  */
 ?>
 <div id="frmDiaryCommon" class="form">
-    <div class="row form-group">
+    <div class="row ">
         <div class="col-md-3 col-sm-3 col-sx-12">
             <span>
                 <label for="height"><?=Yii::t('ui', 'Height');?>:</label>
             </span>
         </div>
-        <div class="col-md-3 col-sm-3 col-sx-12">
+        <div class="col-md-3 col-sm-3 col-sx-12 form-group no-margin">
             <input type="text" id="height" class="form-control" data-inputmask-regex="^\d{2}((,|\.)\d)?$"/>
         </div>
         <div class="col-md-3 col-sm-3 col-sx-12">
@@ -21,7 +21,7 @@
                 <label for="headCircumference"><?=Yii::t('ui', 'Head circumference');?>:</label>
             </span>
         </div>
-        <div class="col-md-3 col-sm-3 col-sx-12">
+        <div class="col-md-3 col-sm-3 col-sx-12 form-group no-margin">
             <input type="text" id="headCircumference" class="form-control" data-inputmask-regex="^\d{2}((,|\.)\d)?$"/>
         </div>
     </div>
@@ -50,7 +50,7 @@
             </span>
         </div>
         <div class="col-md-9 col-sm-9 col-sx-12">
-            <input type="text" id="other" class="form-control"/>
+            <input type="text" id="other" class="form-control" data-inputmask-regex="^.{0,255}$"/>
         </div>
     </div>
     <div class="row form-group">

@@ -12,3 +12,6 @@
 .form .validation-icon.icon-cancel {
   color: #BE0D10;
 }
+.no-margin {
+  margin: 0 !important;
+}

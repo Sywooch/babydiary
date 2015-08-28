@@ -1070,6 +1070,9 @@ input[type='number']::-webkit-inner-spin-button {
 .form .validation-icon.icon-cancel {
   color: #BE0D10;
 }
+.no-margin {
+  margin: 0 !important;
+}
 html,
 body {
   height: 100%;

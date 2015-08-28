@@ -23,7 +23,7 @@ var SignUpView = Backbone.View.extend({
             this.signUp();
         },
         'keydown .form-control': function (e) {
-            LayoutHelper.hideFieldError($(e.currentTarget));
+            LayoutHelper.clearField($(e.currentTarget));
         },
         'blur #email,#login': function (e) {
             LayoutHelper.showSpin($(e.currentTarget));

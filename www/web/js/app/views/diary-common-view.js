@@ -14,20 +14,20 @@ var DiaryCommonView = Backbone.View.extend({
     // the model and the view
     bindings: {
         '#weight': {
-            observe: 'weight',
-            onSet: 'makeANumber'
+            observe: 'weight'
+            //onSet: 'checkMaskComplete'
         },
         '#height': {
-            observe: 'height',
-            onSet: 'makeANumber'
+            observe: 'height'
+            //onSet: 'checkMaskComplete'
         },
         '#headCircumference': {
-            observe: 'headCircumference',
-            onSet: 'makeANumber'
+            observe: 'headCircumference'
+            //onSet: 'checkMaskComplete'
         },
         '#chestCircumference': {
-            observe: 'chestCircumference',
-            onSet: 'makeANumber'
+            observe: 'chestCircumference'
+            //onSet: 'checkMaskComplete'
         },
         '#other': {
             observe: 'other'
@@ -45,23 +45,24 @@ var DiaryCommonView = Backbone.View.extend({
         return this;
     },
 
-    makeANumber: function (value, options) {
-        if (_.isEmpty(value)) {
-            return "";
-        }
-        if($(options.selector).inputmask("isComplete")){
-                return value;
-        }
-        return NaN;
-    },
+    //checkMaskComplete: function (value, options) {
+    //    if (_.isEmpty(value)) {
+    //        return "";
+    //    }
+    //    if($(options.selector).inputmask("isComplete")){
+    //            return value;
+    //    }
+    //    return NaN;
+    //},
+
     saveDiary: function () {
         alert("Save");
         var self = this;
-        if (this.model.isValid(true)) {
+        //if (this.model.isValid(true)) {
             this.model.save(null, {showLoader: true, success:function(model, response) {
                 //self.remove();
             } });
-        }
+        //}
     }
 
 });

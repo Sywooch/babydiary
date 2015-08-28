@@ -4,9 +4,10 @@
 var LayoutHelper = function(){
     var $loader = $('.ajax-loader');
     var api = {
-        hideFieldError: function($el) {
+        clearField: function($el) {
             var $group = $el.closest('.form-group');
 
+            $group.removeClass('has-warning');
             $group.removeClass('has-error');
             $group.find('.help-block').html('');
             $el.siblings('span').attr('class', 'validation-icon');
@@ -20,8 +21,12 @@ var LayoutHelper = function(){
             $el.siblings('span').attr('class', 'validation-icon icon-cancel');
             //$el.attr('data-original-title',error);
         },
+        showFieldWarning: function($el) {
+            var $group = $el.closest('.form-group');
+            $group.addClass('has-warning');
+        },
         showFieldValid: function($el) {
-            this.hideFieldError($el);
+            this.clearField($el);
             if ($el.val()) {
                 $el.siblings('span').attr('class', 'validation-icon icon-ok');
             }
@@ -59,6 +64,6 @@ $(document).ready(function(){
     //        $(this).tooltip('hide');
     //    }
     //});
-    $("input[data-inputmask-regex]").inputmask('Regex', {'rightAlign':true, 'showMaskOnHover': false});
+    $("input[data-inputmask-regex]").inputmask('Regex');
     $("<span class='validation-icon'></span>").insertAfter(".form-control");
 });
